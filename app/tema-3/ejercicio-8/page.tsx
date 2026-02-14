@@ -20,6 +20,7 @@ const empresas = [
 
 // a) Media del holding
 const mediaHolding = empresas.reduce((sum, e) => sum + e.peso * e.media, 0);
+const mediaSimple = round((empresas[0].media + empresas[1].media + empresas[2].media) / 3, 2);
 
 // b) Variabilidad del 40% centrado
 const empresasDeciles = [
@@ -101,31 +102,44 @@ export default function Ejercicio8() {
       <StepCard stepNumber={1} title="¿Qué vamos a aprender en este ejercicio?" variant="explanation">
         <p>
           Este es un <strong>ejercicio integrador</strong> que combina varios conceptos del tema.
-          Cada apartado usa una herramienta diferente:
+          Cada apartado plantea una <strong>pregunta real de negocio</strong> y nosotros tenemos que saber
+          qué herramienta estadística responde a esa pregunta. Vamos a ver:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
           <Card className="bg-blue-50 border-blue-200">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-blue-200 text-blue-800 text-[10px]">Media ponderada</Badge>
-              <p className="text-[10px] text-muted-foreground">Calcular la media del holding combinando empresas de distinto peso.</p>
+              <Badge className="bg-blue-200 text-blue-800 text-[10px]">a) Media ponderada</Badge>
+              <p className="text-[10px] text-muted-foreground">
+                <strong>Pregunta de negocio:</strong> &quot;¿Cuánto factura el holding en promedio?&quot;
+                No vale promediar las 3 medias porque las empresas tienen distinto peso.
+              </p>
             </CardContent>
           </Card>
           <Card className="bg-emerald-50 border-emerald-200">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-emerald-200 text-emerald-800 text-[10px]">Deciles</Badge>
-              <p className="text-[10px] text-muted-foreground">Usar D3 y D7 para medir variabilidad del 40% central, y D2 para el 20% inferior.</p>
+              <Badge className="bg-emerald-200 text-emerald-800 text-[10px]">b) Rango interdecílico</Badge>
+              <p className="text-[10px] text-muted-foreground">
+                <strong>Pregunta de negocio:</strong> &quot;¿Qué empresa tiene los días más impredecibles
+                en su zona central?&quot; Usamos D₃ y D₇ para medir esa variabilidad.
+              </p>
             </CardContent>
           </Card>
           <Card className="bg-violet-50 border-violet-200">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-violet-200 text-violet-800 text-[10px]">Cambio de escala</Badge>
-              <p className="text-[10px] text-muted-foreground">Subir un 15% = multiplicar por 1.15. Afecta a media Y varianza.</p>
+              <Badge className="bg-violet-200 text-violet-800 text-[10px]">c) Decil 2</Badge>
+              <p className="text-[10px] text-muted-foreground">
+                <strong>Pregunta de negocio:</strong> &quot;¿Cuál es el peor escenario para el 20% de días
+                más flojos de C?&quot; El D₂ responde exactamente a esto.
+              </p>
             </CardContent>
           </Card>
           <Card className="bg-rose-50 border-rose-200">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-rose-200 text-rose-800 text-[10px]">Cambio de origen</Badge>
-              <p className="text-[10px] text-muted-foreground">Sumar 100€ = cambio de origen. Afecta a la media pero NO a la varianza.</p>
+              <Badge className="bg-rose-200 text-rose-800 text-[10px]">d) Transformaciones</Badge>
+              <p className="text-[10px] text-muted-foreground">
+                <strong>Pregunta de negocio:</strong> &quot;Si subo los precios un 15% o añado 100€ fijos,
+                ¿cómo cambian las estadísticas?&quot; Hay reglas claras para esto.
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -135,28 +149,84 @@ export default function Ejercicio8() {
       <StepCard stepNumber={2} title="a) Media de facturación del holding" variant="calculation">
         <Card className="bg-blue-50 border-blue-200 mb-3">
           <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-blue-800">¿Qué nos piden?</p>
+            <p className="font-semibold text-blue-800">¿Por qué NO podemos simplemente promediar las tres medias?</p>
             <p className="text-muted-foreground">
-              La facturación media del holding es la <strong>media ponderada</strong> de las tres empresas,
-              donde los pesos son las proporciones del holding (A=30%, B=45%, C=25%).
+              La tentación es calcular (541.6 + 601.8 + 137.3) / 3 = {mediaSimple}€. Pero eso sería
+              <strong> tratar a las tres empresas como si pesaran lo mismo</strong>, y no es así.
             </p>
-            <FormulaDisplay math={`\\bar{x}_{holding} = \\sum w_k \\cdot \\bar{x}_k`} />
-            <div className="bg-white rounded p-2 space-y-1">
-              <p><InlineMath math="w_k" /> = peso (proporción) de cada empresa en el holding</p>
-              <p><InlineMath math="\bar{x}_k" /> = media de facturación de cada empresa</p>
-              <p className="text-muted-foreground">Como los pesos ya suman 1 (30% + 45% + 25% = 100%), no necesitamos dividir.</p>
-            </div>
+            <Card className="bg-white">
+              <CardContent className="p-2 text-[10px] space-y-1">
+                <p className="font-semibold">Analogía: tres amigos ponen dinero en un bote</p>
+                <p className="text-muted-foreground">
+                  Si Juan pone 30€, María pone 45€ y Pedro pone 25€, la &quot;contribución media&quot;
+                  no es dividir entre 3. María contribuyó más, así que su parte pesa más.
+                  Lo mismo pasa con el holding: la empresa B contribuye el 45% del negocio,
+                  así que su facturación media debe tener más peso en el cálculo.
+                </p>
+              </CardContent>
+            </Card>
+            <p className="text-muted-foreground mt-1">
+              <strong>¿Por qué media ponderada?</strong> Porque cada empresa representa una proporción
+              diferente del holding. Si B es el 45% del holding, su media debe &quot;pesar&quot; el 45%
+              en el resultado final. Si las tres fueran iguales (33% cada una), la media ponderada
+              coincidiría con la simple. Pero no es el caso.
+            </p>
           </CardContent>
         </Card>
 
+        <Card className="bg-violet-50 border-violet-200 mb-3">
+          <CardContent className="p-3 text-xs space-y-2">
+            <p className="font-semibold text-violet-800">La fórmula y qué significa cada parte</p>
+            <FormulaDisplay math={`\\bar{x}_{holding} = \\sum w_k \\cdot \\bar{x}_k = w_A \\cdot \\bar{x}_A + w_B \\cdot \\bar{x}_B + w_C \\cdot \\bar{x}_C`} />
+            <div className="bg-white rounded p-2 space-y-1">
+              <p><InlineMath math="w_k" /> = peso (proporción) de cada empresa → cuánto representa del total</p>
+              <p><InlineMath math="\bar{x}_k" /> = media de facturación de cada empresa → cuánto factura en promedio</p>
+              <p><InlineMath math="w_k \cdot \bar{x}_k" /> = contribución de esa empresa al holding → &quot;de los X€ del holding, cuántos aporta esta empresa&quot;</p>
+            </div>
+            <p className="text-muted-foreground">
+              <strong>¿Por qué no dividimos al final?</strong> Porque los pesos ya suman 1
+              (0.30 + 0.45 + 0.25 = 1.00). Si en vez de proporciones nos dieran cantidades absolutas
+              (ej: 300, 450, 250 empleados), sí dividiríamos entre el total (1000).
+            </p>
+          </CardContent>
+        </Card>
+
+        <p className="text-sm font-medium">Cálculo paso a paso:</p>
         <FormulaDisplay math={`\\bar{x}_{holding} = 0.30 \\cdot 541.6 + 0.45 \\cdot 601.8 + 0.25 \\cdot 137.3`} />
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 my-2">
+          <Card className="bg-gray-50">
+            <CardContent className="p-2 text-center text-xs">
+              <p className="font-semibold">A aporta:</p>
+              <p>0.30 × 541.6 = <strong>{round(0.30 * 541.6, 2)}€</strong></p>
+            </CardContent>
+          </Card>
+          <Card className="bg-gray-50">
+            <CardContent className="p-2 text-center text-xs">
+              <p className="font-semibold">B aporta:</p>
+              <p>0.45 × 601.8 = <strong>{round(0.45 * 601.8, 2)}€</strong></p>
+            </CardContent>
+          </Card>
+          <Card className="bg-gray-50">
+            <CardContent className="p-2 text-center text-xs">
+              <p className="font-semibold">C aporta:</p>
+              <p>0.25 × 137.3 = <strong>{round(0.25 * 137.3, 2)}€</strong></p>
+            </CardContent>
+          </Card>
+        </div>
+
         <FormulaDisplay math={`= ${round(0.30 * 541.6, 2)} + ${round(0.45 * 601.8, 2)} + ${round(0.25 * 137.3, 2)} = ${round(mediaHolding, 2)} €`} />
 
         <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-2 text-xs">
-            <p><strong>Interpretación:</strong> El holding factura en promedio {round(mediaHolding, 2)}€ diarios.
-            La empresa C (media=137.3€) tira la media hacia abajo, pero pesa solo un 25%.
-            La empresa B (media=601.8€, peso=45%) es la que más influye.</p>
+          <CardContent className="p-2 text-xs space-y-1">
+            <p className="font-semibold text-amber-800">¿Tiene sentido el resultado?</p>
+            <p className="text-muted-foreground">
+              El holding factura en promedio <strong>{round(mediaHolding, 2)}€</strong> diarios.
+              Comparemos: la media simple sería {mediaSimple}€. La ponderada es <strong>mayor</strong> porque
+              B (la empresa que más factura, 601.8€) tiene el mayor peso (45%), y C (la que menos
+              factura, 137.3€) tiene el menor peso (25%). El resultado está &quot;tirado&quot; hacia
+              las empresas grandes, que es exactamente lo que debe pasar.
+            </p>
           </CardContent>
         </Card>
 
@@ -167,132 +237,416 @@ export default function Ejercicio8() {
       <StepCard stepNumber={3} title="b) Variabilidad del 40% centrado" variant="calculation">
         <Card className="bg-emerald-50 border-emerald-200 mb-3">
           <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-emerald-800">¿Qué es el &quot;40% centrado&quot;?</p>
+            <p className="font-semibold text-emerald-800">¿Por qué nos interesa el &quot;40% centrado&quot; y no la variabilidad total?</p>
             <p className="text-muted-foreground">
-              El 40% central de una distribución es la franja que va desde el <strong>decil 3 (D₃)</strong>
-              hasta el <strong>decil 7 (D₇)</strong>.
+              La varianza (s²) mide la variabilidad de <strong>todos</strong> los datos, incluyendo los
+              extremos (los mejores y peores días). Pero a veces queremos saber:
+              <em> &quot;ignorando los días excepcionalmente buenos y los excepcionalmente malos,
+              ¿cuánto varían los días normales?&quot;</em>
+            </p>
+            <Card className="bg-white">
+              <CardContent className="p-2 text-[10px] space-y-1">
+                <p className="font-semibold">Analogía: el rendimiento de un jugador de fútbol</p>
+                <p className="text-muted-foreground">
+                  Si quieres saber lo consistente que es un jugador, no miras su mejor partido ni su peor partido
+                  (esos son excepciones). Miras sus partidos &quot;normales&quot; — el 40% del medio.
+                  Si ese rango es estrecho, el jugador es consistente. Si es amplio, es impredecible.
+                </p>
+              </CardContent>
+            </Card>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-blue-50 border-blue-200 mb-3">
+          <CardContent className="p-3 text-xs space-y-2">
+            <p className="font-semibold text-blue-800">¿Qué son D₃ y D₇ y por qué delimitan el 40% central?</p>
+            <p className="text-muted-foreground">
+              Los <strong>deciles</strong> dividen los datos ordenados en 10 partes iguales, cada una con el 10%.
             </p>
             <div className="bg-white rounded p-2 space-y-1">
-              <p>D₃ deja el 30% por debajo → el límite inferior del 40% central.</p>
-              <p>D₇ deja el 70% por debajo → el límite superior del 40% central.</p>
-              <p>Entre D₃ y D₇ está exactamente el 40% central (70% - 30% = 40%).</p>
+              <p><InlineMath math="D_3" /> = el valor que deja el <strong>30%</strong> por debajo. Todo lo que está debajo de D₃ son los días &quot;flojos&quot; (el 30% peor).</p>
+              <p><InlineMath math="D_7" /> = el valor que deja el <strong>70%</strong> por debajo. Todo lo que está por encima de D₇ son los días &quot;excepcionales&quot; (el 30% mejor).</p>
+              <p className="mt-1 font-semibold">Entre D₃ y D₇: queda exactamente el 70% - 30% = <strong>40% central</strong></p>
             </div>
+            <p className="text-muted-foreground mt-1">
+              <strong>¿Por qué D₇ - D₃ mide la variabilidad?</strong> Porque es la <strong>amplitud</strong>
+              (rango) de esa franja central. Si D₇ - D₃ es grande, los días &quot;normales&quot; varían mucho
+              entre sí. Si es pequeño, los días normales son bastante parecidos.
+            </p>
             <p className="text-muted-foreground">
-              La <strong>variabilidad de esta franja</strong> se mide con el rango: D₇ - D₃.
-              Cuanto mayor sea esta diferencia, más varían los datos en su zona central.
+              Es exactamente la misma idea que el <strong>rango intercuartílico</strong> (Q₃ - Q₁ mide el 50% central),
+              pero aquí usamos un recorte diferente (40% en vez de 50%).
             </p>
           </CardContent>
         </Card>
 
+        <p className="text-sm font-medium">Cálculo del rango D₇ - D₃ para cada empresa:</p>
         <FormulaDisplay math={`RI_{40\\%} = D_7 - D_3`} />
-        {riDeciles.map((e) => (
-          <FormulaDisplay key={e.nombre} math={`RI_{${e.nombre}} = ${empresasDeciles.find(d => d.nombre === e.nombre)!.d7} - ${empresasDeciles.find(d => d.nombre === e.nombre)!.d3} = ${e.ri}`} />
-        ))}
+
+        <div className="space-y-2 my-2">
+          {empresasDeciles.map((e, i) => (
+            <Card key={e.nombre} className="bg-gray-50">
+              <CardContent className="p-2 text-xs">
+                <div className="flex items-center justify-between flex-wrap gap-1">
+                  <span className="font-semibold">Empresa {e.nombre}:</span>
+                  <span>D₇ ({e.d7}) - D₃ ({e.d3}) = <strong>{riDeciles[i].ri}€</strong></span>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
         <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-2 text-xs">
-            <p><strong>Interpretación:</strong> La empresa B tiene el mayor rango en su 40% central ({riDeciles[1].ri}€),
-            lo que significa que incluso sus días &quot;normales&quot; son bastante variables.
-            La empresa C tiene el menor rango ({riDeciles[2].ri}€), siendo la más estable en su zona central.</p>
+          <CardContent className="p-2 text-xs space-y-1">
+            <p className="font-semibold text-amber-800">¿Qué nos dice esto de cada empresa?</p>
+            <p className="text-muted-foreground">
+              <strong>Empresa B (RI = {riDeciles[1].ri}€):</strong> Tiene la mayor variabilidad en sus días
+              &quot;normales&quot;. Incluso descartando los extremos, la facturación fluctúa en un rango
+              de {riDeciles[1].ri}€. Es la más <strong>impredecible</strong> en su zona central.
+            </p>
+            <p className="text-muted-foreground">
+              <strong>Empresa A (RI = {riDeciles[0].ri}€):</strong> Variabilidad intermedia.
+              Sus días normales varían en {riDeciles[0].ri}€.
+            </p>
+            <p className="text-muted-foreground">
+              <strong>Empresa C (RI = {riDeciles[2].ri}€):</strong> Es la más <strong>estable</strong>
+              en su zona central. Sus días normales solo varían en {riDeciles[2].ri}€.
+              Tiene sentido: C factura mucho menos (media=137.3€), así que sus fluctuaciones
+              también son más pequeñas en términos absolutos.
+            </p>
           </CardContent>
         </Card>
 
-        <ResultCard label="Mayor variabilidad en 40% centrado" value={`Empresa B (RI = ${riDeciles[1].ri})`} />
+        <ResultCard label="Mayor variabilidad en 40% centrado" value={`Empresa B (RI = ${riDeciles[1].ri}€)`} />
       </StepCard>
 
       {/* ============ PASO 3: D2 de C ============ */}
       <StepCard stepNumber={4} title="c) Facturación máxima del 20% inferior en C" variant="calculation">
         <Card className="bg-violet-50 border-violet-200 mb-3">
           <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-violet-800">Traducción de la pregunta</p>
+            <p className="font-semibold text-violet-800">¿Cómo traducimos esta pregunta a estadística?</p>
             <p className="text-muted-foreground">
-              &quot;Del 20% de días en que la empresa C menos factura, ¿cuál es la facturación más alta?&quot;
+              La pregunta es: <em>&quot;Del 20% de días en que la empresa C menos factura,
+              ¿cuál es la facturación más alta?&quot;</em>
             </p>
+            <Card className="bg-white">
+              <CardContent className="p-2 text-[10px] space-y-1">
+                <p className="font-semibold">Razonamiento paso a paso:</p>
+                <p className="text-muted-foreground">
+                  1. &quot;El 20% de días que menos factura&quot; = el 20% inferior de la distribución.<br />
+                  2. &quot;La facturación más alta de ese grupo&quot; = el <strong>techo</strong> de ese 20%.<br />
+                  3. ¿Qué valor estadístico separa el 20% inferior del 80% superior? → El <strong>decil 2 (D₂)</strong>.
+                </p>
+              </CardContent>
+            </Card>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-blue-50 border-blue-200 mb-3">
+          <CardContent className="p-3 text-xs space-y-2">
+            <p className="font-semibold text-blue-800">¿Por qué es D₂ y no otro decil?</p>
             <p className="text-muted-foreground">
-              El valor que separa el 20% inferior del 80% superior es el <strong>decil 2 (D₂)</strong>.
-              D₂ deja exactamente el 20% de los datos por debajo.
+              Los deciles dividen los datos en 10 partes iguales. <InlineMath math="D_k" /> deja
+              el <InlineMath math="k \cdot 10\%" /> de los datos por debajo.
+            </p>
+            <div className="bg-white rounded p-2 space-y-1">
+              <p><InlineMath math="D_1" /> → deja el 10% por debajo</p>
+              <p><strong><InlineMath math="D_2" /> → deja el 20% por debajo ← este es el que necesitamos</strong></p>
+              <p><InlineMath math="D_3" /> → deja el 30% por debajo</p>
+              <p className="text-muted-foreground text-[10px] mt-1">...y así sucesivamente hasta D₉ (90%).</p>
+            </div>
+            <p className="text-muted-foreground">
+              Como queremos el <strong>techo del 20% inferior</strong>, necesitamos el valor que
+              deja exactamente el 20% por debajo = D₂. El día más &quot;bueno&quot; del 20% peor
+              es exactamente D₂.
             </p>
           </CardContent>
         </Card>
 
+        <p className="text-sm font-medium">Respuesta (dato directo de la tabla):</p>
         <FormulaDisplay math={`D_2^C = ${facturacionC_D2} €`} />
 
         <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-2 text-xs">
-            <p><strong>Interpretación:</strong> El 20% de los peores días de la empresa C factura como máximo {facturacionC_D2}€.
-            El otro 80% de los días factura más que eso.</p>
+          <CardContent className="p-2 text-xs space-y-1">
+            <p className="font-semibold text-amber-800">¿Qué significa esto en la práctica?</p>
+            <p className="text-muted-foreground">
+              <strong>El 20% de los peores días de la empresa C factura como máximo {facturacionC_D2}€.</strong>
+              Dicho de otra forma: 2 de cada 10 días, la empresa C factura {facturacionC_D2}€ o menos.
+              Los otros 8 de cada 10 días, factura más que eso.
+            </p>
+            <p className="text-muted-foreground">
+              Esto es útil para planificación financiera: si la empresa necesita al menos 100€/día
+              para cubrir costes, sabemos que incluso en sus peores días (el peor 20%) ya cubre gastos,
+              porque {facturacionC_D2}€ &lt; 137.3€ (media) pero aún es un nivel razonable.
+            </p>
           </CardContent>
         </Card>
 
         <ResultCard label="Facturación máxima del 20% inferior (C)" value={`${facturacionC_D2} €`} />
       </StepCard>
 
-      {/* ============ PASO 4: Transformaciones ============ */}
-      <StepCard stepNumber={5} title="d) Transformaciones de variables" variant="calculation">
+      {/* ============ PASO 4: Transformaciones - Teoría ============ */}
+      <StepCard stepNumber={5} title="d) Transformaciones: la teoría detrás" variant="explanation">
         <Card className="bg-rose-50 border-rose-200 mb-3">
           <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-rose-800">Las dos reglas fundamentales de transformaciones lineales</p>
-            <p className="text-muted-foreground">Si transformamos una variable X mediante Y = a·X + b:</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
-              <Card className="bg-white">
-                <CardContent className="p-2 space-y-1">
-                  <p className="font-semibold text-xs">La media se transforma igual</p>
-                  <FormulaDisplay math={`\\bar{y} = a \\cdot \\bar{x} + b`} />
-                  <p className="text-[10px] text-muted-foreground">Tanto multiplicar (a) como sumar (b) afectan a la media.</p>
-                </CardContent>
-              </Card>
-              <Card className="bg-white">
-                <CardContent className="p-2 space-y-1">
-                  <p className="font-semibold text-xs">La varianza solo depende de la escala</p>
-                  <FormulaDisplay math={`s_Y^2 = a^2 \\cdot s_X^2`} />
-                  <p className="text-[10px] text-muted-foreground">Solo multiplicar (a²) afecta la varianza. Sumar (b) NO la cambia.</p>
-                </CardContent>
-              </Card>
-            </div>
-            <div className="bg-white rounded p-2 mt-1">
-              <p className="font-semibold text-xs">¿Por qué sumar una constante no cambia la varianza?</p>
-              <p className="text-[10px] text-muted-foreground">
-                La varianza mide cuánto se alejan los datos <em>entre sí</em>. Si a todos les sumas 100,
-                todos suben igual → las distancias entre ellos no cambian → la varianza no cambia.
-                Es como subir un ascensor: todos suben, pero siguen a la misma distancia entre sí.
-              </p>
-            </div>
+            <p className="font-semibold text-rose-800">¿Por qué necesitamos reglas de transformación?</p>
+            <p className="text-muted-foreground">
+              En el mundo real, los datos cambian: suben precios, se aplican descuentos, se añaden bonificaciones.
+              Sería muy costoso recalcular todo desde cero cada vez. Las <strong>reglas de transformación
+              lineal</strong> nos permiten actualizar media y varianza <strong>instantáneamente</strong>,
+              sin necesidad de volver a los datos originales.
+            </p>
+            <Card className="bg-white">
+              <CardContent className="p-2 text-[10px] space-y-1">
+                <p className="font-semibold">Analogía: recibo de la luz</p>
+                <p className="text-muted-foreground">
+                  Si la compañía eléctrica sube un 15% todas las facturas, no necesitas mirar cada factura individual
+                  para saber la nueva media. Solo multiplicas la media antigua por 1.15. Lo mismo con la variabilidad.
+                  <strong> Estas reglas nos ahorran recalcular todo.</strong>
+                </p>
+              </CardContent>
+            </Card>
           </CardContent>
         </Card>
 
         <Card className="bg-blue-50 border-blue-200 mb-3">
           <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-sm mb-2">Empresa B: incremento del 15% (cambio de escala)</p>
-            <p className="text-muted-foreground">Subir un 15% = multiplicar por 1.15. Aquí a = 1.15, b = 0.</p>
-            <FormulaDisplay math={`Y_B = 1.15 \\cdot X_B`} />
-            <FormulaDisplay math={`\\bar{y}_B = 1.15 \\cdot ${empresas[1].media} = ${newMediaB} €`} />
-            <FormulaDisplay math={`s_{Y_B}^2 = 1.15^2 \\cdot s_{X_B}^2 = ${round(1.15 ** 2, 4)} \\cdot ${empresas[1].var} = ${newVarB}`} />
+            <p className="font-semibold text-blue-800">La transformación lineal: Y = a·X + b</p>
             <p className="text-muted-foreground">
-              <strong>Ojo:</strong> La varianza se multiplica por 1.15² = {round(1.15 ** 2, 4)}, no por 1.15.
-              La varianza está al cuadrado, así que el factor también se eleva al cuadrado.
+              Cualquier cambio que sea &quot;multiplicar por algo y/o sumar algo&quot; es una transformación lineal.
+              <InlineMath math="a" /> es el <strong>factor de escala</strong> (multiplicar) y
+              <InlineMath math="b" /> es el <strong>desplazamiento</strong> (sumar/restar).
             </p>
           </CardContent>
         </Card>
 
-        <Card className="bg-emerald-50 border-emerald-200">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <Card className="bg-emerald-50 border-emerald-200">
+            <CardContent className="p-3 text-xs space-y-2">
+              <p className="font-semibold text-emerald-800">Regla 1: La media se transforma completa</p>
+              <FormulaDisplay math={`\\bar{y} = a \\cdot \\bar{x} + b`} />
+              <p className="text-muted-foreground">
+                <strong>¿Por qué?</strong> La media es el &quot;centro de gravedad&quot; de los datos.
+                Si multiplicas todos los datos por <InlineMath math="a" />, el centro se multiplica por <InlineMath math="a" />.
+                Si a todos les sumas <InlineMath math="b" />, el centro se desplaza <InlineMath math="b" />.
+              </p>
+              <Card className="bg-white">
+                <CardContent className="p-2 text-[10px]">
+                  <p className="font-semibold">Ejemplo intuitivo:</p>
+                  <p className="text-muted-foreground">
+                    Si 5 personas pesan 60, 65, 70, 75, 80 kg (media = 70), y todas engordan 5 kg,
+                    la nueva media es 70 + 5 = 75. Si todas adelgazan un 10%, la nueva media es 70 × 0.9 = 63.
+                    En ambos casos, basta con transformar la media.
+                  </p>
+                </CardContent>
+              </Card>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-violet-50 border-violet-200">
+            <CardContent className="p-3 text-xs space-y-2">
+              <p className="font-semibold text-violet-800">Regla 2: La varianza SOLO depende de la escala</p>
+              <FormulaDisplay math={`s_Y^2 = a^2 \\cdot s_X^2`} />
+              <p className="text-muted-foreground">
+                <strong>¿Por qué <InlineMath math="a^2" /> y no simplemente <InlineMath math="a" />?</strong> Porque
+                la varianza usa diferencias al cuadrado: <InlineMath math="(x_i - \bar{x})^2" />.
+                Si multiplicas cada <InlineMath math="x_i" /> por <InlineMath math="a" />,
+                cada diferencia se multiplica por <InlineMath math="a" />, y al elevar al cuadrado
+                queda <InlineMath math="a^2" />.
+              </p>
+              <p className="text-muted-foreground">
+                <strong>¿Por qué <InlineMath math="b" /> no aparece?</strong> Porque la varianza mide
+                <em> distancias entre los datos</em>, no su valor absoluto.
+              </p>
+              <Card className="bg-white">
+                <CardContent className="p-2 text-[10px]">
+                  <p className="font-semibold">Analogía del ascensor:</p>
+                  <p className="text-muted-foreground">
+                    5 personas en un ascensor están a alturas: 1.60, 1.65, 1.70, 1.75, 1.80m.
+                    Si el ascensor sube 10 pisos, todos suben igual → las <strong>diferencias entre ellos
+                    no cambian</strong> → la varianza no cambia.
+                    Pero si todos crecen un 10% (× 1.10), las diferencias se amplifican → la varianza sí cambia.
+                  </p>
+                </CardContent>
+              </Card>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card className="bg-amber-50 border-amber-200 mt-3">
+          <CardContent className="p-3 text-xs">
+            <p className="font-semibold text-amber-800">Resumen de las reglas</p>
+            <div className="overflow-x-auto mt-2">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Operación</TableHead>
+                  <TableHead className="text-center">Tipo</TableHead>
+                  <TableHead className="text-center">Media</TableHead>
+                  <TableHead className="text-center">Varianza</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell className="text-xs">Sumar b (ej: +100€)</TableCell>
+                  <TableCell className="text-center text-xs">Origen</TableCell>
+                  <TableCell className="text-center text-xs">Cambia (+b)</TableCell>
+                  <TableCell className="text-center text-xs font-bold text-rose-600">NO cambia</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="text-xs">Multiplicar por a (ej: ×1.15)</TableCell>
+                  <TableCell className="text-center text-xs">Escala</TableCell>
+                  <TableCell className="text-center text-xs">Cambia (×a)</TableCell>
+                  <TableCell className="text-center text-xs font-bold text-emerald-600">Cambia (×a²)</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </StepCard>
+
+      {/* ============ PASO 5: Aplicación B ============ */}
+      <StepCard stepNumber={6} title="d.1) Empresa B: incremento del 15%" variant="calculation">
+        <Card className="bg-blue-50 border-blue-200 mb-3">
           <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-sm mb-2">Empresa A: incremento de 100€ (cambio de origen)</p>
-            <p className="text-muted-foreground">Sumar 100€ fijos = cambio de origen. Aquí a = 1, b = 100.</p>
-            <FormulaDisplay math={`Y_A = X_A + 100`} />
-            <FormulaDisplay math={`\\bar{y}_A = ${empresas[0].media} + 100 = ${newMediaA} €`} />
-            <FormulaDisplay math={`s_{Y_A}^2 = 1^2 \\cdot s_{X_A}^2 = ${newVarA}`} />
+            <p className="font-semibold text-blue-800">¿Cómo traducimos &quot;subir un 15%&quot; a la fórmula Y = a·X + b?</p>
             <p className="text-muted-foreground">
-              <strong>La varianza NO cambia</strong> porque solo sumamos una constante. Todos los días suben 100€,
-              así que las diferencias entre días siguen siendo las mismas.
+              &quot;Subir un 15%&quot; significa que el nuevo valor es el valor original <strong>más el 15%
+              del original</strong>: Y = X + 0.15·X = 1.15·X.
+            </p>
+            <p className="text-muted-foreground">
+              Esto es un <strong>cambio de escala puro</strong>: <InlineMath math="a = 1.15" />, <InlineMath math="b = 0" />.
+              No se suma ninguna cantidad fija, solo se multiplica.
+            </p>
+          </CardContent>
+        </Card>
+
+        <FormulaDisplay math={`Y_B = 1.15 \\cdot X_B \\quad (a = 1.15,\\; b = 0)`} />
+
+        <p className="text-sm font-medium mt-2">Nueva media:</p>
+        <FormulaDisplay math={`\\bar{y}_B = 1.15 \\cdot \\bar{x}_B = 1.15 \\cdot ${empresas[1].media} = ${newMediaB} €`} />
+
+        <p className="text-sm font-medium mt-2">Nueva varianza:</p>
+        <FormulaDisplay math={`s_{Y_B}^2 = 1.15^2 \\cdot s_{X_B}^2 = ${round(1.15 ** 2, 4)} \\cdot ${empresas[1].var} = ${newVarB}`} />
+
+        <Card className="bg-amber-50 border-amber-200 mt-2">
+          <CardContent className="p-2 text-xs space-y-1">
+            <p className="font-semibold text-amber-800">¿Por qué la varianza se multiplica por 1.15² y no por 1.15?</p>
+            <p className="text-muted-foreground">
+              Porque la varianza está en <strong>unidades al cuadrado</strong> (€²).
+              Si cada dato se multiplica por 1.15, las distancias al centro también se multiplican por 1.15.
+              Pero la varianza <em>eleva al cuadrado</em> esas distancias, por eso el factor es 1.15² = {round(1.15 ** 2, 4)}.
+            </p>
+            <p className="text-muted-foreground">
+              Si usáramos la <strong>desviación típica</strong> (que está en €, no en €²), sí se multiplicaría
+              directamente por 1.15: <InlineMath math="s_Y = 1.15 \cdot s_X" />.
             </p>
           </CardContent>
         </Card>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
           <ResultCard label="Nueva media B" value={`${newMediaB} €`} />
-          <ResultCard label="Nueva varianza B" value={`${newVarB}`} />
+          <ResultCard label="Nueva varianza B" value={`${newVarB} €²`} />
+        </div>
+      </StepCard>
+
+      {/* ============ PASO 6: Aplicación A ============ */}
+      <StepCard stepNumber={7} title="d.2) Empresa A: incremento fijo de 100€" variant="calculation">
+        <Card className="bg-blue-50 border-blue-200 mb-3">
+          <CardContent className="p-3 text-xs space-y-2">
+            <p className="font-semibold text-blue-800">¿Cómo traducimos &quot;sumar 100€ fijos&quot; a Y = a·X + b?</p>
+            <p className="text-muted-foreground">
+              Aquí no se multiplica nada: el nuevo valor es simplemente el original <strong>más 100</strong>.
+              Y = X + 100 = 1·X + 100.
+            </p>
+            <p className="text-muted-foreground">
+              Esto es un <strong>cambio de origen puro</strong>: <InlineMath math="a = 1" />, <InlineMath math="b = 100" />.
+              Todos los días suben exactamente 100€, sin importar cuánto facturaban antes.
+            </p>
+          </CardContent>
+        </Card>
+
+        <FormulaDisplay math={`Y_A = X_A + 100 \\quad (a = 1,\\; b = 100)`} />
+
+        <p className="text-sm font-medium mt-2">Nueva media:</p>
+        <FormulaDisplay math={`\\bar{y}_A = 1 \\cdot ${empresas[0].media} + 100 = ${newMediaA} €`} />
+
+        <p className="text-sm font-medium mt-2">Nueva varianza:</p>
+        <FormulaDisplay math={`s_{Y_A}^2 = 1^2 \\cdot s_{X_A}^2 = 1 \\cdot ${empresas[0].var} = ${newVarA}`} />
+
+        <Card className="bg-amber-50 border-amber-200 mt-2">
+          <CardContent className="p-2 text-xs space-y-1">
+            <p className="font-semibold text-amber-800">¿Por qué la varianza NO cambia?</p>
+            <p className="text-muted-foreground">
+              Esto es la parte que más sorprende. <strong>La varianza mide dispersión (cuánto varían los datos
+              entre sí), no nivel (cuánto valen).</strong>
+            </p>
+            <p className="text-muted-foreground">
+              Si todos los días suben 100€, el día que antes facturaba más sigue facturando más,
+              y el que facturaba menos sigue facturando menos. Las <strong>diferencias entre días
+              no cambian</strong>.
+            </p>
+            <Card className="bg-white mt-1">
+              <CardContent className="p-2 text-[10px]">
+                <p className="font-semibold">Ejemplo numérico rápido:</p>
+                <p className="text-muted-foreground">
+                  Datos: 100, 200, 300 → diferencias con media (200): -100, 0, +100<br/>
+                  Sumamos 100: 200, 300, 400 → diferencias con media (300): -100, 0, +100<br/>
+                  <strong>Las diferencias son idénticas</strong> → la varianza no cambia.
+                </p>
+              </CardContent>
+            </Card>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
           <ResultCard label="Nueva media A" value={`${newMediaA} €`} />
           <ResultCard label="Nueva varianza A" value={`${newVarA} (sin cambio)`} />
+        </div>
+      </StepCard>
+
+      {/* ============ PASO 7: Resumen ============ */}
+      <StepCard stepNumber={8} title="Resumen: ¿qué hemos aprendido?" variant="result">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <Card className="bg-blue-50 border-blue-200">
+            <CardContent className="p-3 space-y-1">
+              <p className="font-semibold text-xs text-blue-800">Media ponderada</p>
+              <p className="text-[10px] text-muted-foreground">
+                Cuando las partes tienen distinto peso, no vale promediar las medias.
+                Hay que ponderar: cada media se multiplica por su peso.
+                El resultado se acerca más a las partes con mayor peso.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="bg-emerald-50 border-emerald-200">
+            <CardContent className="p-3 space-y-1">
+              <p className="font-semibold text-xs text-emerald-800">Rango interdecílico</p>
+              <p className="text-[10px] text-muted-foreground">
+                D₇ - D₃ mide la amplitud del 40% central: cuánto varían los días &quot;normales&quot;,
+                ignorando los extremos. Mayor rango = más impredecible en sus días típicos.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="bg-violet-50 border-violet-200">
+            <CardContent className="p-3 space-y-1">
+              <p className="font-semibold text-xs text-violet-800">Deciles como &quot;traductores&quot;</p>
+              <p className="text-[10px] text-muted-foreground">
+                &quot;Máxima del 20% inferior&quot; = D₂. &quot;Mínima del 30% superior&quot; = D₇.
+                Los deciles traducen preguntas de negocio a valores concretos.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="bg-rose-50 border-rose-200">
+            <CardContent className="p-3 space-y-1">
+              <p className="font-semibold text-xs text-rose-800">Transformaciones lineales</p>
+              <p className="text-[10px] text-muted-foreground">
+                Multiplicar (escala) → media y varianza cambian. Sumar (origen) → solo la media cambia.
+                La varianza solo se ve afectada por lo que &quot;estira o comprime&quot; los datos,
+                no por lo que los &quot;desplaza&quot;.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </StepCard>
     </ExerciseLayout>
