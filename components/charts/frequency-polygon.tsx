@@ -2,6 +2,7 @@
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PolygonData {
   x: number;
@@ -24,25 +25,28 @@ export function FrequencyPolygon({
   yLabel = "Frecuencia",
   color = "hsl(var(--chart-2))",
 }: FrequencyPolygonProps) {
+  const isMobile = useIsMobile();
+
   return (
     <Card>
       {title && (
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm">{title}</CardTitle>
+          <CardTitle className="text-xs sm:text-sm">{title}</CardTitle>
         </CardHeader>
       )}
-      <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 25 }}>
+      <CardContent className="px-2 sm:px-6">
+        <ResponsiveContainer width="100%" height={isMobile ? 220 : 300}>
+          <LineChart data={data} margin={isMobile ? { top: 5, right: 5, left: 0, bottom: 15 } : { top: 5, right: 30, left: 20, bottom: 25 }}>
             <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
             <XAxis
               dataKey="x"
-              tick={{ fontSize: 12 }}
-              label={xLabel ? { value: xLabel, position: "bottom", offset: 15 } : undefined}
+              tick={{ fontSize: isMobile ? 10 : 12 }}
+              label={xLabel && !isMobile ? { value: xLabel, position: "bottom", offset: 15 } : undefined}
             />
             <YAxis
-              tick={{ fontSize: 12 }}
-              label={yLabel ? { value: yLabel, angle: -90, position: "insideLeft", offset: -5 } : undefined}
+              tick={{ fontSize: isMobile ? 10 : 12 }}
+              width={isMobile ? 30 : undefined}
+              label={yLabel && !isMobile ? { value: yLabel, angle: -90, position: "insideLeft", offset: -5 } : undefined}
             />
             <Tooltip
               formatter={(value) => [String(value), yLabel]}
@@ -53,8 +57,8 @@ export function FrequencyPolygon({
               dataKey="y"
               stroke={color}
               strokeWidth={2}
-              dot={{ r: 4, fill: color }}
-              activeDot={{ r: 6 }}
+              dot={{ r: isMobile ? 3 : 4, fill: color }}
+              activeDot={{ r: isMobile ? 4 : 6 }}
             />
           </LineChart>
         </ResponsiveContainer>

@@ -78,7 +78,7 @@ export default function Tema2Page() {
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">1</span>
                   Según la escala de medida
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Cualitativas */}
                   <Card className="border-l-4 border-l-purple-400">
                     <CardHeader className="pb-2">
@@ -135,7 +135,7 @@ export default function Tema2Page() {
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">2</span>
                   Según el número de características observadas
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Card className="bg-amber-50 border-amber-200">
                     <CardContent className="p-4 space-y-1">
                       <p className="font-semibold text-sm text-amber-800">Unidimensionales</p>
@@ -161,7 +161,7 @@ export default function Tema2Page() {
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">3</span>
                   Según el periodo de tiempo de recogida
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Card className="bg-sky-50 border-sky-200">
                     <CardContent className="p-4 space-y-1">
                       <p className="font-semibold text-sm text-sky-800">Transversales</p>
@@ -190,7 +190,7 @@ export default function Tema2Page() {
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">4</span>
                   Vector y Matriz de datos
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Card className="border-l-4 border-l-teal-400">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm">Vector de datos</CardTitle>
@@ -290,7 +290,7 @@ export default function Tema2Page() {
             <CardContent className="space-y-6">
 
               {/* Definiciones de frecuencias */}
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Card className="bg-blue-50 border-blue-200">
                   <CardContent className="p-4 space-y-2">
                     <div className="flex items-center gap-2">
@@ -557,7 +557,7 @@ export default function Tema2Page() {
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-blue-700 text-xs font-bold">1</span>
                   Distribución Conjunta
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <p className="text-xs text-muted-foreground">
                       La <strong>frecuencia absoluta conjunta</strong> <InlineMath math="n_{ij}" /> es el número de veces que aparece el par <InlineMath math="(x_i, y_j)" /> en los datos.
@@ -629,7 +629,7 @@ export default function Tema2Page() {
                 <p className="text-xs text-muted-foreground">
                   Permiten estudiar cada variable <strong>por separado</strong>, ignorando la otra. Se obtienen sumando filas (para X) o columnas (para Y) de la tabla conjunta.
                 </p>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Card className="bg-emerald-50 border-emerald-200">
                     <CardContent className="p-4 space-y-2">
                       <p className="font-semibold text-xs text-emerald-800">Marginal de X</p>
@@ -658,7 +658,7 @@ export default function Tema2Page() {
                 <p className="text-xs text-muted-foreground">
                   Estudian el comportamiento de una variable <strong>fijando un valor</strong> de la otra. Es como &quot;filtrar&quot; la tabla por una fila o columna concreta.
                 </p>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Card className="bg-violet-50 border-violet-200">
                     <CardContent className="p-4 space-y-2">
                       <p className="font-semibold text-xs text-violet-800">Y condicionada a X = <InlineMath math="x_i" /></p>
@@ -729,7 +729,7 @@ export default function Tema2Page() {
                         </TableBody>
                       </Table>
                     </div>
-                    <div className="grid md:grid-cols-3 gap-3 mt-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-2">
                       <div className="bg-emerald-50 rounded p-2 text-xs">
                         <p className="font-semibold text-emerald-800 mb-1">Marginal X:</p>
                         <p>x=1: 12, x=2: 18, x=3: 6</p>

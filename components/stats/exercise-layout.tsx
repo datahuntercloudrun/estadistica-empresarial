@@ -42,48 +42,48 @@ export function ExerciseLayout({
   nextUrl,
 }: ExerciseLayoutProps) {
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center gap-2 flex-wrap">
+    <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
+      <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
         <Badge className={temaColors[tema]}>Tema {tema}</Badge>
         <Badge className={difficultyColors[difficulty]}>{difficulty}</Badge>
         <Badge variant="outline">{category}</Badge>
       </div>
 
-      <h1 className="text-2xl font-bold">
+      <h1 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight">
         Ejercicio {exerciseNumber}: {title}
       </h1>
 
       <Card className="border-2 border-primary/20 bg-primary/5">
         <CardHeader className="pb-2">
-          <CardTitle className="text-base">Enunciado</CardTitle>
+          <CardTitle className="text-sm sm:text-base">Enunciado</CardTitle>
         </CardHeader>
-        <CardContent className="text-sm space-y-2">
+        <CardContent className="text-xs sm:text-sm space-y-2">
           {statement}
         </CardContent>
       </Card>
 
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Resolución paso a paso</h2>
+      <div className="space-y-3 sm:space-y-4">
+        <h2 className="text-base sm:text-lg md:text-xl font-semibold">Resolución paso a paso</h2>
         {children}
       </div>
 
-      <div className="flex justify-between pt-4 border-t">
+      <div className="flex flex-col sm:flex-row justify-between gap-2 pt-4 border-t">
         {prevUrl ? (
-          <Button variant="outline" asChild>
+          <Button variant="outline" asChild className="w-full sm:w-auto">
             <Link href={prevUrl}>
               <ArrowLeft className="h-4 w-4 mr-2" />
               Anterior
             </Link>
           </Button>
-        ) : <div />}
+        ) : <div className="hidden sm:block" />}
         {nextUrl ? (
-          <Button variant="outline" asChild>
+          <Button variant="outline" asChild className="w-full sm:w-auto">
             <Link href={nextUrl}>
               Siguiente
               <ArrowRight className="h-4 w-4 ml-2" />
             </Link>
           </Button>
-        ) : <div />}
+        ) : <div className="hidden sm:block" />}
       </div>
     </div>
   );

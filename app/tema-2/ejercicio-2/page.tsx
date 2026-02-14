@@ -211,7 +211,7 @@ export default function Ejercicio2() {
       <StepCard stepNumber={4} title="¿Qué son las 4 frecuencias y cómo se calculan?" variant="explanation">
         <p>Para cada intervalo calculamos 4 valores. Están relacionados entre sí como una cadena:</p>
 
-        <div className="grid md:grid-cols-2 gap-3 mt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
           <Card className="bg-blue-50 border-blue-200 border-l-4">
             <CardContent className="p-3 space-y-1">
               <div className="flex items-center gap-2">
@@ -333,7 +333,7 @@ export default function Ejercicio2() {
       <StepCard stepNumber={6} title="a) y b) Tabla de frecuencias completa" variant="calculation">
         <p>Aplicamos el mismo proceso a todos los intervalos. Aquí está la tabla completa:</p>
         <FrequencyTable data={tableData} title="Distribución de frecuencias - Pesos (kg)" grouped />
-        <div className="grid md:grid-cols-2 gap-2 mt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
           <Card className="bg-gray-50">
             <CardContent className="p-2 text-[10px] space-y-1">
               <p><strong>Verificación <InlineMath math="n_i" />:</strong> La suma de todos los <InlineMath math="n_i" /> debe ser n = {rawData.length} ✓</p>
@@ -409,7 +409,7 @@ export default function Ejercicio2() {
       {/* Paso resumen */}
       <StepCard stepNumber={8} title="Resumen: ¿qué hemos aprendido?" variant="result">
         <div className="space-y-2 text-xs">
-          <div className="grid md:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <Card className="bg-blue-50 border-blue-200">
               <CardContent className="p-2 space-y-1">
                 <p className="font-semibold text-blue-800">Agrupar datos</p>

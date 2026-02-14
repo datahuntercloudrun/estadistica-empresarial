@@ -83,7 +83,7 @@ export default function Ejercicio1() {
           </CardContent>
         </Card>
 
-        <div className="grid md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Card className="bg-blue-50 border-blue-200">
             <CardContent className="p-3 space-y-2">
               <p className="font-semibold text-blue-800 text-xs">Cuantitativas (= números)</p>
@@ -166,7 +166,7 @@ export default function Ejercicio1() {
 
       {/* ============ PASO 5: Resumen ============ */}
       <StepCard stepNumber={5} title="Resumen por categoría" variant="result">
-        <div className="grid md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Card className="bg-blue-50 border-blue-200">
             <CardContent className="p-3">
               <p className="font-semibold text-sm mb-1">Cuantitativas Discretas</p>

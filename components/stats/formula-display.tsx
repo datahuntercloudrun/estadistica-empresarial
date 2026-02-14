@@ -17,7 +17,7 @@ export function FormulaDisplay({ math, block = true, className = "" }: FormulaDi
 
   return (
     <span
-      className={`${block ? "block text-center my-3 text-lg" : "inline"} ${className}`}
+      className={`${block ? "block text-center my-2 sm:my-3 text-sm sm:text-base md:text-lg overflow-x-auto" : "inline"} ${className}`}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

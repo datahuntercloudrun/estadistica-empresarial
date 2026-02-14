@@ -38,11 +38,11 @@ export default function RootLayout({
       >
         <SidebarProvider>
           <AppSidebar />
-          <SidebarInset className="h-svh overflow-hidden">
-            <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
+          <SidebarInset className="min-h-svh">
+            <header className="flex h-12 sm:h-14 shrink-0 items-center gap-2 border-b px-3 sm:px-4">
               <SidebarTrigger className="-ml-1" />
             </header>
-            <main className="flex-1 overflow-y-auto p-4 sm:p-6 relative">
+            <main className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 relative">
               {children}
             </main>
           </SidebarInset>

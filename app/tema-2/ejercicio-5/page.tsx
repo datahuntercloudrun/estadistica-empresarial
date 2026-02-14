@@ -154,7 +154,7 @@ export default function Ejercicio5() {
       {/* ============ PASO 1: Los 10 gráficos a clasificar ============ */}
       <StepCard stepNumber={1} title="Los 10 gráficos a clasificar" variant="explanation">
         <p className="text-xs text-muted-foreground mb-3">Observa cada gráfico e intenta identificar de qué tipo es antes de ver la solución.</p>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           {/* Gráfico 1: Diagrama de sectores (ciudades) */}
           <Card className="border-2">
@@ -450,7 +450,7 @@ export default function Ejercicio5() {
       {/* ============ PASO 3: Gráficos para cualitativas ============ */}
       <StepCard stepNumber={3} title="Gráficos para variables cualitativas (y discretas con pocos valores)" variant="explanation">
         <p>Estos gráficos muestran <strong>categorías</strong> y cuántas veces aparece cada una. También sirven para variables cuantitativas discretas con pocos valores distintos.</p>
-        <div className="grid md:grid-cols-2 gap-3 mt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
           <Card className="bg-emerald-50 border-emerald-200">
             <CardContent className="p-4 space-y-2">
               <p className="font-semibold text-sm">Diagrama de sectores (tarta)</p>
@@ -520,7 +520,7 @@ export default function Ejercicio5() {
       {/* ============ PASO 4: Gráficos para cuantitativas ============ */}
       <StepCard stepNumber={4} title="Gráficos para variables cuantitativas" variant="explanation">
         <p>Estos gráficos trabajan con <strong>valores numéricos</strong> y necesitan una escala en el eje. Reflejan la distribución y forma de los datos.</p>
-        <div className="grid md:grid-cols-2 gap-3 mt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
           <Card className="bg-amber-50 border-amber-200">
             <CardContent className="p-4 space-y-2">
               <p className="font-semibold text-sm">Histograma</p>
@@ -596,7 +596,7 @@ export default function Ejercicio5() {
           <CardContent className="p-3 text-xs space-y-2">
             <p className="font-semibold text-rose-800">Esta es la confusión más frecuente en estadística descriptiva</p>
             <p className="text-muted-foreground">Ambos usan rectángulos, pero representan cosas muy distintas:</p>
-            <div className="grid md:grid-cols-2 gap-3 mt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
               <Card className="bg-white border-violet-200">
                 <CardContent className="p-3 space-y-1">
                   <p className="font-semibold text-violet-800 text-sm">Diagrama de barras</p>
@@ -702,7 +702,7 @@ export default function Ejercicio5() {
           </table>
         </Card>
 
-        <div className="grid md:grid-cols-3 gap-2 mt-3 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-3 text-xs">
           <Card className="bg-blue-50 border-blue-200">
             <CardContent className="p-2 space-y-1">
               <p className="font-semibold text-blue-800">Comparar distribuciones</p>

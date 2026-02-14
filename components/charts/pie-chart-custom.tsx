@@ -2,6 +2,7 @@
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PieChartData {
   name: string;
@@ -29,28 +30,29 @@ interface PieChartCustomProps {
 
 export function PieChartCustom({ data, title, showPercentage = true }: PieChartCustomProps) {
   const total = data.reduce((sum, d) => sum + d.value, 0);
+  const isMobile = useIsMobile();
 
   return (
     <Card>
       {title && (
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm">{title}</CardTitle>
+          <CardTitle className="text-xs sm:text-sm">{title}</CardTitle>
         </CardHeader>
       )}
-      <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
+      <CardContent className="px-2 sm:px-6">
+        <ResponsiveContainer width="100%" height={isMobile ? 250 : 300}>
           <PieChart>
             <Pie
               data={data}
               cx="50%"
               cy="50%"
-              labelLine={false}
-              label={({ name, value }) =>
+              labelLine={!isMobile}
+              label={isMobile ? false : ({ name, value }) =>
                 showPercentage
                   ? `${name}: ${((value / total) * 100).toFixed(1)}%`
                   : `${name}: ${value}`
               }
-              outerRadius={100}
+              outerRadius={isMobile ? 70 : 100}
               dataKey="value"
             >
               {data.map((_, index) => (
@@ -58,7 +60,7 @@ export function PieChartCustom({ data, title, showPercentage = true }: PieChartC
               ))}
             </Pie>
             <Tooltip formatter={(value) => [String(value), "Frecuencia"]} />
-            <Legend />
+            <Legend wrapperStyle={isMobile ? { fontSize: "11px" } : undefined} />
           </PieChart>
         </ResponsiveContainer>
       </CardContent>

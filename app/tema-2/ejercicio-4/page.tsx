@@ -62,7 +62,7 @@ export default function Ejercicio4() {
         <p>
           El enunciado nos da directamente una <strong>tabla de correlación</strong> (tabla de doble entrada) con dos variables X e Y medidas a la vez (distribución bivariante).
         </p>
-        <div className="grid md:grid-cols-3 gap-3 mt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-2">
           <Card className="bg-blue-50 border-blue-200">
             <CardContent className="p-3 space-y-1">
               <Badge className="bg-blue-200 text-blue-800 text-xs"><InlineMath math="x_i" /></Badge>
@@ -112,7 +112,7 @@ export default function Ejercicio4() {
         </Card>
 
         <p>Sumamos por filas (para X) y por columnas (para Y):</p>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Card>
             <CardContent className="p-3">
               <p className="font-semibold text-sm mb-2 text-blue-700">Marginal de X</p>

@@ -35,42 +35,44 @@ export function FrequencyTable({ data, title, showDensity = false, highlightRows
   return (
     <Card className="overflow-hidden">
       {title && (
-        <div className="px-4 py-2 bg-muted/50 border-b">
-          <span className="text-sm font-medium">{title}</span>
+        <div className="px-3 sm:px-4 py-2 bg-muted/50 border-b">
+          <span className="text-xs sm:text-sm font-medium">{title}</span>
         </div>
       )}
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="text-center font-bold">{grouped ? "Intervalo" : <InlineMath math="x_i" />}</TableHead>
-            <TableHead className="text-center font-bold"><InlineMath math="n_i" /></TableHead>
-            <TableHead className="text-center font-bold"><InlineMath math="f_i" /></TableHead>
-            <TableHead className="text-center font-bold"><InlineMath math="N_i" /></TableHead>
-            <TableHead className="text-center font-bold"><InlineMath math="F_i" /></TableHead>
-            {showDensity && <TableHead className="text-center font-bold"><InlineMath math="d_i" /></TableHead>}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.map((row, i) => (
-            <TableRow key={i} className={highlightRows.includes(i) ? "bg-amber-50" : i % 2 === 0 ? "bg-muted/20" : ""}>
-              <TableCell className="text-center font-medium">{row.xi}</TableCell>
-              <TableCell className="text-center">{row.ni}</TableCell>
-              <TableCell className="text-center">{row.fi.toFixed(4)}</TableCell>
-              <TableCell className="text-center">{row.Ni}</TableCell>
-              <TableCell className="text-center">{row.Fi.toFixed(4)}</TableCell>
-              {showDensity && <TableCell className="text-center">{row.di?.toFixed(4)}</TableCell>}
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-center font-bold">{grouped ? "Intervalo" : <InlineMath math="x_i" />}</TableHead>
+              <TableHead className="text-center font-bold"><InlineMath math="n_i" /></TableHead>
+              <TableHead className="text-center font-bold"><InlineMath math="f_i" /></TableHead>
+              <TableHead className="text-center font-bold"><InlineMath math="N_i" /></TableHead>
+              <TableHead className="text-center font-bold"><InlineMath math="F_i" /></TableHead>
+              {showDensity && <TableHead className="text-center font-bold"><InlineMath math="d_i" /></TableHead>}
             </TableRow>
-          ))}
-          <TableRow className="font-bold bg-muted/40">
-            <TableCell className="text-center">Total</TableCell>
-            <TableCell className="text-center">{totalNi}</TableCell>
-            <TableCell className="text-center">1.0000</TableCell>
-            <TableCell className="text-center">-</TableCell>
-            <TableCell className="text-center">-</TableCell>
-            {showDensity && <TableCell className="text-center">-</TableCell>}
-          </TableRow>
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {data.map((row, i) => (
+              <TableRow key={i} className={highlightRows.includes(i) ? "bg-amber-50" : i % 2 === 0 ? "bg-muted/20" : ""}>
+                <TableCell className="text-center font-medium text-xs sm:text-sm">{row.xi}</TableCell>
+                <TableCell className="text-center text-xs sm:text-sm">{row.ni}</TableCell>
+                <TableCell className="text-center text-xs sm:text-sm">{row.fi.toFixed(4)}</TableCell>
+                <TableCell className="text-center text-xs sm:text-sm">{row.Ni}</TableCell>
+                <TableCell className="text-center text-xs sm:text-sm">{row.Fi.toFixed(4)}</TableCell>
+                {showDensity && <TableCell className="text-center text-xs sm:text-sm">{row.di?.toFixed(4)}</TableCell>}
+              </TableRow>
+            ))}
+            <TableRow className="font-bold bg-muted/40">
+              <TableCell className="text-center text-xs sm:text-sm">Total</TableCell>
+              <TableCell className="text-center text-xs sm:text-sm">{totalNi}</TableCell>
+              <TableCell className="text-center text-xs sm:text-sm">1.0000</TableCell>
+              <TableCell className="text-center text-xs sm:text-sm">-</TableCell>
+              <TableCell className="text-center text-xs sm:text-sm">-</TableCell>
+              {showDensity && <TableCell className="text-center text-xs sm:text-sm">-</TableCell>}
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
     </Card>
   );
 }

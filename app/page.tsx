@@ -52,7 +52,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {temas.map((tema) => (
           <Link key={tema.numero} href={tema.url}>
             <Card className={`h-full transition-all hover:shadow-md hover:scale-[1.02] cursor-pointer border ${tema.borderColor}`}>

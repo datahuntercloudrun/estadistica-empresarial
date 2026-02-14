@@ -134,3 +134,21 @@
     display: none;
   }
 }
+
+/* KaTeX responsive overflow */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.katex {
+  font-size: inherit !important;
+}
+
+/* Ensure tables are scrollable on mobile */
+@media (max-width: 640px) {
+  table {
+    font-size: 0.75rem;
+  }
+}

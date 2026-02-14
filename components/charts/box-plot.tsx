@@ -27,14 +27,14 @@ export function BoxPlot({ min, q1, median, q3, max, title, label, outliers = [] 
     <Card>
       {title && (
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm">{title}</CardTitle>
+          <CardTitle className="text-xs sm:text-sm">{title}</CardTitle>
         </CardHeader>
       )}
-      <CardContent>
-        <div className="relative h-36 mx-8">
+      <CardContent className="px-2 sm:px-6">
+        <div className="relative h-32 sm:h-36 mx-2 sm:mx-8">
           {/* Labels */}
           <div className="absolute top-0 left-0 right-0 h-6 flex items-center">
-            {label && <span className="text-xs text-muted-foreground">{label}</span>}
+            {label && <span className="text-[10px] sm:text-xs text-muted-foreground">{label}</span>}
           </div>
 
           {/* Box plot area */}
@@ -84,21 +84,21 @@ export function BoxPlot({ min, q1, median, q3, max, title, label, outliers = [] 
 
           {/* Value labels - two rows to prevent overlap */}
           <div className="absolute bottom-4 left-0 right-0 h-5">
-            <span className="absolute text-[10px] text-muted-foreground -translate-x-1/2" style={{ left: `${toPercent(min)}%` }}>
+            <span className="absolute text-[8px] sm:text-[10px] text-muted-foreground -translate-x-1/2" style={{ left: `${toPercent(min)}%` }}>
               {min}
             </span>
-            <span className="absolute text-[10px] text-red-600 font-bold -translate-x-1/2" style={{ left: `${toPercent(median)}%` }}>
+            <span className="absolute text-[8px] sm:text-[10px] text-red-600 font-bold -translate-x-1/2" style={{ left: `${toPercent(median)}%` }}>
               Me={median}
             </span>
-            <span className="absolute text-[10px] text-muted-foreground -translate-x-1/2" style={{ left: `${toPercent(max)}%` }}>
+            <span className="absolute text-[8px] sm:text-[10px] text-muted-foreground -translate-x-1/2" style={{ left: `${toPercent(max)}%` }}>
               {max}
             </span>
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-5">
-            <span className="absolute text-[10px] text-blue-600 font-medium -translate-x-1/2" style={{ left: `${toPercent(q1)}%` }}>
+            <span className="absolute text-[8px] sm:text-[10px] text-blue-600 font-medium -translate-x-1/2" style={{ left: `${toPercent(q1)}%` }}>
               Q1={q1}
             </span>
-            <span className="absolute text-[10px] text-blue-600 font-medium -translate-x-1/2" style={{ left: `${toPercent(q3)}%` }}>
+            <span className="absolute text-[8px] sm:text-[10px] text-blue-600 font-medium -translate-x-1/2" style={{ left: `${toPercent(q3)}%` }}>
               Q3={q3}
             </span>
           </div>
