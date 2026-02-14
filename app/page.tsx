@@ -1,65 +1,112 @@
-import Image from "next/image";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { BookOpen, BarChart3, Calculator } from "lucide-react";
+import Link from "next/link";
+
+const temas = [
+  {
+    numero: 1,
+    titulo: "Introducción a la Estadística",
+    descripcion: "Conceptos básicos, población y muestra, método estadístico, fenómenos deterministas y aleatorios.",
+    icon: BookOpen,
+    color: "text-blue-500",
+    bgColor: "bg-blue-50",
+    borderColor: "border-blue-200",
+    ejercicios: 0,
+    url: "/tema-1",
+    temas: ["Concepto de Estadística", "Método Estadístico", "Población y Muestra", "Estadística Económica"],
+  },
+  {
+    numero: 2,
+    titulo: "El Mundo de los Datos",
+    descripcion: "Variables estadísticas, distribuciones de frecuencias, distribuciones bivariantes y representaciones gráficas.",
+    icon: BarChart3,
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-50",
+    borderColor: "border-emerald-200",
+    ejercicios: 7,
+    url: "/tema-2",
+    temas: ["Tipos de Variables", "Distribuciones de Frecuencias", "Datos Agrupados", "Distribuciones Bivariantes", "Gráficos Estadísticos"],
+  },
+  {
+    numero: 3,
+    titulo: "Análisis Estadístico",
+    descripcion: "Medidas de posición, dispersión y forma. Media, mediana, moda, varianza, cuartiles, asimetría y curtosis.",
+    icon: Calculator,
+    color: "text-violet-500",
+    bgColor: "bg-violet-50",
+    borderColor: "border-violet-200",
+    ejercicios: 11,
+    url: "/tema-3",
+    temas: ["Media, Mediana y Moda", "Cuartiles y Percentiles", "Varianza y Desviación Típica", "Coeficiente de Variación", "Asimetría y Curtosis", "Tipificación"],
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="max-w-5xl mx-auto space-y-8">
+      <div className="space-y-2">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Estadística Empresarial I</h1>
+        <p className="text-muted-foreground text-base sm:text-lg">
+          Ejercicios resueltos paso a paso con visualizaciones interactivas
+        </p>
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {temas.map((tema) => (
+          <Link key={tema.numero} href={tema.url}>
+            <Card className={`h-full transition-all hover:shadow-md hover:scale-[1.02] cursor-pointer border ${tema.borderColor}`}>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div className={`p-2 rounded-lg ${tema.bgColor}`}>
+                    <tema.icon className={`h-6 w-6 ${tema.color}`} />
+                  </div>
+                  {tema.ejercicios > 0 && (
+                    <Badge variant="secondary">
+                      {tema.ejercicios} ejercicios
+                    </Badge>
+                  )}
+                </div>
+                <CardTitle className="text-lg">Tema {tema.numero}</CardTitle>
+                <CardDescription className="font-medium text-foreground/80">
+                  {tema.titulo}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-3">
+                  {tema.descripcion}
+                </p>
+                <div className="flex flex-wrap gap-1">
+                  {tema.temas.map((t) => (
+                    <Badge key={t} variant="outline" className="text-xs">
+                      {t}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Sobre esta aplicación</CardTitle>
+        </CardHeader>
+        <CardContent className="text-sm text-muted-foreground space-y-2">
+          <p>
+            Esta aplicación resuelve los ejercicios de Estadística Empresarial I de forma visual e intuitiva.
+            Cada ejercicio incluye:
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Enunciado completo del ejercicio</li>
+            <li>Resolución paso a paso con explicaciones claras</li>
+            <li>Fórmulas matemáticas renderizadas</li>
+            <li>Gráficos interactivos para visualizar los datos</li>
+            <li>Resultados destacados y verificados</li>
+          </ul>
+        </CardContent>
+      </Card>
     </div>
   );
 }
