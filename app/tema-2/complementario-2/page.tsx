@@ -204,16 +204,24 @@ export default function Complementario2() {
       {/* ============ PASO 2: a) Empresas con mas de 200 puestos ============ */}
       <StepCard stepNumber={3} title="a) Empresas con mas de 200 puestos de trabajo" variant="calculation">
         <Card className="bg-gray-50 border mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold">¿Cual es la logica de este apartado?</p>
+          <CardContent className="p-3 text-xs space-y-2">
+            <p className="font-semibold">¿Por que necesitamos identificar intervalos?</p>
             <p className="text-muted-foreground">
-              Nos piden las empresas con <strong>mas de 200 puestos</strong>. Esto significa que debemos identificar
-              todos los intervalos cuyo <strong>limite inferior sea 200 o mas</strong>.
+              Los datos estan agrupados, asi que <strong>no sabemos el numero exacto de empleados de cada empresa</strong>.
+              Solo sabemos que, por ejemplo, 12 empresas tienen entre 200 y 300 empleados. Es como una caja opaca:
+              sabemos cuantas bolas hay dentro de cada caja, pero no el valor exacto de cada bola.
             </p>
             <p className="text-muted-foreground">
-              ¿Por que el limite inferior? Porque el intervalo [200, 300) contiene a todas las empresas con 200
-              o mas puestos (y menos de 300). Si una empresa tiene exactamente 200 empleados, cae en este intervalo.
-              Asi que todos los intervalos desde [200, 300) en adelante cuentan.
+              Cuando nos piden &quot;mas de 200 puestos&quot;, debemos decidir: ¿que intervalos contienen
+              <strong> exclusivamente</strong> empresas que cumplen esa condicion? El intervalo [200, 300) SI cumple:
+              cualquier empresa ahi tiene al menos 200 empleados. El intervalo [100, 200) NO cumple: las empresas
+              de ese rango tienen menos de 200. Asi que sumamos todos los intervalos desde [200, 300) en adelante.
+            </p>
+            <p className="font-semibold">¿Y si la pregunta fuera &quot;mas de 250 puestos&quot;?</p>
+            <p className="text-muted-foreground">
+              Ahi tendriamos un problema: el intervalo [200, 300) contiene empresas con 200, 210, 250, 270...
+              No podriamos separar exactamente las que superan 250. Este es un <strong>limite de los datos agrupados</strong>:
+              solo podemos responder con precision cuando el punto de corte coincide con un limite de intervalo.
             </p>
           </CardContent>
         </Card>
@@ -252,14 +260,22 @@ export default function Complementario2() {
         </Card>
 
         <Card className="bg-amber-50 border-amber-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-amber-800">Truco: usar la frecuencia acumulada</p>
+          <CardContent className="p-3 text-xs space-y-2">
+            <p className="font-semibold text-amber-800">Truco: usar la frecuencia acumulada (pensar al reves)</p>
             <p className="text-muted-foreground">
-              Otra forma de resolverlo: las empresas con mas de 200 puestos son
-              <strong> todas menos las que tienen 200 o menos</strong>.
-              Sabemos que <InlineMath math="N_2" /> (acumulada hasta el intervalo [100, 200)) = {tablaCompleta[0].Ni + tablaCompleta[1].ni} empresas.
+              A veces es mas facil contar lo que <strong>NO</strong> queremos y restar del total.
+              Es como contar cuantas personas en un cine NO llevan gafas: en lugar de contar uno a uno a todos los que si las llevan,
+              cuentas a los que no y restas del total.
+            </p>
+            <p className="text-muted-foreground">
+              Aqui: empresas con mas de 200 = <strong>total - empresas con 200 o menos</strong>.
+              Las empresas con 200 o menos estan en los dos primeros intervalos, cuya frecuencia acumulada es <InlineMath math="N_2" /> = {tablaCompleta[0].Ni + tablaCompleta[1].ni}.
             </p>
             <FormulaDisplay math={`\\text{Empresas con mas de 200} = n - N_2 = ${totalEmpresas} - ${tablaCompleta[0].ni + tablaCompleta[1].ni} = ${masde200}`} />
+            <p className="text-muted-foreground">
+              Este truco es especialmente util cuando el rango que buscamos cubre <strong>muchos intervalos</strong>
+              (aqui 8 intervalos) pero el complemento son pocos (solo 2). Menos sumas = menos errores.
+            </p>
           </CardContent>
         </Card>
 
@@ -284,16 +300,21 @@ export default function Complementario2() {
       {/* ============ PASO 3: b) Empresas entre 100 y 400 puestos ============ */}
       <StepCard stepNumber={4} title="b) Empresas entre 100 y 400 puestos (en porcentaje)" variant="calculation">
         <Card className="bg-gray-50 border mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold">¿Cual es la logica de este apartado?</p>
+          <CardContent className="p-3 text-xs space-y-2">
+            <p className="font-semibold">¿Por que nos piden el resultado en porcentaje?</p>
             <p className="text-muted-foreground">
-              Ahora nos piden las empresas con <strong>mas de 100 y menos de 400 puestos</strong>.
-              Esto implica identificar los intervalos que caen <em>completamente</em> dentro de ese rango:
-              [100, 200), [200, 300) y [300, 400).
+              Decir &quot;69 empresas&quot; solo tiene sentido si sabes que la muestra es de 160. Si fueran 10.000 empresas,
+              69 seria poquísimo. El <strong>porcentaje normaliza</strong> el resultado: &quot;el 43.13% de las empresas&quot;
+              se entiende igual independientemente del tamano de la muestra. Por eso en estadística muchas veces
+              se piden resultados como porcentaje o frecuencia relativa.
             </p>
+            <p className="font-semibold">¿Como identificamos los intervalos correctos?</p>
             <p className="text-muted-foreground">
-              Ademas, el resultado debe estar <strong>en porcentaje</strong>, asi que tras sumar
-              las frecuencias absolutas, dividiremos entre el total (n = {totalEmpresas}) y multiplicaremos por 100.
+              Buscamos empresas con <strong>mas de 100 y menos de 400 puestos</strong>.
+              Los intervalos que caen <em>completamente</em> dentro de ese rango son:
+              [100, 200), [200, 300) y [300, 400). El intervalo [0, 100) queda fuera
+              porque contiene empresas con menos de 100. El [400, 500) tambien queda fuera
+              porque contiene empresas con 400 o mas.
             </p>
           </CardContent>
         </Card>
@@ -338,14 +359,21 @@ export default function Complementario2() {
 
         <Card className="bg-amber-50 border-amber-200 mb-3">
           <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-amber-800">¿Como se calcula un porcentaje a partir de frecuencias?</p>
+            <p className="font-semibold text-amber-800">¿Que significa realmente un porcentaje?</p>
             <p className="text-muted-foreground">
-              El porcentaje responde a la pregunta: <em>&quot;de cada 100 empresas, ¿cuantas estan en este rango?&quot;</em>
+              Un porcentaje es una forma de decir &quot;de cada 100&quot;. Si digo que el 43% de las empresas tiene
+              entre 100 y 400 empleados, estoy diciendo: <em>&quot;si eligieras 100 empresas al azar de esta muestra,
+              aproximadamente 43 tendrian entre 100 y 400 empleados&quot;</em>.
             </p>
             <FormulaDisplay math={`\\text{Porcentaje} = \\frac{n_i \\text{ (del rango)}}{n \\text{ (total)}} \\times 100`} />
             <p className="text-muted-foreground">
-              Esto es lo mismo que calcular la <strong>frecuencia relativa</strong> (<InlineMath math="f_i" />) y multiplicar por 100.
-              Es decir, la frecuencia relativa ya es la proporcion, y el porcentaje es esa proporcion expresada &quot;de cada 100&quot;.
+              <strong>¿Por que dividir y multiplicar?</strong> La division <InlineMath math="n_i / n" /> calcula la <strong>proporcion</strong>
+              (un numero entre 0 y 1). Multiplicar por 100 lo convierte a porcentaje (un numero entre 0 y 100),
+              que es mas intuitivo para el cerebro humano. Decir &quot;0.4313&quot; suena abstracto, pero &quot;43.13%&quot; se entiende al instante.
+            </p>
+            <p className="text-muted-foreground">
+              En las tablas de frecuencias, esto ya lo tienes calculado: la columna <InlineMath math="f_i" /> es exactamente
+              esa division. Solo falta multiplicar por 100 para obtener el porcentaje.
             </p>
           </CardContent>
         </Card>
@@ -413,17 +441,22 @@ export default function Complementario2() {
         />
 
         <Card className="bg-blue-50 border-blue-200 mt-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-blue-800">Lectura del histograma</p>
+          <CardContent className="p-3 text-xs space-y-2">
+            <p className="font-semibold text-blue-800">¿Que nos cuenta el histograma que los numeros solos no dicen?</p>
             <p className="text-muted-foreground">
-              El histograma muestra claramente que la distribucion esta <strong>sesgada a la derecha</strong>
-              (asimetria positiva): la mayoria de empresas tienen pocos empleados (concentradas en los primeros
-              intervalos) y solo unas pocas tienen muchos empleados (la cola se extiende hacia la derecha).
+              El histograma revela la <strong>forma</strong> de la distribucion de un vistazo, algo que cuesta mucho
+              ver mirando solo la tabla de numeros. Aqui vemos claramente una distribucion <strong>sesgada a la derecha</strong>
+              (asimetria positiva): las barras son altas a la izquierda y van disminuyendo hacia la derecha.
             </p>
             <p className="text-muted-foreground">
-              El intervalo con mas empresas es <strong>[100, 200)</strong> con {data[1].empresas} empresas,
-              seguido de <strong>[0, 100)</strong> con {data[0].empresas} empresas.
-              Solo {data[7].empresas + data[8].empresas + data[9].empresas} empresas tienen mas de 700 empleados.
+              <strong>¿Que significa esto en la practica?</strong> Que la mayoria de empresas son pequeñas o medianas
+              (muchas en los primeros intervalos), mientras que solo unas pocas son grandes. Esto es el patron
+              tipico del tejido empresarial real: por cada empresa grande hay docenas de pequeñas.
+            </p>
+            <p className="text-muted-foreground">
+              <strong>Datos concretos:</strong> El intervalo mas frecuente es [100, 200) con {data[1].empresas} empresas,
+              seguido de [0, 100) con {data[0].empresas}. En el extremo opuesto, solo {data[7].empresas + data[8].empresas + data[9].empresas} empresas
+              superan los 700 empleados. Esta concentracion en los valores bajos es la &quot;marca visual&quot; de la asimetria positiva.
             </p>
           </CardContent>
         </Card>

@@ -125,11 +125,23 @@ export default function Ejercicio3() {
       {/* ============ PASO 3: Mediana ============ */}
       <StepCard stepNumber={4} title="a) Mediana" variant="calculation">
         <Card className="bg-emerald-50 border-emerald-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
+          <CardContent className="p-3 text-xs space-y-2">
             <p className="font-semibold text-emerald-800">¿Qué pregunta responde la mediana?</p>
             <p className="text-muted-foreground">
               &quot;¿Cuál es el valor que deja exactamente la mitad de las semanas por debajo y la mitad por encima?&quot;
-              Con n={rawData.length} (par), tomamos la media de los valores en posiciones 15 y 16.
+            </p>
+            <p className="font-semibold text-emerald-800">¿Por qué no usar la media directamente?</p>
+            <p className="text-muted-foreground">
+              La media es sensible a valores extremos. Si una semana se vendiera 100.000€, la media subiría
+              enormemente, pero la mediana apenas cambiaría. Por eso la mediana es una medida <strong>robusta</strong>:
+              refleja el centro &quot;real&quot; de los datos sin dejarse influir por extremos.
+            </p>
+            <p className="font-semibold text-emerald-800">¿Por qué promediamos dos valores cuando n es par?</p>
+            <p className="text-muted-foreground">
+              Con n = {rawData.length} datos (número <strong>par</strong>), no hay un dato exactamente en el centro.
+              Hay 15 datos a cada lado, pero ninguno &quot;en medio&quot;. La solución: tomamos los dos valores centrales
+              (posiciones 15 y 16) y calculamos su media. Así obtenemos un punto que realmente divide los datos en dos mitades iguales.
+              Si n fuera impar (ej: 31), el dato central sería directamente el de la posición 16.
             </p>
           </CardContent>
         </Card>
@@ -146,11 +158,22 @@ export default function Ejercicio3() {
       {/* ============ PASO 4: Moda ============ */}
       <StepCard stepNumber={5} title="a) Moda" variant="calculation">
         <Card className="bg-violet-50 border-violet-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
+          <CardContent className="p-3 text-xs space-y-2">
             <p className="font-semibold text-violet-800">¿Qué pregunta responde la moda?</p>
             <p className="text-muted-foreground">
-              &quot;¿Cuál es la cifra de ventas que más se repite?&quot; Con datos continuos como estos,
-              es habitual que la moda sea poco representativa porque muchos valores son únicos.
+              &quot;¿Cuál es la cifra de ventas que más se repite?&quot; Es la medida más intuitiva: el valor más &quot;popular&quot;.
+            </p>
+            <p className="font-semibold text-violet-800">¿Por qué la moda es problemática con datos continuos?</p>
+            <p className="text-muted-foreground">
+              Piensa en las alturas de 30 personas medidas con precisión de milímetros: 1.723m, 1.724m, 1.681m...
+              Es muy raro que dos personas midan <em>exactamente</em> lo mismo. Lo mismo pasa con las ventas:
+              al tener decimales, la probabilidad de que dos semanas vendan <em>exactamente</em> 17.9 miles € es baja.
+              Si aparece una coincidencia, probablemente sea casualidad, no un patrón real.
+            </p>
+            <p className="text-muted-foreground">
+              Por eso, con datos continuos, la moda es poco fiable como medida de centralización.
+              Es más útil con datos <strong>discretos</strong> (ej: nº de hijos) o <strong>cualitativos</strong> (ej: color favorito),
+              donde las repeticiones sí son significativas.
             </p>
           </CardContent>
         </Card>
@@ -209,18 +232,35 @@ export default function Ejercicio3() {
       <StepCard stepNumber={7} title="b) Coeficiente de variación y recorrido" variant="calculation">
         <Card className="bg-emerald-50 border-emerald-200 mb-3">
           <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-emerald-800">Coeficiente de Variación (CV)</p>
+            <p className="font-semibold text-emerald-800">¿Por qué necesitamos el Coeficiente de Variación (CV)?</p>
             <p className="text-muted-foreground">
-              &quot;¿Qué porcentaje de la media representa la desviación?&quot; Mide la dispersión relativa.
-              Si CV &lt; 50%, la media se considera representativa.
+              La desviación típica (σ = {round(s, 2)} miles €) nos dice cuánto varían los datos, pero <strong>ese número solo
+              tiene sentido si lo comparamos con la media</strong>. Ejemplo: una desviación de 2 miles € es &quot;mucha&quot;
+              si la media es 5, pero &quot;poca&quot; si la media es 500. El CV resuelve esto: expresa la desviación
+              como porcentaje de la media, creando una medida <strong>sin unidades</strong> que permite comparar
+              distribuciones completamente distintas.
             </p>
             <FormulaDisplay math={`CV = \\frac{s}{|\\bar{x}|} \\times 100`} />
-            <p className="font-semibold text-emerald-800 mt-2">Recorrido (Re)</p>
             <p className="text-muted-foreground">
-              La medida de dispersión más simple: la diferencia entre el valor mayor y el menor.
-              Es muy sensible a valores extremos.
+              <strong>¿Por qué el umbral del 50%?</strong> Es una convención práctica: si la desviación es menos
+              de la mitad de la media (CV &lt; 50%), los datos están suficientemente &quot;agrupados&quot; alrededor del centro
+              como para que la media sea un buen resumen. Si CV &gt; 50%, la dispersión es tan grande que la media
+              &quot;engaña&quot; — como decir que la temperatura media es 20°C cuando oscila entre -10°C y 50°C.
+            </p>
+
+            <p className="font-semibold text-emerald-800 mt-2">¿Por qué el Recorrido (Re) es útil pero limitado?</p>
+            <p className="text-muted-foreground">
+              Es la medida de dispersión más simple: la diferencia entre el mayor y el menor valor.
+              Su ventaja es que se entiende al instante. Su gran debilidad: <strong>depende solo de dos datos</strong>
+              (el máximo y el mínimo), ignorando los otros 28.
             </p>
             <FormulaDisplay math={`Re = x_{max} - x_{min}`} />
+            <p className="text-muted-foreground">
+              <strong>Ejemplo de su sensibilidad:</strong> Si una sola semana hubiera vendido 50 miles € (un valor atípico),
+              el recorrido saltaría de {round(r, 1)} a {round(50 - Math.min(...rawData), 1)} miles €, ¡una distorsión enorme!
+              Mientras tanto, la desviación típica apenas cambiaría porque promedia <em>todos</em> los datos.
+              Por eso el recorrido se usa como primera impresión, nunca como medida definitiva.
+            </p>
           </CardContent>
         </Card>
 
@@ -311,13 +351,20 @@ export default function Ejercicio3() {
       {/* ============ PASO 8: Boxplot ============ */}
       <StepCard stepNumber={9} title="Diagrama de caja (Boxplot)" variant="explanation">
         <Card className="bg-gray-50 border mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold">¿Para qué sirve el boxplot?</p>
+          <CardContent className="p-3 text-xs space-y-2">
+            <p className="font-semibold">¿Por qué visualizar los datos con un boxplot?</p>
             <p className="text-muted-foreground">
-              Resume visualmente toda la información anterior: la mediana (línea central),
-              los cuartiles (bordes de la caja), el recorrido (bigotes) y posibles valores atípicos.
-              La caja central contiene el <strong>50% de los datos</strong>.
+              Los números (media, mediana, cuartiles...) cuentan una historia, pero el cerebro humano procesa
+              imágenes mucho más rápido. El boxplot condensa <strong>5 medidas clave</strong> en un solo gráfico:
+              mínimo, Q₁, mediana, Q₃ y máximo. De un vistazo puedes ver el centro, la dispersión y la forma de la distribución.
             </p>
+            <p className="font-semibold">¿Cómo leer un boxplot?</p>
+            <div className="bg-white rounded p-2 space-y-1 text-muted-foreground">
+              <p><strong>La caja</strong> (de Q₁ a Q₃) contiene el 50% central de los datos. Cuanto más ancha, más dispersión.</p>
+              <p><strong>La línea roja</strong> dentro de la caja es la mediana. Si está centrada → distribución simétrica. Si está más cerca de Q₁ → asimetría positiva (cola hacia la derecha).</p>
+              <p><strong>Los bigotes</strong> (líneas a los lados) llegan hasta el mínimo y máximo. Si un bigote es mucho más largo que el otro, indica asimetría.</p>
+              <p><strong>Puntos fuera de los bigotes</strong> serían valores atípicos (outliers).</p>
+            </div>
           </CardContent>
         </Card>
         <BoxPlot
@@ -330,8 +377,14 @@ export default function Ejercicio3() {
           label="Ventas (miles €)"
         />
         <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-2 text-xs">
-            <p><strong>Lectura del boxplot:</strong> La caja va de Q₁={round(q1, 2)} a Q₃={round(q3, 2)} → el 50% central de las semanas vendió entre {round(q1, 2)} y {round(q3, 2)} miles €. La mediana ({round(med, 2)}) está centrada en la caja, confirmando una distribución bastante simétrica.</p>
+          <CardContent className="p-2 text-xs space-y-2">
+            <p className="font-semibold text-amber-800">Lectura del boxplot paso a paso:</p>
+            <div className="space-y-1 text-muted-foreground">
+              <p><strong>1. Centro:</strong> La mediana ({round(med, 2)}) está relativamente centrada en la caja → la distribución es bastante <strong>simétrica</strong>.</p>
+              <p><strong>2. Dispersión central:</strong> La caja va de Q₁={round(q1, 2)} a Q₃={round(q3, 2)}, un rango intercuartílico de {round(q3 - q1, 2)} miles €. El 50% central de las semanas vendió dentro de este rango relativamente estrecho.</p>
+              <p><strong>3. Dispersión total:</strong> Los bigotes van de {Math.min(...rawData)} a {Math.max(...rawData)}. No hay valores atípicos, lo que indica una distribución &quot;bien comportada&quot; sin semanas extraordinariamente buenas ni malas.</p>
+              <p><strong>4. Conclusión empresarial:</strong> Las ventas son bastante estables y predecibles. Un gerente puede confiar en que la mayoría de semanas se venderá entre {round(q1, 2)} y {round(q3, 2)} miles €.</p>
+            </div>
           </CardContent>
         </Card>
       </StepCard>
