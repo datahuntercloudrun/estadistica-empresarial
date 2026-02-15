@@ -35,7 +35,8 @@ const d2 = decile(rawData, 2);
 const n = rawData.length;
 const sumXi = rawData.reduce((acc, x) => acc + x, 0);
 const modFreq = freqTable.find(r => r.xNum === mod[0])?.ni ?? 0;
-const posMediana = (n + 1) / 2;
+const posMediana1 = n / 2;
+const posMediana2 = n / 2 + 1;
 const posQ1 = (n + 1) / 4;
 const posD2 = (2 * (n + 1)) / 10;
 const cvValue = round((s / m) * 100, 2);
@@ -221,12 +222,12 @@ export default function Complementario1() {
           </CardContent>
         </Card>
 
-        <FormulaDisplay math={`\\text{Posición} = \\frac{n+1}{2} = \\frac{${n}+1}{2} = \\frac{${n + 1}}{2} = ${posMediana}`} />
-        <p className="text-xs text-muted-foreground mt-1 mb-2">
-          La posición {posMediana} significa que la mediana está entre el dato en la posición {Math.floor(posMediana)} y
-          el dato en la posición {Math.ceil(posMediana)} de los datos ordenados. Buscamos esos dos valores y hacemos su media.
+        <p className="text-xs text-muted-foreground mb-2">
+          Como n={n} es <strong>par</strong>, no hay un dato exactamente en el centro.
+          Las dos posiciones centrales son <InlineMath math={`\\frac{n}{2} = ${posMediana1}`} /> y <InlineMath math={`\\frac{n}{2}+1 = ${posMediana2}`} />.
+          La mediana es la media de los valores en las posiciones <strong>{posMediana1} y {posMediana2}</strong> de los datos ordenados:
         </p>
-        <FormulaDisplay math={`Me = \\frac{x_{(${Math.floor(posMediana)})} + x_{(${Math.ceil(posMediana)})}}{2} = \\frac{${sorted[Math.floor(posMediana) - 1]} + ${sorted[Math.ceil(posMediana) - 1]}}{2} = ${round(med, 2)}`} />
+        <FormulaDisplay math={`Me = \\frac{x_{(${posMediana1})} + x_{(${posMediana2})}}{2} = \\frac{${sorted[posMediana1 - 1]} + ${sorted[posMediana2 - 1]}}{2} = ${round(med, 2)}`} />
 
         <Card className="bg-amber-50 border-amber-200 mt-3">
           <CardContent className="p-2 text-xs space-y-1">

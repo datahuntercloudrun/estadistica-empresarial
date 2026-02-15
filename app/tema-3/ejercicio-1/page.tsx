@@ -4,7 +4,6 @@ import { ExerciseLayout } from "@/components/stats/exercise-layout";
 import { StepCard } from "@/components/stats/step-card";
 import { FormulaDisplay, InlineMath } from "@/components/stats/formula-display";
 import { ResultCard } from "@/components/stats/result-card";
-import { BarChartCustom } from "@/components/charts/bar-chart-custom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -171,7 +170,7 @@ export default function Ejercicio1() {
             <FormulaDisplay math={`CV = \\frac{\\sigma}{|\\bar{x}|} \\times 100`} />
             <div className="bg-white rounded p-2 space-y-1">
               <p><InlineMath math="\sigma" /> = desviación típica (cuánto varían los datos de la media, en las mismas unidades)</p>
-              <p><InlineMath math="|\\bar{x}|" /> = valor absoluto de la media (la &quot;referencia&quot; contra la que medimos)</p>
+              <p><InlineMath math="|\bar{x}|" /> = valor absoluto de la media (la &quot;referencia&quot; contra la que medimos)</p>
               <p><InlineMath math="\times 100" /> = lo pasamos a porcentaje para que sea más intuitivo</p>
             </div>
             <p className="text-muted-foreground mt-1">
@@ -214,66 +213,6 @@ export default function Ejercicio1() {
         <ResultCard label="Mayor dispersión relativa" value={`Tubo A (CV = ${cvA.toFixed(2)}% > ${cvB.toFixed(2)}%)`} />
       </StepCard>
 
-      {/* ============ PASO 4: Comparación visual ============ */}
-      <StepCard stepNumber={5} title="Comparación visual" variant="explanation">
-        <BarChartCustom
-          data={[
-            { name: "Tubo A", value: cvA, color: "hsl(var(--chart-1))" },
-            { name: "Tubo B", value: cvB, color: "hsl(var(--chart-2))" },
-          ]}
-          title="Coeficiente de Variación (%)"
-          yLabel="CV (%)"
-        />
-      </StepCard>
-
-      {/* ============ PASO 5: Resultado sorprendente ============ */}
-      <StepCard stepNumber={6} title="¡Resultado contraintuitivo! ¿Cómo es posible?" variant="result">
-        <Card className="bg-rose-50 border-rose-200">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-rose-800">El tubo B tiene mayor σ pero menor CV. ¿No es contradictorio?</p>
-            <p className="text-muted-foreground">
-              <strong>No.</strong> La clave está en la media. Veamos la analogía:
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
-              <Card className="bg-white">
-                <CardContent className="p-2">
-                  <p className="font-semibold text-xs">Tubo A (σ=280, media=1.495)</p>
-                  <p className="text-[10px] text-muted-foreground">
-                    Una desviación de 280h sobre una media de 1.495h es un {cvA.toFixed(1)}% de error.
-                    Es como errar 280€ en un presupuesto de 1.495€ → error considerable.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="bg-white">
-                <CardContent className="p-2">
-                  <p className="font-semibold text-xs">Tubo B (σ=310, media=1.875)</p>
-                  <p className="text-[10px] text-muted-foreground">
-                    Una desviación de 310h sobre una media de 1.875h es un {cvB.toFixed(1)}% de error.
-                    Es como errar 310€ en un presupuesto de 1.875€ → error proporcionalmente menor.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-            <p className="text-muted-foreground mt-1">
-              <strong>Conclusión:</strong> Aunque el tubo B varía más en valor absoluto (σ=310 &gt; 280),
-              proporcionalmente a su media varía menos (CV=16.53% &lt; 18.73%).
-              Esto significa que <strong>la media del tubo B es más representativa</strong> que la del tubo A.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-blue-50 border-blue-200 mt-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-blue-800">Resumen: ¿qué hemos aprendido?</p>
-            <div className="space-y-1">
-              <p>1. La <strong>dispersión absoluta (σ)</strong> compara variabilidad en las mismas unidades → gana quien tiene σ mayor (Tubo B).</p>
-              <p>2. La <strong>dispersión relativa (CV)</strong> compara variabilidad proporcionalmente a la media → gana quien tiene CV mayor (Tubo A).</p>
-              <p>3. <strong>Siempre que las medias sean diferentes</strong>, debemos usar el CV para una comparación justa.</p>
-              <p>4. A menor CV, más representativa es la media y más &quot;fiables&quot; son los datos.</p>
-            </div>
-          </CardContent>
-        </Card>
-      </StepCard>
     </ExerciseLayout>
   );
 }

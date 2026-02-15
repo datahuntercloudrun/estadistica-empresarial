@@ -206,10 +206,10 @@ export default function Ejercicio2() {
         </p>
 
         <p className="text-sm font-medium mb-1">Paso 2: Buscamos la posición central:</p>
-        <FormulaDisplay math={`\\text{Posición} = \\frac{n+1}{2} = \\frac{${rawData.length}+1}{2} = ${(rawData.length + 1) / 2}`} />
         <p className="text-xs text-muted-foreground mb-2">
-          Como n={rawData.length} es <strong>par</strong>, la posición 10.5 no existe.
-          La mediana es la media de los valores en las posiciones <strong>10 y 11</strong> (los resaltados arriba):
+          Como n={rawData.length} es <strong>par</strong>, no hay un dato exactamente en el centro.
+          Las dos posiciones centrales son <InlineMath math={`\\frac{n}{2} = ${rawData.length / 2}`} /> y <InlineMath math={`\\frac{n}{2}+1 = ${rawData.length / 2 + 1}`} />.
+          La mediana es la media de los valores en las posiciones <strong>{rawData.length / 2} y {rawData.length / 2 + 1}</strong> (los resaltados arriba):
         </p>
         <FormulaDisplay math={`Me = \\frac{x_{(10)} + x_{(11)}}{2} = \\frac{${sorted[9]} + ${sorted[10]}}{2} = ${med}`} />
 
