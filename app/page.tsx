@@ -10,8 +10,8 @@ const temas = [
     descripcion: "Conceptos básicos, población y muestra, método estadístico, fenómenos deterministas y aleatorios.",
     icon: BookOpen,
     color: "text-blue-500",
-    bgColor: "bg-blue-50",
-    borderColor: "border-blue-200",
+    bgColor: "bg-blue-50 dark:bg-blue-950/20",
+    borderColor: "border-blue-200 dark:border-blue-800",
     ejercicios: 0,
     url: "/tema-1",
     temas: ["Concepto de Estadística", "Método Estadístico", "Población y Muestra", "Estadística Económica"],
@@ -22,8 +22,8 @@ const temas = [
     descripcion: "Variables estadísticas, distribuciones de frecuencias, distribuciones bivariantes y representaciones gráficas.",
     icon: BarChart3,
     color: "text-emerald-500",
-    bgColor: "bg-emerald-50",
-    borderColor: "border-emerald-200",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/20",
+    borderColor: "border-emerald-200 dark:border-emerald-800",
     ejercicios: 7,
     url: "/tema-2",
     temas: ["Tipos de Variables", "Distribuciones de Frecuencias", "Datos Agrupados", "Distribuciones Bivariantes", "Gráficos Estadísticos"],
@@ -34,8 +34,8 @@ const temas = [
     descripcion: "Medidas de posición, dispersión y forma. Media, mediana, moda, varianza, cuartiles, asimetría y curtosis.",
     icon: Calculator,
     color: "text-violet-500",
-    bgColor: "bg-violet-50",
-    borderColor: "border-violet-200",
+    bgColor: "bg-violet-50 dark:bg-violet-950/20",
+    borderColor: "border-violet-200 dark:border-violet-800",
     ejercicios: 11,
     url: "/tema-3",
     temas: ["Media, Mediana y Moda", "Cuartiles y Percentiles", "Varianza y Desviación Típica", "Coeficiente de Variación", "Asimetría y Curtosis", "Tipificación"],
@@ -78,7 +78,7 @@ export default function Home() {
                 </p>
                 <div className="flex flex-wrap gap-1">
                   {tema.temas.map((t) => (
-                    <Badge key={t} variant="outline" className="text-xs">
+                    <Badge key={t} variant="outline" className="text-sm">
                       {t}
                     </Badge>
                   ))}

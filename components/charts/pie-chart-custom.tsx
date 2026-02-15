@@ -36,7 +36,7 @@ export function PieChartCustom({ data, title, showPercentage = true }: PieChartC
     <Card>
       {title && (
         <CardHeader className="pb-2">
-          <CardTitle className="text-xs sm:text-sm">{title}</CardTitle>
+          <CardTitle className="text-sm sm:text-sm">{title}</CardTitle>
         </CardHeader>
       )}
       <CardContent className="px-2 sm:px-6">

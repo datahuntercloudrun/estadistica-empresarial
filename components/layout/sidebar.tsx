@@ -23,6 +23,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import {
   Collapsible,
@@ -85,17 +86,17 @@ const navigation = [
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { setOpenMobile } = useSidebar();
 
   return (
     <Sidebar>
-      <SidebarHeader className="border-b px-4 py-3">
-        <Link href="/" className="flex items-center gap-2">
-          <GraduationCap className="h-6 w-6 text-primary" />
-          <div className="flex flex-col">
-            <span className="text-sm font-bold">Estadística</span>
-            <span className="text-xs text-muted-foreground">Empresarial I</span>
-          </div>
-        </Link>
+      <SidebarHeader className="border-b px-4 h-12 sm:h-14 flex items-center">
+        <div className="flex items-center gap-2 w-full">
+          <Link href="/" className="flex items-center gap-2 min-w-0" onClick={() => setOpenMobile(false)}>
+            <GraduationCap className="h-5 w-5 text-primary shrink-0" />
+            <span className="text-sm font-semibold truncate">Estadística Empresarial I — FBS · UCM</span>
+          </Link>
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -115,7 +116,7 @@ export function AppSidebar() {
                           <item.icon className={`h-4 w-4 ${item.color || ""}`} />
                           <span className="flex-1 truncate">{item.title}</span>
                           {item.badge && (
-                            <Badge variant="secondary" className="ml-auto h-5 min-w-5 px-1 text-xs">
+                            <Badge variant="secondary" className="ml-auto h-5 min-w-5 px-1 text-sm">
                               {item.badge}
                             </Badge>
                           )}
@@ -127,7 +128,7 @@ export function AppSidebar() {
                           {item.items.map((sub) => (
                             <SidebarMenuSubItem key={sub.url}>
                               <SidebarMenuSubButton asChild isActive={pathname === sub.url}>
-                                <Link href={sub.url}>
+                                <Link href={sub.url} onClick={() => setOpenMobile(false)}>
                                   <span>{sub.title}</span>
                                 </Link>
                               </SidebarMenuSubButton>
@@ -140,7 +141,7 @@ export function AppSidebar() {
                 ) : (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={pathname === item.url}>
-                      <Link href={item.url!}>
+                      <Link href={item.url!} onClick={() => setOpenMobile(false)}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </Link>

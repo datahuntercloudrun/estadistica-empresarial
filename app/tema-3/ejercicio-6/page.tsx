@@ -47,9 +47,9 @@ export default function Ejercicio6() {
           Este ejercicio nos enseña <strong>cómo cambian las medidas estadísticas al añadir datos</strong>.
           Es un concepto clave porque en el mundo real constantemente se añaden nuevas observaciones.
         </p>
-        <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-amber-800">La intuición antes de calcular</p>
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">La intuición antes de calcular</p>
             <p className="text-muted-foreground">
               Tenemos 100 datos con media = 5 y varianza = 15 (bastante dispersos).
               Añadimos 20 datos nuevos, <strong>todos exactamente iguales al valor 5</strong> (la media).
@@ -58,16 +58,16 @@ export default function Ejercicio6() {
               <strong>¿Qué debería pasar intuitivamente?</strong>
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
-              <div className="bg-white rounded p-2">
-                <p className="font-semibold text-xs">¿Cambia la media?</p>
-                <p className="text-[10px] text-muted-foreground">
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p className="font-semibold text-sm">¿Cambia la media?</p>
+                <p className="text-sm text-muted-foreground">
                   Los nuevos datos valen 5, que es exactamente la media original.
                   Añadir datos iguales a la media <strong>no cambia la media</strong>.
                 </p>
               </div>
-              <div className="bg-white rounded p-2">
-                <p className="font-semibold text-xs">¿Cambia la varianza?</p>
-                <p className="text-[10px] text-muted-foreground">
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p className="font-semibold text-sm">¿Cambia la varianza?</p>
+                <p className="text-sm text-muted-foreground">
                   Los nuevos datos no se desvían nada de la media (son exactamente la media).
                   Al mezclarlos con datos que sí varían, la dispersión total debería <strong>disminuir</strong>.
                 </p>
@@ -83,16 +83,16 @@ export default function Ejercicio6() {
       {/* ============ PASO 1: Datos iniciales ============ */}
       <StepCard stepNumber={2} title="Datos que nos dan" variant="explanation">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Card className="bg-blue-50 border-blue-200">
-            <CardContent className="p-3 text-xs space-y-1">
-              <Badge className="bg-blue-200 text-blue-800">Distribución original</Badge>
+          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
+            <CardContent className="p-3 text-sm space-y-1">
+              <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200">Distribución original</Badge>
               <FormulaDisplay math={`n_1 = 100, \\quad \\bar{x}_1 = 5, \\quad s_1^2 = 15`} />
               <p className="text-muted-foreground">100 observaciones con media 5 y varianza 15.</p>
             </CardContent>
           </Card>
-          <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-3 text-xs space-y-1">
-              <Badge className="bg-emerald-200 text-emerald-800">Nuevos datos</Badge>
+          <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
+            <CardContent className="p-3 text-sm space-y-1">
+              <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200">Nuevos datos</Badge>
               <FormulaDisplay math={`n_2 = 20, \\quad \\text{todos valen } 5`} />
               <p className="text-muted-foreground">20 observaciones nuevas, todas idénticas (valor 5). Su media es 5 y su varianza interna es 0 (no varían entre sí).</p>
             </CardContent>
@@ -102,8 +102,8 @@ export default function Ejercicio6() {
 
       {/* ============ PASO 2: Nueva media ============ */}
       <StepCard stepNumber={3} title="Paso 1: ¿Cuál es la nueva media?" variant="calculation">
-        <Card className="bg-gray-50 border mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
+        <Card className="bg-gray-50 dark:bg-gray-800 border mb-3">
+          <CardContent className="p-3 text-sm space-y-1">
             <p className="font-semibold">Fórmula de la media combinada</p>
             <p className="text-muted-foreground">
               Para combinar dos grupos, usamos la media ponderada (cada grupo &quot;pesa&quot; según su tamaño):
@@ -114,8 +114,8 @@ export default function Ejercicio6() {
 
         <FormulaDisplay math={`\\bar{x}_{new} = \\frac{100 \\cdot 5 + 20 \\cdot 5}{120} = \\frac{500 + 100}{120} = \\frac{600}{120} = 5`} />
 
-        <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-2 text-xs">
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-2 text-sm">
             <p><strong>¿Tiene sentido?</strong> Sí. Como los nuevos datos valen exactamente la media (5),
             añadirlos no puede cambiar el promedio. Es como si la media de un grupo de 5 personas es 170 cm
             y añades 2 personas que miden exactamente 170 cm: la media sigue siendo 170.</p>
@@ -127,15 +127,15 @@ export default function Ejercicio6() {
 
       {/* ============ PASO 3: Nueva varianza ============ */}
       <StepCard stepNumber={4} title="Paso 2: ¿Cuál es la nueva varianza?" variant="calculation">
-        <Card className="bg-blue-50 border-blue-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-blue-800">Fórmula de la varianza combinada - desglosada</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">Fórmula de la varianza combinada - desglosada</p>
             <p className="text-muted-foreground">
               Para combinar las varianzas de dos grupos, no basta con promediar las varianzas.
               Hay que tener en cuenta <strong>dos fuentes de variación</strong>:
             </p>
             <FormulaDisplay math={`s_{new}^2 = \\frac{n_1 \\cdot [s_1^2 + (\\bar{x}_1 - \\bar{x}_{new})^2] + n_2 \\cdot [s_2^2 + (\\bar{x}_2 - \\bar{x}_{new})^2]}{n_1 + n_2}`} />
-            <div className="bg-white rounded p-2 space-y-1">
+            <div className="bg-white dark:bg-gray-900 rounded p-2 space-y-1">
               <p><InlineMath math="s_k^2" /> = varianza interna del grupo k (cuánto varían los datos dentro de ese grupo)</p>
               <p><InlineMath math="(\bar{x}_k - \bar{x}_{new})^2" /> = varianza entre grupos (cuánto se aleja la media del grupo k de la media global)</p>
               <p className="text-muted-foreground mt-1"><strong>En palabras:</strong> La varianza total = varianza dentro de cada grupo + varianza entre los grupos.</p>
@@ -147,8 +147,8 @@ export default function Ejercicio6() {
         <FormulaDisplay math={`s_{new}^2 = \\frac{100 \\cdot [15 + (5-5)^2] + 20 \\cdot [0 + (5-5)^2]}{120}`} />
         <FormulaDisplay math={`= \\frac{100 \\cdot [15 + 0] + 20 \\cdot [0 + 0]}{120} = \\frac{1500 + 0}{120} = ${round(newVar, 2)}`} />
 
-        <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-2 text-xs space-y-1">
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-2 text-sm space-y-1">
             <p><strong>¿Tiene sentido?</strong> La varianza bajó de 15 a {round(newVar, 2)}.
             Los 20 datos nuevos (todos = 5) aportan <strong>0 variación</strong>, así que &quot;diluyen&quot; la variación original.
             Es exactamente como mezclar 100 mL de café (concentrado = varianza 15) con 20 mL de agua (varianza 0):
@@ -162,8 +162,8 @@ export default function Ejercicio6() {
 
       {/* ============ PASO 4: Nuevo CV ============ */}
       <StepCard stepNumber={5} title="Paso 3: Nuevo coeficiente de variación" variant="result">
-        <Card className="bg-gray-50 border mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
+        <Card className="bg-gray-50 dark:bg-gray-800 border mb-3">
+          <CardContent className="p-3 text-sm space-y-1">
             <p className="font-semibold">Recordatorio: CV = σ / |media| × 100</p>
             <p className="text-muted-foreground">
               Mide qué porcentaje de la media representa la desviación. Menor CV = media más representativa.
@@ -176,22 +176,22 @@ export default function Ejercicio6() {
 
         <ResultCard label="Nuevo CV" value={`${round(newCV, 2)}%`} />
 
-        <Card className="bg-blue-50 border-blue-200 mt-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-blue-800">Comparación antes y después</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mt-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">Comparación antes y después</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <Card className="bg-white">
+              <Card className="bg-white dark:bg-gray-900">
                 <CardContent className="p-2">
-                  <p className="font-semibold text-xs">Antes (n=100)</p>
-                  <p className="text-[10px]">Media = 5 | Varianza = 15 | σ = {round(Math.sqrt(15), 4)}</p>
-                  <p className="text-[10px]">CV = {round(oldCV, 2)}%</p>
+                  <p className="font-semibold text-sm">Antes (n=100)</p>
+                  <p className="text-sm">Media = 5 | Varianza = 15 | σ = {round(Math.sqrt(15), 4)}</p>
+                  <p className="text-sm">CV = {round(oldCV, 2)}%</p>
                 </CardContent>
               </Card>
-              <Card className="bg-white">
+              <Card className="bg-white dark:bg-gray-900">
                 <CardContent className="p-2">
-                  <p className="font-semibold text-xs">Después (n=120)</p>
-                  <p className="text-[10px]">Media = 5 | Varianza = {round(newVar, 2)} | σ = {round(newStd, 4)}</p>
-                  <p className="text-[10px]">CV = {round(newCV, 2)}%</p>
+                  <p className="font-semibold text-sm">Después (n=120)</p>
+                  <p className="text-sm">Media = 5 | Varianza = {round(newVar, 2)} | σ = {round(newStd, 4)}</p>
+                  <p className="text-sm">CV = {round(newCV, 2)}%</p>
                 </CardContent>
               </Card>
             </div>
@@ -202,9 +202,9 @@ export default function Ejercicio6() {
           </CardContent>
         </Card>
 
-        <Card className="bg-amber-50 border-amber-200 mt-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-amber-800">Lección clave</p>
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-3">
+          <CardContent className="p-3 text-sm space-y-1">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">Lección clave</p>
             <p className="text-muted-foreground">
               Añadir datos que no varían (todos iguales a la media) reduce la dispersión del conjunto.
               <strong> No confundir con añadir datos diferentes:</strong> si los 20 datos fueran valores dispersos

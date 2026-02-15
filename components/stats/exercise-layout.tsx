@@ -17,17 +17,17 @@ interface ExerciseLayoutProps {
 }
 
 const difficultyColors: Record<string, string> = {
-  "Bajo": "bg-green-100 text-green-800",
-  "Bajo-Medio": "bg-lime-100 text-lime-800",
-  "Medio": "bg-yellow-100 text-yellow-800",
-  "Medio-Alto": "bg-orange-100 text-orange-800",
-  "Alto": "bg-red-100 text-red-800",
+  "Bajo": "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200",
+  "Bajo-Medio": "bg-lime-100 dark:bg-lime-900/30 text-lime-800 dark:text-lime-200",
+  "Medio": "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200",
+  "Medio-Alto": "bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200",
+  "Alto": "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200",
 };
 
 const temaColors: Record<number, string> = {
-  1: "bg-blue-100 text-blue-800",
-  2: "bg-emerald-100 text-emerald-800",
-  3: "bg-violet-100 text-violet-800",
+  1: "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200",
+  2: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200",
+  3: "bg-violet-100 dark:bg-violet-900/30 text-violet-800 dark:text-violet-200",
 };
 
 export function ExerciseLayout({
@@ -57,7 +57,7 @@ export function ExerciseLayout({
         <CardHeader className="pb-2">
           <CardTitle className="text-sm sm:text-base">Enunciado</CardTitle>
         </CardHeader>
-        <CardContent className="text-xs sm:text-sm space-y-2">
+        <CardContent className="text-sm sm:text-sm space-y-2">
           {statement}
         </CardContent>
       </Card>

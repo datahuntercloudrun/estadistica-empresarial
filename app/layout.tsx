@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppSidebar } from "@/components/layout/sidebar";
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppHeader } from "@/components/layout/header";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { ThemeProvider } from "@/components/theme-provider";
+import { AuthGate } from "@/components/auth-gate";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
@@ -36,17 +39,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset className="min-h-svh">
-            <header className="flex h-12 sm:h-14 shrink-0 items-center gap-2 border-b px-3 sm:px-4">
-              <SidebarTrigger className="-ml-1" />
-            </header>
-            <main className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 relative">
-              {children}
-            </main>
-          </SidebarInset>
-        </SidebarProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <AuthGate>
+            <SidebarProvider>
+              <AppSidebar />
+              <SidebarInset className="min-h-svh">
+                <AppHeader />
+                <main className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 relative">
+                  {children}
+                </main>
+              </SidebarInset>
+            </SidebarProvider>
+          </AuthGate>
+        </ThemeProvider>
       </body>
     </html>
   );

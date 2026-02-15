@@ -36,7 +36,7 @@ export function FrequencyTable({ data, title, showDensity = false, highlightRows
     <Card className="overflow-hidden">
       {title && (
         <div className="px-3 sm:px-4 py-2 bg-muted/50 border-b">
-          <span className="text-xs sm:text-sm font-medium">{title}</span>
+          <span className="text-sm sm:text-sm font-medium">{title}</span>
         </div>
       )}
       <div className="overflow-x-auto">
@@ -53,22 +53,22 @@ export function FrequencyTable({ data, title, showDensity = false, highlightRows
           </TableHeader>
           <TableBody>
             {data.map((row, i) => (
-              <TableRow key={i} className={highlightRows.includes(i) ? "bg-amber-50" : i % 2 === 0 ? "bg-muted/20" : ""}>
-                <TableCell className="text-center font-medium text-xs sm:text-sm">{row.xi}</TableCell>
-                <TableCell className="text-center text-xs sm:text-sm">{row.ni}</TableCell>
-                <TableCell className="text-center text-xs sm:text-sm">{row.fi.toFixed(4)}</TableCell>
-                <TableCell className="text-center text-xs sm:text-sm">{row.Ni}</TableCell>
-                <TableCell className="text-center text-xs sm:text-sm">{row.Fi.toFixed(4)}</TableCell>
-                {showDensity && <TableCell className="text-center text-xs sm:text-sm">{row.di?.toFixed(4)}</TableCell>}
+              <TableRow key={i} className={highlightRows.includes(i) ? "bg-amber-50 dark:bg-amber-950/20" : i % 2 === 0 ? "bg-muted/20" : ""}>
+                <TableCell className="text-center font-medium text-sm sm:text-sm">{row.xi}</TableCell>
+                <TableCell className="text-center text-sm sm:text-sm">{row.ni}</TableCell>
+                <TableCell className="text-center text-sm sm:text-sm">{row.fi.toFixed(4)}</TableCell>
+                <TableCell className="text-center text-sm sm:text-sm">{row.Ni}</TableCell>
+                <TableCell className="text-center text-sm sm:text-sm">{row.Fi.toFixed(4)}</TableCell>
+                {showDensity && <TableCell className="text-center text-sm sm:text-sm">{row.di?.toFixed(4)}</TableCell>}
               </TableRow>
             ))}
             <TableRow className="font-bold bg-muted/40">
-              <TableCell className="text-center text-xs sm:text-sm">Total</TableCell>
-              <TableCell className="text-center text-xs sm:text-sm">{totalNi}</TableCell>
-              <TableCell className="text-center text-xs sm:text-sm">1.0000</TableCell>
-              <TableCell className="text-center text-xs sm:text-sm">-</TableCell>
-              <TableCell className="text-center text-xs sm:text-sm">-</TableCell>
-              {showDensity && <TableCell className="text-center text-xs sm:text-sm">-</TableCell>}
+              <TableCell className="text-center text-sm sm:text-sm">Total</TableCell>
+              <TableCell className="text-center text-sm sm:text-sm">{totalNi}</TableCell>
+              <TableCell className="text-center text-sm sm:text-sm">1.0000</TableCell>
+              <TableCell className="text-center text-sm sm:text-sm">-</TableCell>
+              <TableCell className="text-center text-sm sm:text-sm">-</TableCell>
+              {showDensity && <TableCell className="text-center text-sm sm:text-sm">-</TableCell>}
             </TableRow>
           </TableBody>
         </Table>

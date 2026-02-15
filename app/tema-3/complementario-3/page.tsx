@@ -76,34 +76,34 @@ export default function Complementario3() {
           vamos a <em>pensar</em> sobre que implica una condicion matematica.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-3">
-          <Card className="bg-blue-50 border-blue-200">
+          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-blue-200 text-blue-800 text-[10px]">
+              <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200 text-sm">
                 Razonamiento algebraico
               </Badge>
-              <p className="text-[10px] text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 Traducir la condicion &quot;sigma = CV&quot; en una ecuacion
                 resoluble para hallar x.
               </p>
             </CardContent>
           </Card>
-          <Card className="bg-emerald-50 border-emerald-200">
+          <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-emerald-200 text-emerald-800 text-[10px]">
+              <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200 text-sm">
                 Valor absoluto
               </Badge>
-              <p className="text-[10px] text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 Una ecuacion con valor absoluto puede dar dos soluciones
                 distintas.
               </p>
             </CardContent>
           </Card>
-          <Card className="bg-violet-50 border-violet-200">
+          <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-violet-200 text-violet-800 text-[10px]">
+              <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm">
                 Verificacion
               </Badge>
-              <p className="text-[10px] text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 Siempre comprobar que las soluciones obtenidas realmente cumplen
                 la condicion original.
               </p>
@@ -119,9 +119,9 @@ export default function Complementario3() {
         variant="explanation"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <Card className="bg-blue-50 border-blue-200">
-            <CardContent className="p-3 text-xs space-y-2">
-              <p className="font-semibold text-blue-800">
+          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
+            <CardContent className="p-3 text-sm space-y-2">
+              <p className="font-semibold text-blue-800 dark:text-blue-200">
                 Desviacion tipica (<InlineMath math="\sigma" />)
               </p>
               <FormulaDisplay
@@ -134,9 +134,9 @@ export default function Complementario3() {
               </p>
             </CardContent>
           </Card>
-          <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-3 text-xs space-y-2">
-              <p className="font-semibold text-emerald-800">
+          <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
+            <CardContent className="p-3 text-sm space-y-2">
+              <p className="font-semibold text-emerald-800 dark:text-emerald-200">
                 Coeficiente de Variacion de Pearson (
                 <InlineMath math="CV" />)
               </p>
@@ -152,9 +152,9 @@ export default function Complementario3() {
             </CardContent>
           </Card>
         </div>
-        <Card className="bg-amber-50 border-amber-200 mt-3">
-          <CardContent className="p-3 text-xs">
-            <p className="font-semibold text-amber-800">
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-3">
+          <CardContent className="p-3 text-sm">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">
               La relacion clave entre ambos
             </p>
             <p className="text-muted-foreground mt-1">
@@ -176,9 +176,9 @@ export default function Complementario3() {
         title="Planteamiento: si sigma = CV, ¿que implica?"
         variant="calculation"
       >
-        <Card className="bg-blue-50 border-blue-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-blue-800">
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">
               Idea clave del ejercicio
             </p>
             <p className="text-muted-foreground">
@@ -209,9 +209,9 @@ export default function Complementario3() {
         <p>Despejamos:</p>
         <FormulaDisplay math={`|\\bar{x}| = 1`} />
 
-        <Card className="bg-violet-50 border-violet-200 mt-2">
-          <CardContent className="p-3 text-xs">
-            <p className="font-semibold text-violet-800">
+        <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800 mt-2">
+          <CardContent className="p-3 text-sm">
+            <p className="font-semibold text-violet-800 dark:text-violet-200">
               ¿Que significa esto?
             </p>
             <p className="text-muted-foreground mt-1">
@@ -246,8 +246,8 @@ export default function Complementario3() {
         </p>
         <FormulaDisplay math={`\\bar{x} = \\frac{4 + x}{6}`} />
 
-        <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-2 text-xs">
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-2 text-sm">
             <p className="text-muted-foreground">
               Ahora tenemos una expresion sencilla que relaciona la media con x.
               Combinandola con la condicion{" "}
@@ -267,9 +267,9 @@ export default function Complementario3() {
         }
         variant="calculation"
       >
-        <Card className="bg-blue-50 border-blue-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-blue-800">
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">
               Suponemos que la media es positiva e igual a 1
             </p>
             <p className="text-muted-foreground">
@@ -289,8 +289,8 @@ export default function Complementario3() {
 
         <ResultCard label="Solucion Caso 1" value="x = 2, media = 1" />
 
-        <Card className="bg-emerald-50 border-emerald-200 mt-2">
-          <CardContent className="p-2 text-xs">
+        <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 mt-2">
+          <CardContent className="p-2 text-sm">
             <p className="text-muted-foreground">
               <strong>Interpretacion:</strong> Si x = 2, los datos serian &#123;-10,
               3, 2, 10, 1, 0&#125; con media igual a 1. Como{" "}
@@ -311,9 +311,9 @@ export default function Complementario3() {
         }
         variant="calculation"
       >
-        <Card className="bg-blue-50 border-blue-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-blue-800">
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">
               Suponemos que la media es negativa e igual a -1
             </p>
             <p className="text-muted-foreground">
@@ -333,8 +333,8 @@ export default function Complementario3() {
 
         <ResultCard label="Solucion Caso 2" value="x = -10, media = -1" />
 
-        <Card className="bg-emerald-50 border-emerald-200 mt-2">
-          <CardContent className="p-2 text-xs">
+        <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 mt-2">
+          <CardContent className="p-2 text-sm">
             <p className="text-muted-foreground">
               <strong>Interpretacion:</strong> Si x = -10, los datos serian
               &#123;-10, 3, -10, 10, 1, 0&#125; con media igual a -1. Como{" "}
@@ -352,9 +352,9 @@ export default function Complementario3() {
         title="Verificacion detallada: Caso 1 (x = 2)"
         variant="calculation"
       >
-        <Card className="bg-violet-50 border-violet-200 mb-3">
-          <CardContent className="p-3 text-xs">
-            <p className="font-semibold text-violet-800">
+        <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800 mb-3">
+          <CardContent className="p-3 text-sm">
+            <p className="font-semibold text-violet-800 dark:text-violet-200">
               ¿Por que verificar?
             </p>
             <p className="text-muted-foreground mt-1">
@@ -376,9 +376,9 @@ export default function Complementario3() {
 
         <p className="font-semibold text-sm mt-2">2. Varianza:</p>
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 text-xs my-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 text-sm my-2">
             {data1.map((xi, i) => (
-              <Card key={i} className="bg-gray-50">
+              <Card key={i} className="bg-gray-50 dark:bg-gray-800">
                 <CardContent className="p-2 text-center">
                   <InlineMath
                     math={`(${xi} - ${round(mean1, 0)})^2 = ${deviations1[i]}`}
@@ -402,9 +402,9 @@ export default function Complementario3() {
           math={`CV = \\frac{\\sigma}{|\\bar{x}|} = \\frac{${round(std1, 4)}}{|${round(mean1, 4)}|} = \\frac{${round(std1, 4)}}{${Math.abs(round(mean1, 4))}} = ${round(cv1, 4)}`}
         />
 
-        <Card className="bg-green-50 border-green-300 mt-3">
-          <CardContent className="p-3 text-xs">
-            <p className="font-semibold text-green-800">
+        <Card className="bg-green-50 dark:bg-green-950/20 border-green-300 mt-3">
+          <CardContent className="p-3 text-sm">
+            <p className="font-semibold text-green-800 dark:text-green-200">
               Comprobacion exitosa
             </p>
             <FormulaDisplay
@@ -437,9 +437,9 @@ export default function Complementario3() {
 
         <p className="font-semibold text-sm mt-2">2. Varianza:</p>
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 text-xs my-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 text-sm my-2">
             {data2.map((xi, i) => (
-              <Card key={i} className="bg-gray-50">
+              <Card key={i} className="bg-gray-50 dark:bg-gray-800">
                 <CardContent className="p-2 text-center">
                   <InlineMath
                     math={`(${xi} - (${round(mean2, 0)}))^2 = ${deviations2[i]}`}
@@ -463,9 +463,9 @@ export default function Complementario3() {
           math={`CV = \\frac{\\sigma}{|\\bar{x}|} = \\frac{${round(std2, 4)}}{|${round(mean2, 4)}|} = \\frac{${round(std2, 4)}}{${Math.abs(round(mean2, 4))}} = ${round(cv2, 4)}`}
         />
 
-        <Card className="bg-green-50 border-green-300 mt-3">
-          <CardContent className="p-3 text-xs">
-            <p className="font-semibold text-green-800">
+        <Card className="bg-green-50 dark:bg-green-950/20 border-green-300 mt-3">
+          <CardContent className="p-3 text-sm">
+            <p className="font-semibold text-green-800 dark:text-green-200">
               Comprobacion exitosa
             </p>
             <FormulaDisplay
@@ -487,9 +487,9 @@ export default function Complementario3() {
         variant="explanation"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <Card className="bg-blue-50 border-blue-200">
-            <CardContent className="p-3 text-xs space-y-2">
-              <p className="font-semibold text-blue-800 text-sm">
+          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
+            <CardContent className="p-3 text-sm space-y-2">
+              <p className="font-semibold text-blue-800 dark:text-blue-200 text-sm">
                 Solucion 1: x = 2
               </p>
               <div className="space-y-1">
@@ -513,9 +513,9 @@ export default function Complementario3() {
               </p>
             </CardContent>
           </Card>
-          <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-3 text-xs space-y-2">
-              <p className="font-semibold text-emerald-800 text-sm">
+          <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
+            <CardContent className="p-3 text-sm space-y-2">
+              <p className="font-semibold text-emerald-800 dark:text-emerald-200 text-sm">
                 Solucion 2: x = -10
               </p>
               <div className="space-y-1">
@@ -541,9 +541,9 @@ export default function Complementario3() {
           </Card>
         </div>
 
-        <Card className="bg-amber-50 border-amber-200 mt-3">
-          <CardContent className="p-3 text-xs">
-            <p className="font-semibold text-amber-800">
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-3">
+          <CardContent className="p-3 text-sm">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">
               ¿Por que hay dos soluciones?
             </p>
             <p className="text-muted-foreground mt-1">
@@ -564,9 +564,9 @@ export default function Complementario3() {
           <ResultCard label="Solucion 2" value="x = -10, media = -1" />
         </div>
 
-        <Card className="bg-violet-50 border-violet-200 mt-4">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-violet-800">
+        <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800 mt-4">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-violet-800 dark:text-violet-200">
               Leccion aprendida
             </p>
             <p className="text-muted-foreground">

@@ -109,9 +109,9 @@ export default function Complementario2() {
           Este ejercicio nos ensena a <strong>leer e interpretar una distribucion de frecuencias ya construida</strong>.
           Es decir, los datos ya estan agrupados en intervalos y solo debemos extraer informacion de la tabla.
         </p>
-        <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-amber-800">¿Que es una distribucion de frecuencias agrupada?</p>
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">¿Que es una distribucion de frecuencias agrupada?</p>
             <p className="text-muted-foreground">
               Imagina que preguntas a 160 empresas cuantos empleados tienen. Obtendrias 160 numeros distintos.
               Trabajar con 160 datos individuales es incomodo, asi que se <strong>agrupan en intervalos</strong>
@@ -123,9 +123,9 @@ export default function Complementario2() {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-blue-50 border-blue-200 mt-2">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-blue-800">Las tres habilidades clave de este ejercicio</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mt-2">
+          <CardContent className="p-3 text-sm space-y-1">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">Las tres habilidades clave de este ejercicio</p>
             <div className="space-y-1 text-muted-foreground">
               <p><strong>1. Identificar intervalos relevantes:</strong> Dado un rango (por ejemplo &quot;mas de 200&quot;), saber cuales filas de la tabla usar.</p>
               <p><strong>2. Sumar frecuencias:</strong> Una vez identificados los intervalos, sumar las frecuencias absolutas para obtener el total.</p>
@@ -137,8 +137,8 @@ export default function Complementario2() {
 
       {/* ============ PASO 1: Tabla completa de frecuencias ============ */}
       <StepCard stepNumber={2} title="Tabla completa de frecuencias" variant="calculation">
-        <Card className="bg-gray-50 border mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
+        <Card className="bg-gray-50 dark:bg-gray-800 border mb-3">
+          <CardContent className="p-3 text-sm space-y-1">
             <p className="font-semibold">¿Por que construir la tabla completa?</p>
             <p className="text-muted-foreground">
               El enunciado solo da las <strong>frecuencias absolutas</strong> (<InlineMath math="n_i" />). Para responder
@@ -164,7 +164,7 @@ export default function Complementario2() {
             <TableBody>
               {tablaCompleta.map((row, i) => (
                 <TableRow key={i}>
-                  <TableCell className="text-xs">{row.interval}</TableCell>
+                  <TableCell className="text-sm">{row.interval}</TableCell>
                   <TableCell className="text-center">{row.ni}</TableCell>
                   <TableCell className="text-center">{row.fi.toFixed(4)}</TableCell>
                   <TableCell className="text-center">{row.fiPct.toFixed(2)}%</TableCell>
@@ -184,15 +184,15 @@ export default function Complementario2() {
           </Table>
         </Card>
 
-        <Card className="bg-blue-50 border-blue-200 mt-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-blue-800">Recordatorio: ¿que significa cada columna?</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mt-3">
+          <CardContent className="p-3 text-sm space-y-1">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">Recordatorio: ¿que significa cada columna?</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
-              <div className="bg-white rounded p-2 text-[10px] space-y-1">
+              <div className="bg-white dark:bg-gray-900 rounded p-2 text-sm space-y-1">
                 <p><InlineMath math="n_i" /> = <strong>Frecuencia absoluta:</strong> cuantas empresas hay en ese intervalo.</p>
                 <p><InlineMath math="f_i" /> = <strong>Frecuencia relativa:</strong> proporcion del total (<InlineMath math="f_i = n_i / n" />).</p>
               </div>
-              <div className="bg-white rounded p-2 text-[10px] space-y-1">
+              <div className="bg-white dark:bg-gray-900 rounded p-2 text-sm space-y-1">
                 <p><InlineMath math="N_i" /> = <strong>Frec. absoluta acumulada:</strong> cuantas empresas hay hasta ese intervalo (inclusive).</p>
                 <p><InlineMath math="F_i" /> = <strong>Frec. relativa acumulada:</strong> proporcion acumulada (<InlineMath math="F_i = N_i / n" />).</p>
               </div>
@@ -203,8 +203,8 @@ export default function Complementario2() {
 
       {/* ============ PASO 2: a) Empresas con mas de 200 puestos ============ */}
       <StepCard stepNumber={3} title="a) Empresas con mas de 200 puestos de trabajo" variant="calculation">
-        <Card className="bg-gray-50 border mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
+        <Card className="bg-gray-50 dark:bg-gray-800 border mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
             <p className="font-semibold">¿Por que necesitamos identificar intervalos?</p>
             <p className="text-muted-foreground">
               Los datos estan agrupados, asi que <strong>no sabemos el numero exacto de empleados de cada empresa</strong>.
@@ -242,14 +242,14 @@ export default function Complementario2() {
                 const lower = parseInt(d.interval.split("-")[0]);
                 const incluir = lower >= 200;
                 return (
-                  <TableRow key={i} className={incluir ? "bg-emerald-50" : "opacity-50"}>
-                    <TableCell className="text-xs">{d.interval}</TableCell>
+                  <TableRow key={i} className={incluir ? "bg-emerald-50 dark:bg-emerald-950/20" : "opacity-50"}>
+                    <TableCell className="text-sm">{d.interval}</TableCell>
                     <TableCell className="text-center">{d.empresas}</TableCell>
                     <TableCell className="text-center">
                       {incluir ? (
-                        <Badge className="bg-emerald-100 text-emerald-800 text-xs">Si</Badge>
+                        <Badge className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200 text-sm">Si</Badge>
                       ) : (
-                        <Badge variant="outline" className="text-xs">No</Badge>
+                        <Badge variant="outline" className="text-sm">No</Badge>
                       )}
                     </TableCell>
                   </TableRow>
@@ -259,9 +259,9 @@ export default function Complementario2() {
           </Table>
         </Card>
 
-        <Card className="bg-amber-50 border-amber-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-amber-800">Truco: usar la frecuencia acumulada (pensar al reves)</p>
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">Truco: usar la frecuencia acumulada (pensar al reves)</p>
             <p className="text-muted-foreground">
               A veces es mas facil contar lo que <strong>NO</strong> queremos y restar del total.
               Es como contar cuantas personas en un cine NO llevan gafas: en lugar de contar uno a uno a todos los que si las llevan,
@@ -282,9 +282,9 @@ export default function Complementario2() {
         <p className="text-sm mb-2">Sumamos las frecuencias de los intervalos seleccionados:</p>
         <FormulaDisplay math={`\\text{Empresas (>200)} = ${intervalosMas200.map(d => d.empresas).join(" + ")} = ${masde200}`} />
 
-        <Card className="bg-blue-50 border-blue-200 mt-3 mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-blue-800">Interpretacion</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mt-3 mb-3">
+          <CardContent className="p-3 text-sm space-y-1">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">Interpretacion</p>
             <p className="text-muted-foreground">
               De las 160 empresas encuestadas, <strong>{masde200}</strong> tienen mas de 200 empleados.
               Esto representa el <strong>{((masde200 / totalEmpresas) * 100).toFixed(2)}%</strong> de la muestra.
@@ -299,8 +299,8 @@ export default function Complementario2() {
 
       {/* ============ PASO 3: b) Empresas entre 100 y 400 puestos ============ */}
       <StepCard stepNumber={4} title="b) Empresas entre 100 y 400 puestos (en porcentaje)" variant="calculation">
-        <Card className="bg-gray-50 border mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
+        <Card className="bg-gray-50 dark:bg-gray-800 border mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
             <p className="font-semibold">¿Por que nos piden el resultado en porcentaje?</p>
             <p className="text-muted-foreground">
               Decir &quot;69 empresas&quot; solo tiene sentido si sabes que la muestra es de 160. Si fueran 10.000 empresas,
@@ -335,14 +335,14 @@ export default function Complementario2() {
                 const lower = parseInt(d.interval.split("-")[0]);
                 const incluir = lower >= 100 && lower < 400;
                 return (
-                  <TableRow key={i} className={incluir ? "bg-violet-50" : "opacity-50"}>
-                    <TableCell className="text-xs">{d.interval}</TableCell>
+                  <TableRow key={i} className={incluir ? "bg-violet-50 dark:bg-violet-950/20" : "opacity-50"}>
+                    <TableCell className="text-sm">{d.interval}</TableCell>
                     <TableCell className="text-center">{d.empresas}</TableCell>
                     <TableCell className="text-center">
                       {incluir ? (
-                        <Badge className="bg-violet-100 text-violet-800 text-xs">Si</Badge>
+                        <Badge className="bg-violet-100 dark:bg-violet-900/30 text-violet-800 dark:text-violet-200 text-sm">Si</Badge>
                       ) : (
-                        <Badge variant="outline" className="text-xs">No</Badge>
+                        <Badge variant="outline" className="text-sm">No</Badge>
                       )}
                     </TableCell>
                   </TableRow>
@@ -357,9 +357,9 @@ export default function Complementario2() {
 
         <p className="text-sm font-medium mb-2 mt-3">Paso 3: Convertir a porcentaje</p>
 
-        <Card className="bg-amber-50 border-amber-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-amber-800">¿Que significa realmente un porcentaje?</p>
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">¿Que significa realmente un porcentaje?</p>
             <p className="text-muted-foreground">
               Un porcentaje es una forma de decir &quot;de cada 100&quot;. Si digo que el 43% de las empresas tiene
               entre 100 y 400 empleados, estoy diciendo: <em>&quot;si eligieras 100 empresas al azar de esta muestra,
@@ -380,9 +380,9 @@ export default function Complementario2() {
 
         <FormulaDisplay math={`\\text{Porcentaje} = \\frac{${entre100y400}}{${totalEmpresas}} \\times 100 = ${porcentaje100a400.toFixed(2)}\\%`} />
 
-        <Card className="bg-blue-50 border-blue-200 mt-3 mb-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-blue-800">Interpretacion</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mt-3 mb-3">
+          <CardContent className="p-3 text-sm space-y-1">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">Interpretacion</p>
             <p className="text-muted-foreground">
               El <strong>{porcentaje100a400.toFixed(2)}%</strong> de las empresas encuestadas tiene entre 100 y 400 empleados.
               Dicho de otro modo, aproximadamente <strong>{entre100y400} de cada {totalEmpresas}</strong> empresas
@@ -400,8 +400,8 @@ export default function Complementario2() {
 
       {/* ============ PASO 4: c) Representacion grafica ============ */}
       <StepCard stepNumber={5} title="c) Representacion grafica de la distribucion" variant="explanation">
-        <Card className="bg-gray-50 border mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
+        <Card className="bg-gray-50 dark:bg-gray-800 border mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
             <p className="font-semibold">¿Que tipo de grafico es apropiado y por que?</p>
             <p className="text-muted-foreground">
               Tenemos una variable <strong>cuantitativa continua agrupada en intervalos</strong>
@@ -409,9 +409,9 @@ export default function Complementario2() {
               <strong> histograma</strong>.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-              <Card className="bg-emerald-50 border-emerald-200">
-                <CardContent className="p-2 text-[10px] space-y-1">
-                  <p className="font-semibold text-emerald-800">¿Por que histograma y no diagrama de barras?</p>
+              <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
+                <CardContent className="p-2 text-sm space-y-1">
+                  <p className="font-semibold text-emerald-800 dark:text-emerald-200">¿Por que histograma y no diagrama de barras?</p>
                   <p className="text-muted-foreground">
                     Porque los datos estan en <strong>intervalos consecutivos</strong> (0-100, 100-200, ...).
                     Los intervalos no tienen &quot;huecos&quot; entre ellos: donde termina uno, empieza el siguiente.
@@ -419,9 +419,9 @@ export default function Complementario2() {
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-blue-50 border-blue-200">
-                <CardContent className="p-2 text-[10px] space-y-1">
-                  <p className="font-semibold text-blue-800">¿Que nos muestra el histograma?</p>
+              <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
+                <CardContent className="p-2 text-sm space-y-1">
+                  <p className="font-semibold text-blue-800 dark:text-blue-200">¿Que nos muestra el histograma?</p>
                   <p className="text-muted-foreground">
                     Nos permite ver de un vistazo <strong>como se distribuyen</strong> las empresas segun
                     su tamano. ¿La mayoria son pequenas? ¿Hay muchas grandes? ¿La distribucion es simetrica?
@@ -440,9 +440,9 @@ export default function Complementario2() {
           yLabel="N.o de empresas"
         />
 
-        <Card className="bg-blue-50 border-blue-200 mt-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-blue-800">¿Que nos cuenta el histograma que los numeros solos no dicen?</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mt-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">¿Que nos cuenta el histograma que los numeros solos no dicen?</p>
             <p className="text-muted-foreground">
               El histograma revela la <strong>forma</strong> de la distribucion de un vistazo, algo que cuesta mucho
               ver mirando solo la tabla de numeros. Aqui vemos claramente una distribucion <strong>sesgada a la derecha</strong>
@@ -464,7 +464,7 @@ export default function Complementario2() {
 
       {/* ============ PASO 5: Visualizacion complementaria ============ */}
       <StepCard stepNumber={6} title="Visualizacion complementaria: frecuencias relativas" variant="explanation">
-        <p className="text-xs text-muted-foreground mb-3">
+        <p className="text-sm text-muted-foreground mb-3">
           Ademas del histograma de frecuencias absolutas, es util ver las <strong>frecuencias relativas (porcentajes)</strong>,
           ya que permiten interpretar mejor el peso de cada intervalo sobre el total.
         </p>
@@ -482,9 +482,9 @@ export default function Complementario2() {
           yLabel="Porcentaje (%)"
         />
 
-        <Card className="bg-amber-50 border-amber-200 mt-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-amber-800">¿Que significan los colores?</p>
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-3">
+          <CardContent className="p-3 text-sm space-y-1">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">¿Que significan los colores?</p>
             <p className="text-muted-foreground">
               Las barras destacadas corresponden a los intervalos del apartado b) (empresas entre 100 y 400 puestos),
               que suman el <strong>{porcentaje100a400.toFixed(2)}%</strong> del total.
@@ -495,33 +495,33 @@ export default function Complementario2() {
 
       {/* ============ PASO 6: Resumen ============ */}
       <StepCard stepNumber={7} title="Resumen: ¿que hemos aprendido?" variant="result">
-        <Card className="bg-blue-50 border-blue-200">
-          <CardContent className="p-3 text-xs space-y-3">
-            <p className="font-semibold text-blue-800">Habilidades practicadas en este ejercicio</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
+          <CardContent className="p-3 text-sm space-y-3">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">Habilidades practicadas en este ejercicio</p>
             <div className="space-y-2">
               <div className="flex items-start gap-2">
-                <Badge className="bg-emerald-100 text-emerald-800 shrink-0">1</Badge>
+                <Badge className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200 shrink-0">1</Badge>
                 <p className="text-muted-foreground">
                   <strong>Lectura de tabla de frecuencias:</strong> Sabemos identificar que filas de la tabla
                   corresponden a un rango concreto (&quot;mas de 200&quot;, &quot;entre 100 y 400&quot;).
                 </p>
               </div>
               <div className="flex items-start gap-2">
-                <Badge className="bg-emerald-100 text-emerald-800 shrink-0">2</Badge>
+                <Badge className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200 shrink-0">2</Badge>
                 <p className="text-muted-foreground">
                   <strong>Suma selectiva de frecuencias:</strong> Para responder &quot;¿cuantas empresas cumplen X?&quot;,
                   basta sumar las <InlineMath math="n_i" /> de los intervalos relevantes.
                 </p>
               </div>
               <div className="flex items-start gap-2">
-                <Badge className="bg-emerald-100 text-emerald-800 shrink-0">3</Badge>
+                <Badge className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200 shrink-0">3</Badge>
                 <p className="text-muted-foreground">
                   <strong>Conversion a porcentaje:</strong> <InlineMath math="\text{Porcentaje} = \frac{\text{parte}}{\text{total}} \times 100" />.
                   Es la frecuencia relativa expresada como porcentaje.
                 </p>
               </div>
               <div className="flex items-start gap-2">
-                <Badge className="bg-emerald-100 text-emerald-800 shrink-0">4</Badge>
+                <Badge className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200 shrink-0">4</Badge>
                 <p className="text-muted-foreground">
                   <strong>Eleccion de grafico:</strong> Para datos cuantitativos continuos agrupados en intervalos,
                   el grafico adecuado es el <strong>histograma</strong> (barras pegadas).
@@ -532,38 +532,38 @@ export default function Complementario2() {
         </Card>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
-          <Card className="bg-emerald-50 border-emerald-200">
+          <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
             <CardContent className="p-3 text-center">
-              <p className="text-2xl font-bold text-emerald-800">{masde200}</p>
-              <p className="text-xs text-muted-foreground">empresas con mas de 200 puestos</p>
-              <Badge className="bg-emerald-200 text-emerald-800 mt-1 text-[10px]">
+              <p className="text-2xl font-bold text-emerald-800 dark:text-emerald-200">{masde200}</p>
+              <p className="text-sm text-muted-foreground">empresas con mas de 200 puestos</p>
+              <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200 mt-1 text-sm">
                 {((masde200 / totalEmpresas) * 100).toFixed(1)}% del total
               </Badge>
             </CardContent>
           </Card>
-          <Card className="bg-violet-50 border-violet-200">
+          <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800">
             <CardContent className="p-3 text-center">
-              <p className="text-2xl font-bold text-violet-800">{porcentaje100a400.toFixed(2)}%</p>
-              <p className="text-xs text-muted-foreground">empresas entre 100 y 400 puestos</p>
-              <Badge className="bg-violet-200 text-violet-800 mt-1 text-[10px]">
+              <p className="text-2xl font-bold text-violet-800 dark:text-violet-200">{porcentaje100a400.toFixed(2)}%</p>
+              <p className="text-sm text-muted-foreground">empresas entre 100 y 400 puestos</p>
+              <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 mt-1 text-sm">
                 {entre100y400} de {totalEmpresas} empresas
               </Badge>
             </CardContent>
           </Card>
-          <Card className="bg-amber-50 border-amber-200">
+          <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800">
             <CardContent className="p-3 text-center">
-              <p className="text-2xl font-bold text-amber-800">100-200</p>
-              <p className="text-xs text-muted-foreground">intervalo mas frecuente (moda)</p>
-              <Badge className="bg-amber-200 text-amber-800 mt-1 text-[10px]">
+              <p className="text-2xl font-bold text-amber-800 dark:text-amber-200">100-200</p>
+              <p className="text-sm text-muted-foreground">intervalo mas frecuente (moda)</p>
+              <Badge className="bg-amber-200 text-amber-800 dark:text-amber-200 mt-1 text-sm">
                 {data[1].empresas} empresas
               </Badge>
             </CardContent>
           </Card>
         </div>
 
-        <Card className="bg-rose-50 border-rose-200 mt-3">
-          <CardContent className="p-3 text-xs space-y-1">
-            <p className="font-semibold text-rose-800">Conclusion sobre la muestra</p>
+        <Card className="bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-800 mt-3">
+          <CardContent className="p-3 text-sm space-y-1">
+            <p className="font-semibold text-rose-800 dark:text-rose-200">Conclusion sobre la muestra</p>
             <p className="text-muted-foreground">
               La distribucion de puestos de trabajo en estas 160 PYMES muestra una <strong>clara asimetria positiva</strong>:
               la mayoria de empresas son pequenas (menos de 200 empleados), mientras que pocas empresas

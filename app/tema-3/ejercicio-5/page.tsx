@@ -75,25 +75,25 @@ export default function Ejercicio5() {
           (como notas de dos asignaturas distintas):
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-2">
-          <Card className="bg-blue-50 border-blue-200">
+          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-blue-200 text-blue-800 text-[10px]">Representatividad</Badge>
-              <p className="text-xs text-muted-foreground">&quot;¿Puedo fiarme de la media?&quot;</p>
-              <p className="text-[10px]">→ Coeficiente de Variación (CV)</p>
+              <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200 text-sm">Representatividad</Badge>
+              <p className="text-sm text-muted-foreground">&quot;¿Puedo fiarme de la media?&quot;</p>
+              <p className="text-sm">→ Coeficiente de Variación (CV)</p>
             </CardContent>
           </Card>
-          <Card className="bg-emerald-50 border-emerald-200">
+          <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-emerald-200 text-emerald-800 text-[10px]">Posición relativa</Badge>
-              <p className="text-xs text-muted-foreground">&quot;¿Un 5 es bueno o malo en cada asignatura?&quot;</p>
-              <p className="text-[10px]">→ Tipificación (valor z)</p>
+              <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200 text-sm">Posición relativa</Badge>
+              <p className="text-sm text-muted-foreground">&quot;¿Un 5 es bueno o malo en cada asignatura?&quot;</p>
+              <p className="text-sm">→ Tipificación (valor z)</p>
             </CardContent>
           </Card>
-          <Card className="bg-violet-50 border-violet-200">
+          <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-violet-200 text-violet-800 text-[10px]">Nota de corte</Badge>
-              <p className="text-xs text-muted-foreground">&quot;¿A partir de qué nota estás en el top 30%?&quot;</p>
-              <p className="text-[10px]">→ Deciles / Percentiles</p>
+              <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm">Nota de corte</Badge>
+              <p className="text-sm text-muted-foreground">&quot;¿A partir de qué nota estás en el top 30%?&quot;</p>
+              <p className="text-sm">→ Deciles / Percentiles</p>
             </CardContent>
           </Card>
         </div>
@@ -101,30 +101,30 @@ export default function Ejercicio5() {
 
       {/* ============ PASO 1: Representatividad ============ */}
       <StepCard stepNumber={2} title="a) ¿Son representativas las medias?" variant="calculation">
-        <Card className="bg-blue-50 border-blue-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-blue-800">¿Qué significa &quot;representativa&quot;?</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">¿Qué significa &quot;representativa&quot;?</p>
             <p className="text-muted-foreground">
               Decimos que la media es representativa cuando los datos no varían demasiado respecto a ella.
               Si la media de Mate es 4.68 pero las notas van de 0 a 10 con mucha dispersión, esa media
               no nos dice mucho. En cambio, si casi todos sacaron entre 4 y 6, la media sí es un buen resumen.
             </p>
-            <p className="font-semibold text-blue-800">¿Cómo lo medimos? Con el CV</p>
+            <p className="font-semibold text-blue-800 dark:text-blue-200">¿Cómo lo medimos? Con el CV</p>
             <FormulaDisplay math={`CV = \\frac{\\sigma}{|\\bar{x}|} \\times 100`} />
-            <div className="bg-white rounded p-2 space-y-1">
+            <div className="bg-white dark:bg-gray-900 rounded p-2 space-y-1">
               <p><strong>Primero calculamos σ</strong> (desviación típica) a partir de la varianza que nos dan:</p>
               <p><InlineMath math="\sigma = \sqrt{s^2}" /> → es la raíz cuadrada de la varianza</p>
               <p><strong>Luego dividimos entre la media</strong> y multiplicamos por 100 para obtener el porcentaje.</p>
             </div>
-            <div className="bg-white rounded p-2 mt-1">
+            <div className="bg-white dark:bg-gray-900 rounded p-2 mt-1">
               <p className="font-semibold">Regla: CV &lt; 50% → la media SÍ es representativa</p>
-              <p className="text-[10px] text-muted-foreground">A menor CV, mayor representatividad (los datos son más homogéneos).</p>
+              <p className="text-sm text-muted-foreground">A menor CV, mayor representatividad (los datos son más homogéneos).</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-blue-50 border-blue-200 mb-2">
-          <CardContent className="p-3 text-xs space-y-1">
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-2">
+          <CardContent className="p-3 text-sm space-y-1">
             <p className="font-semibold">Matemáticas:</p>
             <FormulaDisplay math={`\\sigma_{Mat} = \\sqrt{${mate.varianza}} = ${round(mateSigma, 4)}`} />
             <FormulaDisplay math={`CV_{Mat} = \\frac{${round(mateSigma, 4)}}{${mate.media}} \\times 100 = ${round(mateCV, 2)}\\%`} />
@@ -132,8 +132,8 @@ export default function Ejercicio5() {
           </CardContent>
         </Card>
 
-        <Card className="bg-emerald-50 border-emerald-200 mb-2">
-          <CardContent className="p-3 text-xs space-y-1">
+        <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 mb-2">
+          <CardContent className="p-3 text-sm space-y-1">
             <p className="font-semibold">Estadística:</p>
             <FormulaDisplay math={`\\sigma_{Est} = \\sqrt{${estad.varianza}} = ${round(estadSigma, 4)}`} />
             <FormulaDisplay math={`CV_{Est} = \\frac{${round(estadSigma, 4)}}{${estad.media}} \\times 100 = ${round(estadCV, 2)}\\%`} />
@@ -146,17 +146,17 @@ export default function Ejercicio5() {
 
       {/* ============ PASO 2: Tipificación ============ */}
       <StepCard stepNumber={3} title="b) ¿En cuál está mejor posicionado con un 5?" variant="calculation">
-        <Card className="bg-emerald-50 border-emerald-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-emerald-800">El problema: ¿cómo comparar un 5 en dos asignaturas diferentes?</p>
+        <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-emerald-800 dark:text-emerald-200">El problema: ¿cómo comparar un 5 en dos asignaturas diferentes?</p>
             <p className="text-muted-foreground">
               Un 5 en Matemáticas (donde la media es 4.68) no es lo mismo que un 5 en Estadística
               (donde la media es 5.67). En una estás por encima de la media y en otra por debajo.
               Pero, ¿cuánto por encima o por debajo? Para eso necesitamos <strong>tipificar</strong>.
             </p>
-            <p className="font-semibold text-emerald-800">¿Qué es la tipificación (valor z)?</p>
+            <p className="font-semibold text-emerald-800 dark:text-emerald-200">¿Qué es la tipificación (valor z)?</p>
             <FormulaDisplay math={`z = \\frac{x - \\bar{x}}{\\sigma}`} />
-            <div className="bg-white rounded p-2 space-y-1">
+            <div className="bg-white dark:bg-gray-900 rounded p-2 space-y-1">
               <p><InlineMath math="x" /> = la nota del alumno (5 en ambos casos)</p>
               <p><InlineMath math="\bar{x}" /> = la media de la asignatura</p>
               <p><InlineMath math="\sigma" /> = la desviación típica de la asignatura</p>
@@ -167,30 +167,30 @@ export default function Ejercicio5() {
               Un z = 0 significa que estás justo en la media. Un z = 1 significa que estás
               1 desviación típica por encima. Un z = -1, una desviación por debajo.
             </p>
-            <div className="bg-white rounded p-2 mt-1">
+            <div className="bg-white dark:bg-gray-900 rounded p-2 mt-1">
               <p className="font-semibold">Regla: z mayor = mejor posición relativa</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-blue-50 border-blue-200 mb-2">
-          <CardContent className="p-3 text-xs space-y-1">
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-2">
+          <CardContent className="p-3 text-sm space-y-1">
             <p className="font-semibold">Matemáticas (nota 5, media 4.68):</p>
             <FormulaDisplay math={`z_{Mat} = \\frac{5 - ${mate.media}}{${round(mateSigma, 4)}} = \\frac{${round(5 - mate.media, 2)}}{${round(mateSigma, 4)}} = ${round(zMate, 4)}`} />
             <p className="text-muted-foreground">z = +{round(zMate, 4)} → está <strong>por encima</strong> de la media (el 5 supera al 4.68).</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-emerald-50 border-emerald-200 mb-2">
-          <CardContent className="p-3 text-xs space-y-1">
+        <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 mb-2">
+          <CardContent className="p-3 text-sm space-y-1">
             <p className="font-semibold">Estadística (nota 5, media 5.67):</p>
             <FormulaDisplay math={`z_{Est} = \\frac{5 - ${estad.media}}{${round(estadSigma, 4)}} = \\frac{${round(5 - estad.media, 2)}}{${round(estadSigma, 4)}} = ${round(zEstad, 4)}`} />
             <p className="text-muted-foreground">z = {round(zEstad, 4)} → está <strong>por debajo</strong> de la media (el 5 no llega al 5.67).</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-amber-50 border-amber-200 mt-2 mb-2">
-          <CardContent className="p-2 text-xs">
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2 mb-2">
+          <CardContent className="p-2 text-sm">
             <p><strong>Comparación:</strong> z_Mat = {round(zMate, 4)} &gt; z_Est = {round(zEstad, 4)}.
             En Matemáticas, el alumno está por encima de la media. En Estadística, por debajo.
             Por tanto, <strong>está mejor posicionado en Matemáticas</strong>.</p>
@@ -205,9 +205,9 @@ export default function Ejercicio5() {
 
       {/* ============ PASO 3: Nota de corte ============ */}
       <StepCard stepNumber={4} title="c) Nota de corte (30% más altas)" variant="calculation">
-        <Card className="bg-violet-50 border-violet-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-violet-800">Traducción de la pregunta</p>
+        <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-violet-800 dark:text-violet-200">Traducción de la pregunta</p>
             <p className="text-muted-foreground">
               &quot;¿A partir de qué nota estás en el 30% de alumnos con mejor nota?&quot;
             </p>
@@ -216,7 +216,7 @@ export default function Ejercicio5() {
               El valor que separa el 70% inferior del 30% superior es el <strong>percentil 70</strong>,
               que equivale al <strong>decil 7 (D₇)</strong>.
             </p>
-            <div className="bg-white rounded p-2">
+            <div className="bg-white dark:bg-gray-900 rounded p-2">
               <p><strong>Recordatorio:</strong> Los deciles dividen los datos en 10 partes iguales (10% cada una).
               D₇ deja el 70% por debajo y el 30% por encima. Como los deciles nos los dan en el enunciado, solo hay que mirarlos.</p>
             </div>
@@ -226,8 +226,8 @@ export default function Ejercicio5() {
         <FormulaDisplay math={`D_7^{Mat} = ${mateDeciles[6]} \\quad \\text{(nota de corte para el top 30% en Mate)}`} />
         <FormulaDisplay math={`D_7^{Est} = ${estadDeciles[6]} \\quad \\text{(nota de corte para el top 30% en Estad.)}`} />
 
-        <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-2 text-xs space-y-1">
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-2 text-sm space-y-1">
             <p><strong>Interpretación Mate:</strong> Para estar en el top 30% en Matemáticas, necesitas al menos un {mateDeciles[6]}. El 70% de los alumnos sacó menos de eso.</p>
             <p><strong>Interpretación Estad.:</strong> Para estar en el top 30% en Estadística, necesitas al menos un {estadDeciles[6]}. La nota de corte es similar.</p>
           </CardContent>
@@ -242,22 +242,22 @@ export default function Ejercicio5() {
       {/* ============ PASO 4: Resumen ============ */}
       <StepCard stepNumber={5} title="Resumen: ¿qué hemos aprendido?" variant="result">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          <Card className="bg-blue-50 border-blue-200">
+          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
             <CardContent className="p-3 space-y-1">
-              <p className="font-semibold text-xs text-blue-800">CV → ¿Es fiable la media?</p>
-              <p className="text-[10px] text-muted-foreground">CV &lt; 50% → sí. Cuanto menor sea el CV, más representativa es la media.</p>
+              <p className="font-semibold text-sm text-blue-800 dark:text-blue-200">CV → ¿Es fiable la media?</p>
+              <p className="text-sm text-muted-foreground">CV &lt; 50% → sí. Cuanto menor sea el CV, más representativa es la media.</p>
             </CardContent>
           </Card>
-          <Card className="bg-emerald-50 border-emerald-200">
+          <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
             <CardContent className="p-3 space-y-1">
-              <p className="font-semibold text-xs text-emerald-800">z → ¿Dónde estoy respecto a los demás?</p>
-              <p className="text-[10px] text-muted-foreground">z &gt; 0 → por encima de la media. z &lt; 0 → por debajo. Mayor z = mejor posición.</p>
+              <p className="font-semibold text-sm text-emerald-800 dark:text-emerald-200">z → ¿Dónde estoy respecto a los demás?</p>
+              <p className="text-sm text-muted-foreground">z &gt; 0 → por encima de la media. z &lt; 0 → por debajo. Mayor z = mejor posición.</p>
             </CardContent>
           </Card>
-          <Card className="bg-violet-50 border-violet-200">
+          <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800">
             <CardContent className="p-3 space-y-1">
-              <p className="font-semibold text-xs text-violet-800">Deciles → Notas de corte</p>
-              <p className="text-[10px] text-muted-foreground">D₇ = nota mínima para estar en el top 30%. D₉ = top 10%. Etc.</p>
+              <p className="font-semibold text-sm text-violet-800 dark:text-violet-200">Deciles → Notas de corte</p>
+              <p className="text-sm text-muted-foreground">D₇ = nota mínima para estar en el top 30%. D₉ = top 10%. Etc.</p>
             </CardContent>
           </Card>
         </div>

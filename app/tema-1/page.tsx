@@ -7,7 +7,7 @@ export default function Tema1Page() {
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <Badge className="bg-blue-100 text-blue-800">Tema 1</Badge>
+          <Badge className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200">Tema 1</Badge>
           <Badge variant="outline">Teoría</Badge>
         </div>
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Introducción a la Estadística</h1>
@@ -29,22 +29,22 @@ export default function Tema1Page() {
             para su estudio metódico, con el fin de deducir leyes, hacer previsiones y tomar decisiones.
           </p>
           <div className="grid md:grid-cols-3 gap-4 mt-4">
-            <Card className="bg-blue-50 border-blue-200">
+            <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
               <CardContent className="p-4">
-                <h4 className="font-semibold text-blue-800 mb-1">Estadística Descriptiva</h4>
-                <p className="text-xs text-blue-700">Recogida, representación y análisis de datos de la muestra. Estudia sucesos que han ocurrido.</p>
+                <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-1">Estadística Descriptiva</h4>
+                <p className="text-sm text-blue-700 dark:text-blue-300">Recogida, representación y análisis de datos de la muestra. Estudia sucesos que han ocurrido.</p>
               </CardContent>
             </Card>
-            <Card className="bg-indigo-50 border-indigo-200">
+            <Card className="bg-indigo-50 dark:bg-indigo-950/20 border-indigo-200 dark:border-indigo-800">
               <CardContent className="p-4">
-                <h4 className="font-semibold text-indigo-800 mb-1">Teoría de la Probabilidad</h4>
-                <p className="text-xs text-indigo-700">Técnicas matemáticas para manejar la incertidumbre. Fase deductiva.</p>
+                <h4 className="font-semibold text-indigo-800 dark:text-indigo-200 mb-1">Teoría de la Probabilidad</h4>
+                <p className="text-sm text-indigo-700 dark:text-indigo-300">Técnicas matemáticas para manejar la incertidumbre. Fase deductiva.</p>
               </CardContent>
             </Card>
-            <Card className="bg-violet-50 border-violet-200">
+            <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800">
               <CardContent className="p-4">
-                <h4 className="font-semibold text-violet-800 mb-1">Inferencia Estadística</h4>
-                <p className="text-xs text-violet-700">Trasladar resultados de la muestra a la población. Fase inductiva.</p>
+                <h4 className="font-semibold text-violet-800 dark:text-violet-200 mb-1">Inferencia Estadística</h4>
+                <p className="text-sm text-violet-700 dark:text-violet-300">Trasladar resultados de la muestra a la población. Fase inductiva.</p>
               </CardContent>
             </Card>
           </div>
@@ -61,52 +61,52 @@ export default function Tema1Page() {
         </CardHeader>
         <CardContent className="space-y-4 text-sm">
           <div className="grid md:grid-cols-2 gap-4">
-            <Card className="bg-slate-50">
+            <Card className="bg-slate-50 dark:bg-slate-950/20">
               <CardContent className="p-4">
                 <h4 className="font-semibold mb-2">Fenómenos Deterministas</h4>
-                <p className="text-muted-foreground text-xs mb-2">
+                <p className="text-muted-foreground text-sm mb-2">
                   Realizados siempre en las mismas condiciones, proporcionan <strong>siempre los mismos resultados</strong>.
                 </p>
                 <div className="space-y-1">
-                  <Badge variant="outline" className="text-xs">Caída libre de un objeto</Badge>
-                  <Badge variant="outline" className="text-xs">Cambio de estado físico</Badge>
+                  <Badge variant="outline" className="text-sm">Caída libre de un objeto</Badge>
+                  <Badge variant="outline" className="text-sm">Cambio de estado físico</Badge>
                 </div>
               </CardContent>
             </Card>
-            <Card className="bg-amber-50 border-amber-200">
+            <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800">
               <CardContent className="p-4">
                 <h4 className="font-semibold mb-2">Fenómenos Aleatorios</h4>
-                <p className="text-muted-foreground text-xs mb-2">
+                <p className="text-muted-foreground text-sm mb-2">
                   Realizados en las mismas condiciones, <strong>NO siempre</strong> proporcionan los mismos resultados.
                 </p>
                 <div className="space-y-1">
-                  <Badge variant="outline" className="text-xs">Juegos de azar</Badge>
-                  <Badge variant="outline" className="text-xs">Comportamiento del consumidor</Badge>
-                  <Badge variant="outline" className="text-xs">Duración de un viaje</Badge>
+                  <Badge variant="outline" className="text-sm">Juegos de azar</Badge>
+                  <Badge variant="outline" className="text-sm">Comportamiento del consumidor</Badge>
+                  <Badge variant="outline" className="text-sm">Duración de un viaje</Badge>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          <Card className="bg-gray-50">
+          <Card className="bg-gray-50 dark:bg-gray-800">
             <CardContent className="p-4">
               <h4 className="font-semibold mb-3">Fuentes de Aleatoridad</h4>
               <div className="grid md:grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <p className="text-xs font-medium">1. Referencia al futuro</p>
-                  <p className="text-xs text-muted-foreground">Incertidumbre de un resultado que aún no se ha producido</p>
+                  <p className="text-sm font-medium">1. Referencia al futuro</p>
+                  <p className="text-sm text-muted-foreground">Incertidumbre de un resultado que aún no se ha producido</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs font-medium">2. Información incompleta</p>
-                  <p className="text-xs text-muted-foreground">No se dispone de todos los datos del fenómeno</p>
+                  <p className="text-sm font-medium">2. Información incompleta</p>
+                  <p className="text-sm text-muted-foreground">No se dispone de todos los datos del fenómeno</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs font-medium">3. Información defectuosa</p>
-                  <p className="text-xs text-muted-foreground">Parte de la información se ha perdido</p>
+                  <p className="text-sm font-medium">3. Información defectuosa</p>
+                  <p className="text-sm text-muted-foreground">Parte de la información se ha perdido</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs font-medium">4. Errores de medición</p>
-                  <p className="text-xs text-muted-foreground">Aunque el fenómeno sea determinista, la medición introduce error</p>
+                  <p className="text-sm font-medium">4. Errores de medición</p>
+                  <p className="text-sm text-muted-foreground">Aunque el fenómeno sea determinista, la medición introduce error</p>
                 </div>
               </div>
             </CardContent>
@@ -133,12 +133,12 @@ export default function Tema1Page() {
               { step: 6, title: "Cuantificar la confianza", desc: "Medir la fiabilidad de las conclusiones" },
             ].map((item) => (
               <div key={item.step} className="flex items-start gap-3">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-100 text-violet-700 text-sm font-bold">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 text-sm font-bold">
                   {item.step}
                 </span>
                 <div>
                   <p className="font-medium">{item.title}</p>
-                  <p className="text-xs text-muted-foreground">{item.desc}</p>
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -156,26 +156,26 @@ export default function Tema1Page() {
         </CardHeader>
         <CardContent className="space-y-4 text-sm">
           <div className="grid md:grid-cols-2 gap-4">
-            <Card className="bg-blue-50 border-blue-200">
+            <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
               <CardContent className="p-4">
-                <h4 className="font-semibold text-blue-800 mb-2">Población</h4>
-                <p className="text-xs text-blue-700">
+                <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">Población</h4>
+                <p className="text-sm text-blue-700 dark:text-blue-300">
                   Conjunto de <strong>todos los elementos</strong> portadores de características que nos interesa estudiar.
                   Debe estar definida con absoluta precisión.
                 </p>
-                <p className="text-xs text-blue-600 mt-2 font-medium">
+                <p className="text-sm text-blue-600 mt-2 font-medium">
                   Investigación exhaustiva = Censo
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-emerald-50 border-emerald-200">
+            <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
               <CardContent className="p-4">
-                <h4 className="font-semibold text-emerald-800 mb-2">Muestra</h4>
-                <p className="text-xs text-emerald-700">
+                <h4 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-2">Muestra</h4>
+                <p className="text-sm text-emerald-700 dark:text-emerald-300">
                   <strong>Subconjunto</strong> de la población al que tenemos acceso y sobre el que hacemos las observaciones.
                   Debe ser representativa.
                 </p>
-                <p className="text-xs text-emerald-600 mt-2 font-medium">
+                <p className="text-sm text-emerald-600 mt-2 font-medium">
                   Investigación parcial = Estudio muestral
                 </p>
               </CardContent>
@@ -186,11 +186,11 @@ export default function Tema1Page() {
           <div className="flex justify-center">
             <div className="relative w-full max-w-xs sm:max-w-sm h-48">
               <div className="absolute inset-0 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center">
-                <span className="absolute top-1 left-2 text-xs text-gray-400">Grupo de elementos</span>
-                <div className="w-4/5 h-36 border-2 border-blue-300 bg-blue-50/50 rounded-lg relative flex items-center justify-center">
-                  <span className="absolute top-1 left-2 text-xs text-blue-500 font-medium">Población (N)</span>
-                  <div className="w-24 h-24 border-2 border-emerald-400 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <span className="text-xs text-emerald-700 font-bold">Muestra (n)</span>
+                <span className="absolute top-1 left-2 text-sm text-gray-400">Grupo de elementos</span>
+                <div className="w-4/5 h-36 border-2 border-blue-300 bg-blue-50/50 dark:bg-blue-950/20 rounded-lg relative flex items-center justify-center">
+                  <span className="absolute top-1 left-2 text-sm text-blue-500 font-medium">Población (N)</span>
+                  <div className="w-24 h-24 border-2 border-emerald-400 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
+                    <span className="text-sm text-emerald-700 dark:text-emerald-300 font-bold">Muestra (n)</span>
                   </div>
                 </div>
               </div>
@@ -216,10 +216,10 @@ export default function Tema1Page() {
               { area: "Producción", ejemplo: "Control de calidad" },
               { area: "Marketing", ejemplo: "Estudios de mercado, estrategias publicitarias" },
             ].map((item) => (
-              <Card key={item.area} className="bg-gray-50">
+              <Card key={item.area} className="bg-gray-50 dark:bg-gray-800">
                 <CardContent className="p-3">
                   <p className="font-medium text-sm">{item.area}</p>
-                  <p className="text-xs text-muted-foreground">{item.ejemplo}</p>
+                  <p className="text-sm text-muted-foreground">{item.ejemplo}</p>
                 </CardContent>
               </Card>
             ))}

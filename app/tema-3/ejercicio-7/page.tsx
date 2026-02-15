@@ -34,7 +34,7 @@ export default function Ejercicio7() {
           <p>Tenemos una población dividida en tres estratos: A1, A2 y A3.</p>
           <div className="overflow-x-auto">
             <table className="text-sm border-collapse">
-              <thead><tr className="bg-gray-100"><th className="border p-2">Estrato</th><th className="border p-2">N</th><th className="border p-2">Media</th></tr></thead>
+              <thead><tr className="bg-gray-100 dark:bg-gray-700/30"><th className="border p-2">Estrato</th><th className="border p-2">N</th><th className="border p-2">Media</th></tr></thead>
               <tbody>
                 {estratos.map((e) => (
                   <tr key={e.nombre}><td className="border p-2 text-center">{e.nombre}</td><td className="border p-2 text-center">{e.n}</td><td className="border p-2 text-center">{e.media}</td></tr>
@@ -55,9 +55,9 @@ export default function Ejercicio7() {
           Cuando una población se divide en grupos de distinto tamaño, la media global no es
           simplemente el promedio de las medias de cada grupo.
         </p>
-        <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-amber-800">Analogía: las notas de un curso</p>
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">Analogía: las notas de un curso</p>
             <p className="text-muted-foreground">
               Imagina un curso con 3 clases: A (10 alumnos, media 6), B (30 alumnos, media 8) y C (60 alumnos, media 9).
               La media del curso NO es (6+8+9)/3 = 7.67. Eso trataría a las tres clases como si tuvieran el mismo tamaño.
@@ -72,9 +72,9 @@ export default function Ejercicio7() {
 
       {/* ============ PASO 1: El error de la media simple ============ */}
       <StepCard stepNumber={2} title="¿Por qué NO vale la media simple?" variant="explanation">
-        <Card className="bg-rose-50 border-rose-200">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-rose-800">Error frecuente: promediar las medias directamente</p>
+        <Card className="bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-800">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-rose-800 dark:text-rose-200">Error frecuente: promediar las medias directamente</p>
             <FormulaDisplay math={`\\text{Media simple (INCORRECTO)} = \\frac{2 + 7 + 10}{3} = ${round(mediaSimple, 2)}`} />
             <p className="text-muted-foreground">
               Esto sería correcto solo si los tres estratos tuvieran <strong>exactamente el mismo tamaño</strong> (50 cada uno).
@@ -90,11 +90,11 @@ export default function Ejercicio7() {
 
       {/* ============ PASO 2: Fórmula de la media ponderada ============ */}
       <StepCard stepNumber={3} title="La fórmula correcta: media ponderada" variant="calculation">
-        <Card className="bg-blue-50 border-blue-200 mb-3">
-          <CardContent className="p-3 text-xs space-y-2">
-            <p className="font-semibold text-blue-800">Fórmula desglosada</p>
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">Fórmula desglosada</p>
             <FormulaDisplay math={`\\bar{x} = \\frac{\\sum N_k \\cdot \\bar{x}_k}{\\sum N_k} = \\frac{N_1 \\cdot \\bar{x}_1 + N_2 \\cdot \\bar{x}_2 + N_3 \\cdot \\bar{x}_3}{N_1 + N_2 + N_3}`} />
-            <div className="bg-white rounded p-2 space-y-1">
+            <div className="bg-white dark:bg-gray-900 rounded p-2 space-y-1">
               <p><InlineMath math="N_k" /> = tamaño del estrato k (cuántas personas tiene)</p>
               <p><InlineMath math="\bar{x}_k" /> = media del estrato k</p>
               <p><InlineMath math="N_k \cdot \bar{x}_k" /> = &quot;contribución total&quot; del estrato k (tamaño × media)</p>
@@ -110,8 +110,8 @@ export default function Ejercicio7() {
         <FormulaDisplay math={`\\bar{x} = \\frac{50 \\cdot 2 + 100 \\cdot 7 + 200 \\cdot 10}{50 + 100 + 200}`} />
         <FormulaDisplay math={`= \\frac{100 + 700 + 2000}{350} = \\frac{2800}{350} = ${round(mediaPoblacion, 2)}`} />
 
-        <Card className="bg-amber-50 border-amber-200 mt-2">
-          <CardContent className="p-2 text-xs space-y-1">
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-2 text-sm space-y-1">
             <p><strong>¿Tiene sentido?</strong> La media ponderada ({round(mediaPoblacion, 2)}) es mayor que la simple ({round(mediaSimple, 2)}).
             Esto es porque el grupo más grande (A3, con 200 personas) tiene la media más alta (10),
             y &quot;tira&quot; de la media global hacia arriba.</p>
@@ -124,8 +124,8 @@ export default function Ejercicio7() {
 
       {/* ============ PASO 3: Peso de cada estrato ============ */}
       <StepCard stepNumber={4} title="Visualización: peso de cada estrato" variant="explanation">
-        <Card className="bg-gray-50 border mb-2">
-          <CardContent className="p-3 text-xs space-y-1">
+        <Card className="bg-gray-50 dark:bg-gray-800 border mb-2">
+          <CardContent className="p-3 text-sm space-y-1">
             <p className="font-semibold">¿Cuánto &quot;pesa&quot; cada estrato en el resultado?</p>
             <p className="text-muted-foreground">
               El gráfico muestra la proporción de cada estrato. El A3 domina con el {round((200 / 350) * 100, 1)}% de la población,
@@ -139,11 +139,11 @@ export default function Ejercicio7() {
         />
         <div className="grid grid-cols-3 gap-2 mt-3">
           {estratos.map((e) => (
-            <Card key={e.nombre} className="bg-gray-50">
+            <Card key={e.nombre} className="bg-gray-50 dark:bg-gray-800">
               <CardContent className="p-2 text-center">
-                <p className="font-semibold text-xs">{e.nombre}</p>
-                <p className="text-[10px]">{round((e.n / totalN) * 100, 1)}% de la población</p>
-                <p className="text-[10px]">Contribuye: {e.n} × {e.media} = {e.n * e.media}</p>
+                <p className="font-semibold text-sm">{e.nombre}</p>
+                <p className="text-sm">{round((e.n / totalN) * 100, 1)}% de la población</p>
+                <p className="text-sm">Contribuye: {e.n} × {e.media} = {e.n * e.media}</p>
               </CardContent>
             </Card>
           ))}
@@ -153,19 +153,19 @@ export default function Ejercicio7() {
       {/* ============ PASO 4: Resumen ============ */}
       <StepCard stepNumber={5} title="Resumen: ¿qué hemos aprendido?" variant="result">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <Card className="bg-blue-50 border-blue-200">
+          <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
             <CardContent className="p-3 space-y-1">
-              <p className="font-semibold text-xs text-blue-800">Media ponderada vs simple</p>
-              <p className="text-[10px] text-muted-foreground">
+              <p className="font-semibold text-sm text-blue-800 dark:text-blue-200">Media ponderada vs simple</p>
+              <p className="text-sm text-muted-foreground">
                 Cuando los grupos tienen tamaños diferentes, la media ponderada da resultados correctos.
                 La media simple solo vale si todos los grupos son del mismo tamaño.
               </p>
             </CardContent>
           </Card>
-          <Card className="bg-emerald-50 border-emerald-200">
+          <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800">
             <CardContent className="p-3 space-y-1">
-              <p className="font-semibold text-xs text-emerald-800">El grupo grande domina</p>
-              <p className="text-[10px] text-muted-foreground">
+              <p className="font-semibold text-sm text-emerald-800 dark:text-emerald-200">El grupo grande domina</p>
+              <p className="text-sm text-muted-foreground">
                 La media global siempre está más cercana a la media del grupo más grande.
                 En nuestro caso: A3 (200 personas, media 10) → la media global ({round(mediaPoblacion, 2)}) se acerca más a 10.
               </p>
