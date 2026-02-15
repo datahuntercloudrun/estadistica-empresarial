@@ -119,12 +119,14 @@
 @layer base {
   html {
     font-size: 18px;
+    overflow-x: hidden;
   }
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 
@@ -136,6 +138,18 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Sidebar recommended item shimmer */
+.sidebar-recommended {
+  background: linear-gradient(90deg, #059669, #34d399, #059669);
+  background-size: 200% 100%;
+  animation: sidebar-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes sidebar-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 /* KaTeX responsive overflow */

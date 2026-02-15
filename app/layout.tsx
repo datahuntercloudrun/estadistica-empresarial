@@ -6,6 +6,7 @@ import { AppHeader } from "@/components/layout/header";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthGate } from "@/components/auth-gate";
+import { NotNeededWarning } from "@/components/not-needed-warning";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,10 +44,12 @@ export default function RootLayout({
           <AuthGate>
             <SidebarProvider>
               <AppSidebar />
-              <SidebarInset className="min-h-svh">
+              <SidebarInset className="min-h-svh overflow-x-hidden">
                 <AppHeader />
-                <main className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 relative">
-                  {children}
+                <main className="flex-1 overflow-y-auto overflow-x-hidden p-3 sm:p-4 md:p-6 relative">
+                  <NotNeededWarning>
+                    {children}
+                  </NotNeededWarning>
                 </main>
               </SidebarInset>
             </SidebarProvider>

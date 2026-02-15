@@ -67,7 +67,7 @@ export default function Ejercicio1() {
                   <p className="text-muted-foreground mt-1"><strong>Pregunta 2: ¿Puede tomar cualquier valor en un intervalo (incluidos decimales), o solo valores aislados (enteros)?</strong></p>
                   <div className="pl-4 mt-1 space-y-1">
                     <p><Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200 text-sm">Solo enteros</Badge> → <strong>Discreta</strong> (ej: n.° de hijos: 0, 1, 2, 3...)</p>
-                    <p><Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm">Cualquier valor</Badge> → <strong>Continua</strong> (ej: peso: 72.35 kg, 80.1 kg...)</p>
+                    <p><Badge className="bg-violet-200 dark:bg-violet-800/40 text-violet-800 dark:text-violet-200 text-sm">Cualquier valor</Badge> → <strong>Continua</strong> (ej: peso: 72.35 kg, 80.1 kg...)</p>
                   </div>
                 </div>
                 <div className="bg-emerald-50 dark:bg-emerald-950/20 rounded p-2">
@@ -75,7 +75,7 @@ export default function Ejercicio1() {
                   <p className="text-muted-foreground mt-1"><strong>Pregunta 2: ¿Las categorías tienen un orden natural?</strong></p>
                   <div className="pl-4 mt-1 space-y-1">
                     <p><Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200 text-sm">Sin orden</Badge> → <strong>Nominal</strong> (ej: color de ojos: azul, marrón, verde)</p>
-                    <p><Badge className="bg-lime-200 text-lime-800 dark:text-lime-200 text-sm">Con orden</Badge> → <strong>Ordinal</strong> (ej: satisfacción: baja, media, alta)</p>
+                    <p><Badge className="bg-lime-200 dark:bg-lime-800/40 text-lime-800 dark:text-lime-200 text-sm">Con orden</Badge> → <strong>Ordinal</strong> (ej: satisfacción: baja, media, alta)</p>
                   </div>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function Ejercicio1() {
         <div className="space-y-3">
           {variables.map((v) => (
             <div key={v.id} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800 border">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gray-200 text-sm font-bold">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-sm font-bold">
                 {v.id}
               </span>
               <div className="flex-1 space-y-1">

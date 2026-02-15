@@ -79,7 +79,7 @@ export default function Ejercicio4() {
           </Card>
           <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm"><InlineMath math="n_{ij}" /></Badge>
+              <Badge className="bg-violet-200 dark:bg-violet-800/40 text-violet-800 dark:text-violet-200 text-sm"><InlineMath math="n_{ij}" /></Badge>
               <p className="text-sm text-muted-foreground">Cuántas veces aparece <strong>la combinación</strong> (<InlineMath math="x_i" />, <InlineMath math="y_j" />) en los datos.</p>
               <p className="text-sm">Ej: celda (X=4, Y=3) = 4, esa pareja ocurre 4 veces</p>
             </CardContent>

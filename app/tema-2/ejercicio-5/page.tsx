@@ -643,7 +643,7 @@ export default function Ejercicio5() {
         <div className="space-y-3">
           {classifications.map((c) => (
             <div key={c.num} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800 border">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gray-200 text-sm font-bold">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-sm font-bold">
                 {c.num}
               </span>
               <div className="flex-1 space-y-1">

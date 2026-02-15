@@ -77,7 +77,7 @@ export default function Ejercicio3() {
           </Card>
           <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm">c) Posición</Badge>
+              <Badge className="bg-violet-200 dark:bg-violet-800/40 text-violet-800 dark:text-violet-200 text-sm">c) Posición</Badge>
               <p className="text-sm text-muted-foreground">&quot;¿Dónde se sitúa un valor concreto?&quot;</p>
               <p className="text-sm">→ Cuartiles, percentiles</p>
             </CardContent>

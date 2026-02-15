@@ -6,6 +6,7 @@ import {
   BookOpen,
   BarChart3,
   Calculator,
+  Check,
   ChevronRight,
   GraduationCap,
   Home,
@@ -31,6 +32,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Badge } from "@/components/ui/badge";
+import { NOT_NEEDED_PATHS } from "@/lib/not-needed-paths";
 
 const navigation = [
   {
@@ -125,15 +127,23 @@ export function AppSidebar() {
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         <SidebarMenuSub>
-                          {item.items.map((sub) => (
-                            <SidebarMenuSubItem key={sub.url}>
-                              <SidebarMenuSubButton asChild isActive={pathname === sub.url}>
-                                <Link href={sub.url} onClick={() => setOpenMobile(false)}>
-                                  <span>{sub.title}</span>
-                                </Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
+                          {item.items.map((sub) => {
+                            const isRecommended = !NOT_NEEDED_PATHS.includes(sub.url);
+                            return (
+                              <SidebarMenuSubItem key={sub.url}>
+                                <SidebarMenuSubButton asChild isActive={pathname === sub.url}>
+                                  <Link href={sub.url} onClick={() => setOpenMobile(false)}>
+                                    {isRecommended && (
+                                      <span className="sidebar-recommended inline-flex h-4 min-w-4 items-center justify-center rounded-full shrink-0">
+                                        <Check className="h-2.5 w-2.5 text-white" />
+                                      </span>
+                                    )}
+                                    <span>{sub.title}</span>
+                                  </Link>
+                                </SidebarMenuSubButton>
+                              </SidebarMenuSubItem>
+                            );
+                          })}
                         </SidebarMenuSub>
                       </CollapsibleContent>
                     </SidebarMenuItem>

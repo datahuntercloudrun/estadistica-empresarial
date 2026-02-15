@@ -252,7 +252,7 @@ export default function Ejercicio2() {
               <span className="flex-1">
                 <InlineMath math="n_i" /> = {r.ni}
               </span>
-              {r.xNum === mod[0] && <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm">Máximo</Badge>}
+              {r.xNum === mod[0] && <Badge className="bg-violet-200 dark:bg-violet-800/40 text-violet-800 dark:text-violet-200 text-sm">Máximo</Badge>}
             </div>
           ))}
         </div>

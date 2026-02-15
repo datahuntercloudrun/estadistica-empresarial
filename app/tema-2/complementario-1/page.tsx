@@ -185,7 +185,7 @@ export default function Complementario1() {
               </div>
               <div className="bg-violet-50 dark:bg-violet-950/20 rounded p-2 space-y-1">
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm"><InlineMath math="N_i" /> y <InlineMath math="F_i" /></Badge>
+                  <Badge className="bg-violet-200 dark:bg-violet-800/40 text-violet-800 dark:text-violet-200 text-sm"><InlineMath math="N_i" /> y <InlineMath math="F_i" /></Badge>
                   <p className="font-semibold text-sm text-violet-800 dark:text-violet-200">Acumuladas</p>
                 </div>
                 <p className="text-sm text-muted-foreground"><InlineMath math="N_i" /> = cuantos trabajadores cobran ese salario <strong>o menos</strong>. <InlineMath math="F_i" /> = proporcion acumulada.</p>
@@ -446,7 +446,7 @@ export default function Complementario1() {
                 <p className="text-muted-foreground">La distribucion tiene forma aproximadamente <strong>simetrica</strong> o ligeramente sesgada, con los salarios mas frecuentes en la zona central (25-29) y menos frecuentes en los extremos (19-21 y 29-31).</p>
               </div>
               <div className="flex items-start gap-2">
-                <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm shrink-0">Extremos</Badge>
+                <Badge className="bg-violet-200 dark:bg-violet-800/40 text-violet-800 dark:text-violet-200 text-sm shrink-0">Extremos</Badge>
                 <p className="text-muted-foreground">Los intervalos con menos trabajadores son <strong>{groupedTable[0].xi}</strong> ({groupedTable[0].ni} trabajadores) y podemos ver que pocos trabajadores cobran los salarios mas bajos.</p>
               </div>
             </div>

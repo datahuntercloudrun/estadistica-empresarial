@@ -545,7 +545,7 @@ export default function Complementario2() {
             <CardContent className="p-3 text-center">
               <p className="text-2xl font-bold text-violet-800 dark:text-violet-200">{porcentaje100a400.toFixed(2)}%</p>
               <p className="text-sm text-muted-foreground">empresas entre 100 y 400 puestos</p>
-              <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 mt-1 text-sm">
+              <Badge className="bg-violet-200 dark:bg-violet-800/40 text-violet-800 dark:text-violet-200 mt-1 text-sm">
                 {entre100y400} de {totalEmpresas} empresas
               </Badge>
             </CardContent>
@@ -554,7 +554,7 @@ export default function Complementario2() {
             <CardContent className="p-3 text-center">
               <p className="text-2xl font-bold text-amber-800 dark:text-amber-200">100-200</p>
               <p className="text-sm text-muted-foreground">intervalo mas frecuente (moda)</p>
-              <Badge className="bg-amber-200 text-amber-800 dark:text-amber-200 mt-1 text-sm">
+              <Badge className="bg-amber-200 dark:bg-amber-800/40 text-amber-800 dark:text-amber-200 mt-1 text-sm">
                 {data[1].empresas} empresas
               </Badge>
             </CardContent>

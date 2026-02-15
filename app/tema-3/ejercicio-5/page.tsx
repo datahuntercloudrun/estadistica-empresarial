@@ -91,7 +91,7 @@ export default function Ejercicio5() {
           </Card>
           <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm">Nota de corte</Badge>
+              <Badge className="bg-violet-200 dark:bg-violet-800/40 text-violet-800 dark:text-violet-200 text-sm">Nota de corte</Badge>
               <p className="text-sm text-muted-foreground">&quot;¿A partir de qué nota estás en el top 30%?&quot;</p>
               <p className="text-sm">→ Deciles / Percentiles</p>
             </CardContent>

@@ -90,7 +90,7 @@ export default function Ejercicio3() {
           </Card>
           <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800">
             <CardContent className="p-3 space-y-1">
-              <Badge className="bg-violet-200 text-violet-800 dark:text-violet-200 text-sm"><InlineMath math="n_{ij}" /></Badge>
+              <Badge className="bg-violet-200 dark:bg-violet-800/40 text-violet-800 dark:text-violet-200 text-sm"><InlineMath math="n_{ij}" /></Badge>
               <p className="text-sm text-muted-foreground">Cuántas veces aparece <strong>la combinación</strong> (<InlineMath math="x_i" />, <InlineMath math="y_j" />) en los datos.</p>
               <p className="text-sm">Ej: <InlineMath math="n_{22}" /> = 2 significa que la pareja (X=2, Y=2) ocurre 2 veces</p>
             </CardContent>
