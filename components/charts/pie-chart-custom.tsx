@@ -26,11 +26,13 @@ interface PieChartCustomProps {
   data: PieChartData[];
   title?: string;
   showPercentage?: boolean;
+  colors?: string[];
 }
 
-export function PieChartCustom({ data, title, showPercentage = true }: PieChartCustomProps) {
+export function PieChartCustom({ data, title, showPercentage = true, colors }: PieChartCustomProps) {
   const total = data.reduce((sum, d) => sum + d.value, 0);
   const isMobile = useIsMobile();
+  const palette = colors || COLORS;
 
   return (
     <Card>
@@ -56,7 +58,7 @@ export function PieChartCustom({ data, title, showPercentage = true }: PieChartC
               dataKey="value"
             >
               {data.map((_, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell key={`cell-${index}`} fill={palette[index % palette.length]} />
               ))}
             </Pie>
             <Tooltip formatter={(value) => [String(value), "Frecuencia"]} />

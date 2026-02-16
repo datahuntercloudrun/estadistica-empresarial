@@ -6,6 +6,7 @@ import { FormulaDisplay, InlineMath } from "@/components/stats/formula-display";
 import { ResultCard } from "@/components/stats/result-card";
 import { PieChartCustom } from "@/components/charts/pie-chart-custom";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { round, weightedMean } from "@/lib/stats/descriptive";
 
 const estratos = [
@@ -124,30 +125,83 @@ export default function Ejercicio7() {
 
       {/* ============ PASO 3: Peso de cada estrato ============ */}
       <StepCard stepNumber={4} title="Visualización: peso de cada estrato" variant="explanation">
-        <Card className="bg-gray-50 dark:bg-gray-800 border mb-2">
-          <CardContent className="p-3 text-sm space-y-1">
-            <p className="font-semibold">¿Cuánto &quot;pesa&quot; cada estrato en el resultado?</p>
-            <p className="text-muted-foreground">
-              El gráfico muestra la proporción de cada estrato. El A3 domina con el {round((200 / 350) * 100, 1)}% de la población,
-              por eso su media de 10 tiene el mayor impacto en el resultado final.
-            </p>
-          </CardContent>
-        </Card>
+        <p className="text-sm text-muted-foreground mb-3">
+          ¿Cuánto &quot;pesa&quot; cada estrato en el resultado final? Veámoslo visualmente.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+          {/* A1 - Rose */}
+          <Card className="bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-800 shadow-md">
+            <CardContent className="p-3 space-y-2">
+              <div className="flex items-center justify-between">
+                <p className="font-bold text-rose-800 dark:text-rose-200">A1</p>
+                <Badge className="bg-rose-200 dark:bg-rose-800/40 text-rose-800 dark:text-rose-200">
+                  {round((50 / totalN) * 100, 1)}%
+                </Badge>
+              </div>
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                <div className="h-full rounded-full bg-rose-500 dark:bg-rose-400" style={{ width: `${round((50 / totalN) * 100, 1)}%` }} />
+              </div>
+              <div className="text-sm text-muted-foreground space-y-0.5">
+                <p><strong>50</strong> personas con media <strong>2</strong></p>
+                <p>Contribuye: 50 × 2 = <strong>100</strong></p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* A2 - Amber */}
+          <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 shadow-md">
+            <CardContent className="p-3 space-y-2">
+              <div className="flex items-center justify-between">
+                <p className="font-bold text-amber-800 dark:text-amber-200">A2</p>
+                <Badge className="bg-amber-200 dark:bg-amber-800/40 text-amber-800 dark:text-amber-200">
+                  {round((100 / totalN) * 100, 1)}%
+                </Badge>
+              </div>
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                <div className="h-full rounded-full bg-amber-500 dark:bg-amber-400" style={{ width: `${round((100 / totalN) * 100, 1)}%` }} />
+              </div>
+              <div className="text-sm text-muted-foreground space-y-0.5">
+                <p><strong>100</strong> personas con media <strong>7</strong></p>
+                <p>Contribuye: 100 × 7 = <strong>700</strong></p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* A3 - Emerald */}
+          <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 shadow-md">
+            <CardContent className="p-3 space-y-2">
+              <div className="flex items-center justify-between">
+                <p className="font-bold text-emerald-800 dark:text-emerald-200">A3</p>
+                <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200">
+                  {round((200 / totalN) * 100, 1)}%
+                </Badge>
+              </div>
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                <div className="h-full rounded-full bg-emerald-500 dark:bg-emerald-400" style={{ width: `${round((200 / totalN) * 100, 1)}%` }} />
+              </div>
+              <div className="text-sm text-muted-foreground space-y-0.5">
+                <p><strong>200</strong> personas con media <strong>10</strong></p>
+                <p>Contribuye: 200 × 10 = <strong>2000</strong></p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         <PieChartCustom
           data={estratos.map((e) => ({ name: `${e.nombre} (n=${e.n}, media=${e.media})`, value: e.n }))}
           title="Proporción de cada estrato en la población"
+          colors={["#e11d48", "#f59e0b", "#10b981"]}
         />
-        <div className="grid grid-cols-3 gap-2 mt-3">
-          {estratos.map((e) => (
-            <Card key={e.nombre} className="bg-gray-50 dark:bg-gray-800">
-              <CardContent className="p-2 text-center">
-                <p className="font-semibold text-sm">{e.nombre}</p>
-                <p className="text-sm">{round((e.n / totalN) * 100, 1)}% de la población</p>
-                <p className="text-sm">Contribuye: {e.n} × {e.media} = {e.n * e.media}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+
+        <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800 shadow-sm mt-3">
+          <CardContent className="p-3 text-sm">
+            <p className="text-muted-foreground">
+              <strong>A3 domina</strong> con el {round((200 / totalN) * 100, 1)}% de la población y contribuye {200 * 10} de los {estratos.reduce((s, e) => s + e.n * e.media, 0)} puntos
+              totales ({round((200 * 10 / 2800) * 100, 1)}%). Por eso la media global ({round(mediaPoblacion, 2)}) se acerca mucho más a 10 que a 2.
+            </p>
+          </CardContent>
+        </Card>
       </StepCard>
 
       {/* ============ PASO 4: Resumen ============ */}

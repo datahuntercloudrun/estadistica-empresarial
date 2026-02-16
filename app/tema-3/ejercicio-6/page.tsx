@@ -58,23 +58,33 @@ export default function Ejercicio6() {
               <strong>¿Qué debería pasar intuitivamente?</strong>
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
-              <div className="bg-white dark:bg-gray-900 rounded p-2">
+              <div className="bg-white dark:bg-gray-900 rounded p-2 space-y-1">
                 <p className="font-semibold text-sm">¿Cambia la media?</p>
                 <p className="text-sm text-muted-foreground">
-                  Los nuevos datos valen 5, que es exactamente la media original.
-                  Añadir datos iguales a la media <strong>no cambia la media</strong>.
+                  Para saberlo, necesitamos la <strong>suma total</strong> de todos los valores.
+                  Si 100 datos tienen media 5, su suma es 100 × 5 = 500.
+                  Los 20 nuevos valen 5 cada uno, así que suman 20 × 5 = 100.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Nueva media = (500 + 100) / 120 = <strong>5</strong>. No cambia porque los nuevos datos
+                  valen exactamente la media original.
                 </p>
               </div>
-              <div className="bg-white dark:bg-gray-900 rounded p-2">
+              <div className="bg-white dark:bg-gray-900 rounded p-2 space-y-1">
                 <p className="font-semibold text-sm">¿Cambia la varianza?</p>
                 <p className="text-sm text-muted-foreground">
-                  Los nuevos datos no se desvían nada de la media (son exactamente la media).
-                  Al mezclarlos con datos que sí varían, la dispersión total debería <strong>disminuir</strong>.
+                  La varianza mide cuánto se desvían los datos de la media. Los 20 nuevos datos
+                  valen exactamente 5 (la media), así que su desviación es <strong>0</strong>.
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Al mezclar 100 datos dispersos con 20 datos que no varían nada,
+                  la dispersión del conjunto se <strong>reduce</strong>.
                 </p>
               </div>
             </div>
             <p className="text-muted-foreground mt-1">
-              Es como añadir agua a un café: el café (dispersión) se diluye pero no desaparece.
+              <strong>Resumen:</strong> la media se mantiene (los nuevos datos coinciden con ella),
+              pero la varianza baja (los nuevos datos no aportan dispersión).
             </p>
           </CardContent>
         </Card>
@@ -127,33 +137,111 @@ export default function Ejercicio6() {
 
       {/* ============ PASO 3: Nueva varianza ============ */}
       <StepCard stepNumber={4} title="Paso 2: ¿Cuál es la nueva varianza?" variant="calculation">
-        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-3">
+        {/* --- ¿Por qué no podemos simplemente promediar? --- */}
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mb-3">
           <CardContent className="p-3 text-sm space-y-2">
-            <p className="font-semibold text-blue-800 dark:text-blue-200">Fórmula de la varianza combinada - desglosada</p>
+            <p className="font-semibold text-amber-800 dark:text-amber-200">Antes de calcular: ¿cómo se combinan las varianzas?</p>
             <p className="text-muted-foreground">
-              Para combinar las varianzas de dos grupos, no basta con promediar las varianzas.
-              Hay que tener en cuenta <strong>dos fuentes de variación</strong>:
+              No basta con promediar las varianzas de cada grupo. La fórmula de la varianza combinada
+              tiene en cuenta <strong>dos cosas</strong>:
             </p>
-            <FormulaDisplay math={`s_{new}^2 = \\frac{n_1 \\cdot [s_1^2 + (\\bar{x}_1 - \\bar{x}_{new})^2] + n_2 \\cdot [s_2^2 + (\\bar{x}_2 - \\bar{x}_{new})^2]}{n_1 + n_2}`} />
-            <div className="bg-white dark:bg-gray-900 rounded p-2 space-y-1">
-              <p><InlineMath math="s_k^2" /> = varianza interna del grupo k (cuánto varían los datos dentro de ese grupo)</p>
-              <p><InlineMath math="(\bar{x}_k - \bar{x}_{new})^2" /> = varianza entre grupos (cuánto se aleja la media del grupo k de la media global)</p>
-              <p className="text-muted-foreground mt-1"><strong>En palabras:</strong> La varianza total = varianza dentro de cada grupo + varianza entre los grupos.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p className="font-semibold text-sm">1. Variación dentro de cada grupo</p>
+                <p className="text-sm text-muted-foreground">
+                  Cuánto varían los datos <strong>dentro</strong> de su propio grupo.
+                  Grupo 1: varianza = 15 (dispersos). Grupo 2: varianza = 0 (todos iguales).
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p className="font-semibold text-sm">2. Variación entre los grupos</p>
+                <p className="text-sm text-muted-foreground">
+                  Cuánto se alejan las medias de cada grupo <strong>entre sí</strong>.
+                  Aquí ambas medias son 5, así que esta parte es 0.
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        <p className="text-sm mb-2">En nuestro caso, como <InlineMath math="\bar{x}_1 = \bar{x}_2 = \bar{x}_{new} = 5" />, las diferencias entre medias son 0:</p>
-        <FormulaDisplay math={`s_{new}^2 = \\frac{100 \\cdot [15 + (5-5)^2] + 20 \\cdot [0 + (5-5)^2]}{120}`} />
-        <FormulaDisplay math={`= \\frac{100 \\cdot [15 + 0] + 20 \\cdot [0 + 0]}{120} = \\frac{1500 + 0}{120} = ${round(newVar, 2)}`} />
+        {/* --- La fórmula --- */}
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">La fórmula general</p>
+            <FormulaDisplay math={`s_{new}^2 = \\frac{n_1 \\cdot [s_1^2 + (\\bar{x}_1 - \\bar{x}_{new})^2] + n_2 \\cdot [s_2^2 + (\\bar{x}_2 - \\bar{x}_{new})^2]}{n_1 + n_2}`} />
+            <div className="bg-white dark:bg-gray-900 rounded p-2 text-sm space-y-2">
+              <div>
+                <p className="font-semibold text-xs text-muted-foreground uppercase tracking-wide mb-1">¿Qué hace cada parte de la fórmula?</p>
+                <p><InlineMath math="s_k^2" /> = varianza interna del grupo k (cuánto varían los datos <strong>dentro</strong> de ese grupo)</p>
+                <p><InlineMath math="(\bar{x}_k - \bar{x}_{new})^2" /> = distancia entre la media del grupo k y la media global (cuánto se alejan los grupos <strong>entre sí</strong>)</p>
+              </div>
+              <hr className="border-border" />
+              <div>
+                <p className="font-semibold text-xs text-muted-foreground uppercase tracking-wide mb-1">Valores en nuestro ejercicio:</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+                  <p><InlineMath math="n_1" /> = datos del grupo 1 → <strong>100</strong></p>
+                  <p><InlineMath math="n_2" /> = datos del grupo 2 → <strong>20</strong></p>
+                  <p><InlineMath math="s_1^2" /> = varianza del grupo 1 → <strong>15</strong></p>
+                  <p><InlineMath math="s_2^2" /> = varianza del grupo 2 → <strong>0</strong> (todos iguales)</p>
+                  <p><InlineMath math="\bar{x}_1" /> = media del grupo 1 → <strong>5</strong></p>
+                  <p><InlineMath math="\bar{x}_2" /> = media del grupo 2 → <strong>5</strong></p>
+                  <p className="sm:col-span-2"><InlineMath math="\bar{x}_{new}" /> = media global (la que calculamos en el paso anterior) → <strong>5</strong> (coincide con las anteriores, pero había que comprobarlo)</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
-          <CardContent className="p-2 text-sm space-y-1">
-            <p><strong>¿Tiene sentido?</strong> La varianza bajó de 15 a {round(newVar, 2)}.
-            Los 20 datos nuevos (todos = 5) aportan <strong>0 variación</strong>, así que &quot;diluyen&quot; la variación original.
-            Es exactamente como mezclar 100 mL de café (concentrado = varianza 15) con 20 mL de agua (varianza 0):
-            el resultado es café menos concentrado (varianza {round(newVar, 2)}).</p>
-            <p><strong>Fórmula simplificada:</strong> Como las medias son iguales, se reduce a <InlineMath math="s_{new}^2 = \frac{n_1 \cdot s_1^2}{n_1 + n_2} = \frac{100 \cdot 15}{120} = 12.5" />.</p>
+        {/* --- Aplicación paso a paso --- */}
+        <div className="space-y-3">
+          <p className="text-sm font-semibold">Aplicamos paso a paso:</p>
+
+          {/* Sub-paso A */}
+          <Card className="bg-gray-50 dark:bg-gray-800 border">
+            <CardContent className="p-3 text-sm space-y-1">
+              <p className="font-semibold">A) ¿Cuánto aporta el grupo 1 (los 100 datos originales)?</p>
+              <p className="text-muted-foreground">
+                Su varianza interna es 15, y su media (5) coincide con la media global (5),
+                así que la distancia entre medias es 0:
+              </p>
+              <FormulaDisplay math={`100 \\cdot [15 + (5 - 5)^2] = 100 \\cdot [15 + 0] = 1500`} />
+            </CardContent>
+          </Card>
+
+          {/* Sub-paso B */}
+          <Card className="bg-gray-50 dark:bg-gray-800 border">
+            <CardContent className="p-3 text-sm space-y-1">
+              <p className="font-semibold">B) ¿Cuánto aporta el grupo 2 (los 20 datos nuevos)?</p>
+              <p className="text-muted-foreground">
+                Todos valen 5, así que su varianza interna es 0. Su media (5) también coincide
+                con la global (5), así que la distancia entre medias también es 0:
+              </p>
+              <FormulaDisplay math={`20 \\cdot [0 + (5 - 5)^2] = 20 \\cdot [0 + 0] = 0`} />
+            </CardContent>
+          </Card>
+
+          {/* Sub-paso C */}
+          <Card className="bg-gray-50 dark:bg-gray-800 border">
+            <CardContent className="p-3 text-sm space-y-1">
+              <p className="font-semibold">C) Juntamos todo y dividimos entre el total de datos:</p>
+              <FormulaDisplay math={`s_{new}^2 = \\frac{1500 + 0}{120} = ${round(newVar, 2)}`} />
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* --- Interpretación --- */}
+        <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 mt-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-emerald-800 dark:text-emerald-200">¿Tiene sentido el resultado?</p>
+            <p className="text-muted-foreground">
+              La varianza bajó de 15 a {round(newVar, 2)}. Los 20 datos nuevos aportan <strong>0 variación</strong> (todos
+              son idénticos), así que al mezclarlos con los 100 datos dispersos, la dispersión total se reduce.
+            </p>
+            <p className="text-muted-foreground">
+              <strong>Atajo:</strong> como las medias de ambos grupos son iguales, la fórmula se simplifica a
+              solo repartir la variación del grupo 1 entre todos los datos:
+            </p>
+            <FormulaDisplay math={`s_{new}^2 = \\frac{n_1 \\cdot s_1^2}{n_1 + n_2} = \\frac{100 \\cdot 15}{120} = 12.5`} />
           </CardContent>
         </Card>
 

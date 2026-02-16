@@ -140,48 +140,84 @@ export default function Ejercicio5() {
               <p className="font-semibold">¿Hacia dónde se &quot;estiran&quot; los datos?</p>
             </div>
             <p className="text-muted-foreground">
-              La asimetría indica si los datos se concentran más a un lado de la media, dejando una &quot;cola&quot; más larga hacia el otro.
+              Imagina un histograma de notas: el eje horizontal va de notas bajas (izquierda) a notas altas (derecha).
+              Cada barra muestra <strong>cuántos alumnos</strong> sacaron esa nota. La &quot;cola&quot; es el lado donde hay <strong>pocas personas</strong> (barras pequeñas) con valores extremos.
             </p>
+            <div className="bg-white dark:bg-gray-900 rounded p-2 mb-2">
+              <p className="text-xs text-muted-foreground"><strong>Clave:</strong> Barra alta = muchos alumnos con esa nota. Barra baja = pocos alumnos. La cola apunta hacia donde hay pocos alumnos con notas extremas.</p>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2">
-                <div className="flex items-end gap-0.5 justify-center h-10">
+              {/* Asimetría negativa */}
+              <div className="bg-white dark:bg-gray-900 rounded p-3 space-y-2">
+                <div className="flex items-end gap-0.5 justify-center h-12">
                   {[1, 1, 2, 3, 5, 7, 8, 9, 8, 6].map((h, i) => (
-                    <div key={i} className="w-1.5 bg-blue-400 dark:bg-blue-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                    <div key={i} className={`w-2 rounded-t-sm ${i < 4 ? "bg-blue-300/60 dark:bg-blue-400/40" : "bg-blue-500 dark:bg-blue-400"}`} style={{ height: `${h * 10}%` }} />
                   ))}
                 </div>
-                <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200">g₁ &lt; 0</Badge>
-                <p className="text-xs font-semibold">Asimetría negativa</p>
-                <p className="text-xs text-muted-foreground">Cola a la izquierda. Hay valores bajos alejados.</p>
+                <div className="flex justify-between text-[10px] text-muted-foreground font-medium px-0.5">
+                  <span>Notas bajas</span>
+                  <span>Notas altas</span>
+                </div>
+                <div className="text-center">
+                  <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200">g₁ &lt; 0</Badge>
+                  <p className="text-xs font-semibold mt-1">Asimetría negativa</p>
+                </div>
+                <p className="text-xs text-muted-foreground text-left">
+                  La <strong>mayoría sacó notas altas</strong> (barras grandes a la derecha).
+                  Unos pocos sacaron notas muy bajas (barras claras a la izquierda = la &quot;cola&quot;).
+                </p>
+                <p className="text-[10px] text-muted-foreground text-left italic">Ejemplo: examen fácil donde casi todos aprobaron, pero algunos suspendieron con notas muy bajas.</p>
               </div>
-              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2 ring-2 ring-emerald-300 dark:ring-emerald-700">
-                <div className="flex items-end gap-0.5 justify-center h-10">
+              {/* Simétrica */}
+              <div className="bg-white dark:bg-gray-900 rounded p-3 space-y-2 ring-2 ring-emerald-300 dark:ring-emerald-700">
+                <div className="flex items-end gap-0.5 justify-center h-12">
                   {[2, 3, 5, 7, 9, 9, 7, 5, 3, 2].map((h, i) => (
-                    <div key={i} className="w-1.5 bg-emerald-400 dark:bg-emerald-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                    <div key={i} className="w-2 bg-emerald-400 dark:bg-emerald-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
                   ))}
                 </div>
-                <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200">g₁ ≈ 0</Badge>
-                <p className="text-xs font-semibold">Simétrica</p>
-                <p className="text-xs text-muted-foreground">Datos equilibrados a ambos lados de la media.</p>
+                <div className="flex justify-between text-[10px] text-muted-foreground font-medium px-0.5">
+                  <span>Notas bajas</span>
+                  <span>Notas altas</span>
+                </div>
+                <div className="text-center">
+                  <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200">g₁ ≈ 0</Badge>
+                  <p className="text-xs font-semibold mt-1">Simétrica</p>
+                </div>
+                <p className="text-xs text-muted-foreground text-left">
+                  <strong>Equilibrada:</strong> tantos alumnos con notas bajas como con notas altas, y la mayoría en el centro.
+                </p>
+                <p className="text-[10px] text-muted-foreground text-left italic">Ejemplo: examen donde las notas se reparten de forma pareja alrededor de la media.</p>
               </div>
-              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2">
-                <div className="flex items-end gap-0.5 justify-center h-10">
+              {/* Asimetría positiva */}
+              <div className="bg-white dark:bg-gray-900 rounded p-3 space-y-2">
+                <div className="flex items-end gap-0.5 justify-center h-12">
                   {[6, 8, 9, 8, 7, 5, 3, 2, 1, 1].map((h, i) => (
-                    <div key={i} className="w-1.5 bg-amber-400 dark:bg-amber-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                    <div key={i} className={`w-2 rounded-t-sm ${i > 5 ? "bg-amber-300/60 dark:bg-amber-400/40" : "bg-amber-500 dark:bg-amber-400"}`} style={{ height: `${h * 10}%` }} />
                   ))}
                 </div>
-                <Badge className="bg-amber-200 dark:bg-amber-800/40 text-amber-800 dark:text-amber-200">g₁ &gt; 0</Badge>
-                <p className="text-xs font-semibold">Asimetría positiva</p>
-                <p className="text-xs text-muted-foreground">Cola a la derecha. Hay valores altos alejados.</p>
+                <div className="flex justify-between text-[10px] text-muted-foreground font-medium px-0.5">
+                  <span>Notas bajas</span>
+                  <span>Notas altas</span>
+                </div>
+                <div className="text-center">
+                  <Badge className="bg-amber-200 dark:bg-amber-800/40 text-amber-800 dark:text-amber-200">g₁ &gt; 0</Badge>
+                  <p className="text-xs font-semibold mt-1">Asimetría positiva</p>
+                </div>
+                <p className="text-xs text-muted-foreground text-left">
+                  La <strong>mayoría sacó notas bajas</strong> (barras grandes a la izquierda).
+                  Unos pocos sacaron notas muy altas (barras claras a la derecha = la &quot;cola&quot;).
+                </p>
+                <p className="text-[10px] text-muted-foreground text-left italic">Ejemplo: examen muy difícil donde casi todos suspendieron, pero algunos sacaron notazas.</p>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
               <div className="bg-white dark:bg-gray-900 rounded p-2">
                 <p><strong>Mate:</strong> g₁ = {mate.asimetria} → <strong>ligeramente positiva</strong></p>
-                <p className="text-xs text-muted-foreground">Algunos alumnos sacaron notas altas que &quot;estiran&quot; la cola hacia la derecha.</p>
+                <p className="text-xs text-muted-foreground">La mayoría sacó notas bajas-medias, pero unos pocos sacaron notas bastante altas que &quot;estiran&quot; la cola hacia la derecha.</p>
               </div>
               <div className="bg-white dark:bg-gray-900 rounded p-2">
                 <p><strong>Estad:</strong> g₁ = {estad.asimetria} → <strong>ligeramente negativa</strong></p>
-                <p className="text-xs text-muted-foreground">Algunos alumnos sacaron notas bajas que &quot;estiran&quot; la cola hacia la izquierda.</p>
+                <p className="text-xs text-muted-foreground">La mayoría sacó notas medias-altas, pero unos pocos sacaron notas muy bajas que &quot;estiran&quot; la cola hacia la izquierda.</p>
               </div>
             </div>
           </CardContent>
@@ -195,49 +231,140 @@ export default function Ejercicio5() {
               <p className="font-semibold">¿Es la distribución &quot;puntiaguda&quot; o &quot;aplanada&quot;?</p>
             </div>
             <p className="text-muted-foreground">
-              La curtosis mide lo &quot;apuntada&quot; o &quot;achatada&quot; que es la distribución comparada con la campana de Gauss (distribución normal).
+              La curtosis mide si los datos se <strong>concentran mucho en el centro</strong> (pico alto) o se <strong>reparten más uniformemente</strong> (pico bajo).
+              Se compara siempre con la campana de Gauss (distribución normal), que es la referencia.
             </p>
+            <div className="bg-white dark:bg-gray-900 rounded p-2 mb-2">
+              <p className="text-xs text-muted-foreground"><strong>Clave:</strong> Fíjate en la &quot;forma&quot; del histograma: ¿las barras centrales son mucho más altas que las de los lados? → leptocúrtica. ¿Las barras son todas parecidas en altura? → platicúrtica.</p>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2">
-                <div className="flex items-end gap-0.5 justify-center h-10">
+              {/* Platicúrtica */}
+              <div className="bg-white dark:bg-gray-900 rounded p-3 space-y-2">
+                <div className="flex items-end gap-0.5 justify-center h-12">
                   {[4, 5, 6, 7, 7, 7, 7, 6, 5, 4].map((h, i) => (
-                    <div key={i} className="w-1.5 bg-blue-400 dark:bg-blue-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                    <div key={i} className="w-2 bg-blue-400 dark:bg-blue-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
                   ))}
                 </div>
-                <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200">g₂ &lt; 0</Badge>
-                <p className="text-xs font-semibold">Platicúrtica</p>
-                <p className="text-xs text-muted-foreground">Pico bajo, datos más repartidos. Colas ligeras.</p>
+                <div className="flex justify-between text-[10px] text-muted-foreground font-medium px-0.5">
+                  <span>Notas bajas</span>
+                  <span>Notas altas</span>
+                </div>
+                <div className="text-center">
+                  <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200">g₂ &lt; 0</Badge>
+                  <p className="text-xs font-semibold mt-1">Platicúrtica</p>
+                </div>
+                <p className="text-xs text-muted-foreground text-left">
+                  Las barras son <strong>todas parecidas en altura</strong>. No hay un pico claro: las notas se reparten de forma bastante uniforme.
+                </p>
+                <p className="text-[10px] text-muted-foreground text-left italic">Ejemplo: examen donde hay tantos suspensos como aprobados y sobresalientes, sin un valor dominante.</p>
               </div>
-              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2 ring-2 ring-emerald-300 dark:ring-emerald-700">
-                <div className="flex items-end gap-0.5 justify-center h-10">
+              {/* Mesocúrtica */}
+              <div className="bg-white dark:bg-gray-900 rounded p-3 space-y-2 ring-2 ring-emerald-300 dark:ring-emerald-700">
+                <div className="flex items-end gap-0.5 justify-center h-12">
                   {[1, 2, 4, 7, 10, 10, 7, 4, 2, 1].map((h, i) => (
-                    <div key={i} className="w-1.5 bg-emerald-400 dark:bg-emerald-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                    <div key={i} className="w-2 bg-emerald-400 dark:bg-emerald-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
                   ))}
                 </div>
-                <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200">g₂ ≈ 0</Badge>
-                <p className="text-xs font-semibold">Mesocúrtica</p>
-                <p className="text-xs text-muted-foreground">Forma de campana &quot;normal&quot;. Referencia estándar.</p>
+                <div className="flex justify-between text-[10px] text-muted-foreground font-medium px-0.5">
+                  <span>Notas bajas</span>
+                  <span>Notas altas</span>
+                </div>
+                <div className="text-center">
+                  <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200">g₂ ≈ 0</Badge>
+                  <p className="text-xs font-semibold mt-1">Mesocúrtica (normal)</p>
+                </div>
+                <p className="text-xs text-muted-foreground text-left">
+                  Forma de <strong>campana clásica</strong>: la mayoría de notas están en el centro, y hay cada vez menos hacia los extremos, de forma equilibrada.
+                </p>
+                <p className="text-[10px] text-muted-foreground text-left italic">Es la referencia (g₂ = 0). La campana de Gauss tiene exactamente esta forma.</p>
               </div>
-              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2">
-                <div className="flex items-end gap-0.5 justify-center h-10">
+              {/* Leptocúrtica */}
+              <div className="bg-white dark:bg-gray-900 rounded p-3 space-y-2">
+                <div className="flex items-end gap-0.5 justify-center h-12">
                   {[1, 1, 2, 4, 10, 10, 4, 2, 1, 1].map((h, i) => (
-                    <div key={i} className="w-1.5 bg-amber-400 dark:bg-amber-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                    <div key={i} className={`w-2 rounded-t-sm ${(i < 3 || i > 6) ? "bg-amber-300/60 dark:bg-amber-400/40" : "bg-amber-500 dark:bg-amber-400"}`} style={{ height: `${h * 10}%` }} />
                   ))}
                 </div>
-                <Badge className="bg-amber-200 dark:bg-amber-800/40 text-amber-800 dark:text-amber-200">g₂ &gt; 0</Badge>
-                <p className="text-xs font-semibold">Leptocúrtica</p>
-                <p className="text-xs text-muted-foreground">Pico alto y puntiagudo, colas pesadas. Más valores extremos.</p>
+                <div className="flex justify-between text-[10px] text-muted-foreground font-medium px-0.5">
+                  <span>Notas bajas</span>
+                  <span>Notas altas</span>
+                </div>
+                <div className="text-center">
+                  <Badge className="bg-amber-200 dark:bg-amber-800/40 text-amber-800 dark:text-amber-200">g₂ &gt; 0</Badge>
+                  <p className="text-xs font-semibold mt-1">Leptocúrtica</p>
+                </div>
+                <p className="text-xs text-muted-foreground text-left">
+                  Pico <strong>muy pronunciado</strong> en el centro: casi todos sacaron notas parecidas. Pero las barras claras de los extremos indican que también hay algunos valores muy alejados (&quot;colas pesadas&quot;).
+                </p>
+                <p className="text-[10px] text-muted-foreground text-left italic">Ejemplo: la mayoría sacó 5-6, pero unos pocos sacaron 0 o 10.</p>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
               <div className="bg-white dark:bg-gray-900 rounded p-2">
                 <p><strong>Mate:</strong> g₂ = {mate.curtosis} → <strong>platicúrtica</strong></p>
-                <p className="text-xs text-muted-foreground">Las notas están bastante repartidas, sin un pico pronunciado. No hay tanta concentración alrededor de la media.</p>
+                <p className="text-xs text-muted-foreground">Las notas están bastante repartidas (barras parecidas). No hay un rango de notas que domine claramente sobre los demás.</p>
               </div>
               <div className="bg-white dark:bg-gray-900 rounded p-2">
                 <p><strong>Estad:</strong> g₂ = {estad.curtosis} → <strong>mesocúrtica (≈ normal)</strong></p>
-                <p className="text-xs text-muted-foreground">La distribución tiene forma similar a la campana de Gauss, con concentración &quot;normal&quot; alrededor de la media.</p>
+                <p className="text-xs text-muted-foreground">Las notas se distribuyen en forma de campana: la mayoría cerca de la media ({estad.media}) y menos hacia los extremos.</p>
               </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Representación combinada real */}
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">Entonces, ¿cómo se ven las distribuciones de este ejercicio?</p>
+            <p className="text-muted-foreground">
+              Combinando la asimetría y la curtosis de cada asignatura, así es <strong>aproximadamente</strong> como se distribuyen las notas:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* Matemáticas: g1=0.24 (leve +), g2=-1.19 (platicúrtica) */}
+              <div className="bg-white dark:bg-gray-900 rounded p-3 space-y-2">
+                <p className="text-xs font-bold text-center text-blue-800 dark:text-blue-200">Matemáticas</p>
+                <div className="flex items-end gap-0.5 justify-center h-14">
+                  {[5, 6, 7, 7, 7, 7, 6, 5, 4, 3].map((h, i) => (
+                    <div key={i} className={`w-2.5 rounded-t-sm ${i > 7 ? "bg-blue-300/60 dark:bg-blue-400/40" : "bg-blue-500 dark:bg-blue-400"}`} style={{ height: `${h * 10}%` }} />
+                  ))}
+                </div>
+                <div className="flex justify-between text-[10px] text-muted-foreground font-medium px-0.5">
+                  <span>0</span>
+                  <span>media = {mate.media}</span>
+                  <span>10</span>
+                </div>
+                <div className="flex flex-wrap gap-1 justify-center">
+                  <Badge className="bg-amber-200 dark:bg-amber-800/40 text-amber-800 dark:text-amber-200 text-[10px]">g₁={mate.asimetria} (asim. +)</Badge>
+                  <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200 text-[10px]">g₂={mate.curtosis} (platic.)</Badge>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Forma <strong>aplanada</strong> (barras parecidas) con una ligera cola hacia notas altas. Hay de todo: suspensos, aprobados y notazas. Las notas están muy repartidas.
+                </p>
+              </div>
+              {/* Estadística: g1=-0.43 (leve -), g2=0.04 (mesocúrtica) */}
+              <div className="bg-white dark:bg-gray-900 rounded p-3 space-y-2">
+                <p className="text-xs font-bold text-center text-emerald-800 dark:text-emerald-200">Estadística</p>
+                <div className="flex items-end gap-0.5 justify-center h-14">
+                  {[2, 3, 5, 7, 8, 9, 9, 8, 6, 4].map((h, i) => (
+                    <div key={i} className={`w-2.5 rounded-t-sm ${i < 2 ? "bg-emerald-300/60 dark:bg-emerald-400/40" : "bg-emerald-500 dark:bg-emerald-400"}`} style={{ height: `${h * 10}%` }} />
+                  ))}
+                </div>
+                <div className="flex justify-between text-[10px] text-muted-foreground font-medium px-0.5">
+                  <span>0</span>
+                  <span>media = {estad.media}</span>
+                  <span>10</span>
+                </div>
+                <div className="flex flex-wrap gap-1 justify-center">
+                  <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200 text-[10px]">g₁={estad.asimetria} (asim. -)</Badge>
+                  <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200 text-[10px]">g₂={estad.curtosis} (mesoc.)</Badge>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Forma de <strong>campana</strong> desplazada hacia notas altas, con una pequeña cola de notas bajas. La mayoría sacó entre 5 y 8, y pocos suspendieron con notas muy bajas.
+                </p>
+              </div>
+            </div>
+            <div className="bg-white dark:bg-gray-900 rounded p-2 mt-1">
+              <p className="text-xs text-muted-foreground"><strong>Comparación visual:</strong> En Matemáticas las barras son todas parecidas (aplanada, g₂ negativo) → notas repartidas, difícil predecir la nota de un alumno. En Estadística hay una campana clara (g₂ ≈ 0) centrada en notas medias-altas → la mayoría sacó notas parecidas, más predecible.</p>
             </div>
           </CardContent>
         </Card>
