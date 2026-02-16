@@ -99,8 +99,152 @@ export default function Ejercicio5() {
         </div>
       </StepCard>
 
-      {/* ============ PASO 1: Representatividad ============ */}
-      <StepCard stepNumber={2} title="a) ¿Son representativas las medias?" variant="calculation">
+      {/* ============ PASO 1b: Varianza, Asimetría y Curtosis ============ */}
+      <StepCard stepNumber={2} title="Recordatorio: Varianza, Asimetría y Curtosis" variant="explanation">
+        {/* Varianza */}
+        <Card className="bg-gray-50 dark:bg-gray-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <div className="flex items-center gap-2">
+              <Badge className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm">Varianza (σ²)</Badge>
+              <p className="font-semibold">¿Cuánto se dispersan los datos?</p>
+            </div>
+            <p className="text-muted-foreground">
+              La varianza mide la <strong>dispersión</strong> de los datos respecto a la media.
+              Es el promedio de las desviaciones al cuadrado: si los datos están lejos de la media, la varianza es grande; si están cerca, es pequeña.
+            </p>
+            <FormulaDisplay math={`\\sigma^2 = \\frac{\\sum (x_i - \\bar{x})^2 \\cdot n_i}{n}`} />
+            <div className="bg-white dark:bg-gray-900 rounded p-2 space-y-1">
+              <p className="text-muted-foreground"><strong>σ (desviación típica)</strong> = √σ² → está en las mismas unidades que los datos (puntos), por eso es más intuitiva para interpretar.</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p><strong>Mate:</strong> σ² = {mate.varianza} → σ = {round(mateSigma, 2)}</p>
+                <p className="text-xs text-muted-foreground">Las notas varían en promedio ±{round(mateSigma, 2)} puntos respecto a la media de {mate.media}.</p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p><strong>Estad:</strong> σ² = {estad.varianza} → σ = {round(estadSigma, 2)}</p>
+                <p className="text-xs text-muted-foreground">Las notas varían en promedio ±{round(estadSigma, 2)} puntos respecto a la media de {estad.media}.</p>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Mate tiene mayor varianza ({mate.varianza} vs {estad.varianza}): las notas están más dispersas. En Estadística los alumnos sacan notas más parecidas entre sí.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Asimetría */}
+        <Card className="bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-800 mb-3">
+          <CardContent className="p-3 text-sm space-y-2">
+            <div className="flex items-center gap-2">
+              <Badge className="bg-rose-200 dark:bg-rose-800/40 text-rose-800 dark:text-rose-200 text-sm">Asimetría (g₁)</Badge>
+              <p className="font-semibold">¿Hacia dónde se &quot;estiran&quot; los datos?</p>
+            </div>
+            <p className="text-muted-foreground">
+              La asimetría indica si los datos se concentran más a un lado de la media, dejando una &quot;cola&quot; más larga hacia el otro.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2">
+                <div className="flex items-end gap-0.5 justify-center h-10">
+                  {[1, 1, 2, 3, 5, 7, 8, 9, 8, 6].map((h, i) => (
+                    <div key={i} className="w-1.5 bg-blue-400 dark:bg-blue-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                  ))}
+                </div>
+                <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200">g₁ &lt; 0</Badge>
+                <p className="text-xs font-semibold">Asimetría negativa</p>
+                <p className="text-xs text-muted-foreground">Cola a la izquierda. Hay valores bajos alejados.</p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2 ring-2 ring-emerald-300 dark:ring-emerald-700">
+                <div className="flex items-end gap-0.5 justify-center h-10">
+                  {[2, 3, 5, 7, 9, 9, 7, 5, 3, 2].map((h, i) => (
+                    <div key={i} className="w-1.5 bg-emerald-400 dark:bg-emerald-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                  ))}
+                </div>
+                <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200">g₁ ≈ 0</Badge>
+                <p className="text-xs font-semibold">Simétrica</p>
+                <p className="text-xs text-muted-foreground">Datos equilibrados a ambos lados de la media.</p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2">
+                <div className="flex items-end gap-0.5 justify-center h-10">
+                  {[6, 8, 9, 8, 7, 5, 3, 2, 1, 1].map((h, i) => (
+                    <div key={i} className="w-1.5 bg-amber-400 dark:bg-amber-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                  ))}
+                </div>
+                <Badge className="bg-amber-200 dark:bg-amber-800/40 text-amber-800 dark:text-amber-200">g₁ &gt; 0</Badge>
+                <p className="text-xs font-semibold">Asimetría positiva</p>
+                <p className="text-xs text-muted-foreground">Cola a la derecha. Hay valores altos alejados.</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p><strong>Mate:</strong> g₁ = {mate.asimetria} → <strong>ligeramente positiva</strong></p>
+                <p className="text-xs text-muted-foreground">Algunos alumnos sacaron notas altas que &quot;estiran&quot; la cola hacia la derecha.</p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p><strong>Estad:</strong> g₁ = {estad.asimetria} → <strong>ligeramente negativa</strong></p>
+                <p className="text-xs text-muted-foreground">Algunos alumnos sacaron notas bajas que &quot;estiran&quot; la cola hacia la izquierda.</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Curtosis */}
+        <Card className="bg-indigo-50 dark:bg-indigo-950/20 border-indigo-200 dark:border-indigo-800">
+          <CardContent className="p-3 text-sm space-y-2">
+            <div className="flex items-center gap-2">
+              <Badge className="bg-indigo-200 dark:bg-indigo-800/40 text-indigo-800 dark:text-indigo-200 text-sm">Curtosis (g₂)</Badge>
+              <p className="font-semibold">¿Es la distribución &quot;puntiaguda&quot; o &quot;aplanada&quot;?</p>
+            </div>
+            <p className="text-muted-foreground">
+              La curtosis mide lo &quot;apuntada&quot; o &quot;achatada&quot; que es la distribución comparada con la campana de Gauss (distribución normal).
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2">
+                <div className="flex items-end gap-0.5 justify-center h-10">
+                  {[4, 5, 6, 7, 7, 7, 7, 6, 5, 4].map((h, i) => (
+                    <div key={i} className="w-1.5 bg-blue-400 dark:bg-blue-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                  ))}
+                </div>
+                <Badge className="bg-blue-200 dark:bg-blue-800/40 text-blue-800 dark:text-blue-200">g₂ &lt; 0</Badge>
+                <p className="text-xs font-semibold">Platicúrtica</p>
+                <p className="text-xs text-muted-foreground">Pico bajo, datos más repartidos. Colas ligeras.</p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2 ring-2 ring-emerald-300 dark:ring-emerald-700">
+                <div className="flex items-end gap-0.5 justify-center h-10">
+                  {[1, 2, 4, 7, 10, 10, 7, 4, 2, 1].map((h, i) => (
+                    <div key={i} className="w-1.5 bg-emerald-400 dark:bg-emerald-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                  ))}
+                </div>
+                <Badge className="bg-emerald-200 dark:bg-emerald-800/40 text-emerald-800 dark:text-emerald-200">g₂ ≈ 0</Badge>
+                <p className="text-xs font-semibold">Mesocúrtica</p>
+                <p className="text-xs text-muted-foreground">Forma de campana &quot;normal&quot;. Referencia estándar.</p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 rounded p-3 text-center space-y-2">
+                <div className="flex items-end gap-0.5 justify-center h-10">
+                  {[1, 1, 2, 4, 10, 10, 4, 2, 1, 1].map((h, i) => (
+                    <div key={i} className="w-1.5 bg-amber-400 dark:bg-amber-500 rounded-t-sm" style={{ height: `${h * 10}%` }} />
+                  ))}
+                </div>
+                <Badge className="bg-amber-200 dark:bg-amber-800/40 text-amber-800 dark:text-amber-200">g₂ &gt; 0</Badge>
+                <p className="text-xs font-semibold">Leptocúrtica</p>
+                <p className="text-xs text-muted-foreground">Pico alto y puntiagudo, colas pesadas. Más valores extremos.</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p><strong>Mate:</strong> g₂ = {mate.curtosis} → <strong>platicúrtica</strong></p>
+                <p className="text-xs text-muted-foreground">Las notas están bastante repartidas, sin un pico pronunciado. No hay tanta concentración alrededor de la media.</p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 rounded p-2">
+                <p><strong>Estad:</strong> g₂ = {estad.curtosis} → <strong>mesocúrtica (≈ normal)</strong></p>
+                <p className="text-xs text-muted-foreground">La distribución tiene forma similar a la campana de Gauss, con concentración &quot;normal&quot; alrededor de la media.</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </StepCard>
+
+      {/* ============ PASO 2: Representatividad ============ */}
+      <StepCard stepNumber={3} title="a) ¿Son representativas las medias?" variant="calculation">
         <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mb-3">
           <CardContent className="p-3 text-sm space-y-2">
             <p className="font-semibold text-blue-800 dark:text-blue-200">¿Qué significa &quot;representativa&quot;?</p>
@@ -144,8 +288,8 @@ export default function Ejercicio5() {
         <ResultCard label="Mayor representatividad" value={`Estadística (CV=${round(estadCV, 2)}% < ${round(mateCV, 2)}%)`} />
       </StepCard>
 
-      {/* ============ PASO 2: Tipificación ============ */}
-      <StepCard stepNumber={3} title="b) ¿En cuál está mejor posicionado con un 5?" variant="calculation">
+      {/* ============ PASO 3: Tipificación ============ */}
+      <StepCard stepNumber={4} title="b) ¿En cuál está mejor posicionado con un 5?" variant="calculation">
         <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 mb-3">
           <CardContent className="p-3 text-sm space-y-2">
             <p className="font-semibold text-emerald-800 dark:text-emerald-200">El problema: ¿cómo comparar un 5 en dos asignaturas diferentes?</p>
@@ -203,8 +347,8 @@ export default function Ejercicio5() {
         />
       </StepCard>
 
-      {/* ============ PASO 3: Nota de corte ============ */}
-      <StepCard stepNumber={4} title="c) Nota de corte (30% más altas)" variant="calculation">
+      {/* ============ PASO 4: Nota de corte ============ */}
+      <StepCard stepNumber={5} title="c) Nota de corte (30% más altas)" variant="calculation">
         <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800 mb-3">
           <CardContent className="p-3 text-sm space-y-2">
             <p className="font-semibold text-violet-800 dark:text-violet-200">Traducción de la pregunta</p>
@@ -223,8 +367,8 @@ export default function Ejercicio5() {
           </CardContent>
         </Card>
 
-        <FormulaDisplay math={`D_7^{Mat} = ${mateDeciles[6]} \\quad \\text{(nota de corte para el top 30% en Mate)}`} />
-        <FormulaDisplay math={`D_7^{Est} = ${estadDeciles[6]} \\quad \\text{(nota de corte para el top 30% en Estad.)}`} />
+        <FormulaDisplay math={`D_7^{Mat} = ${mateDeciles[6]} \\quad \\text{(nota de corte para el top 30\\% en Mate)}`} />
+        <FormulaDisplay math={`D_7^{Est} = ${estadDeciles[6]} \\quad \\text{(nota de corte para el top 30\\% en Estad.)}`} />
 
         <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
           <CardContent className="p-2 text-sm space-y-1">
@@ -239,8 +383,8 @@ export default function Ejercicio5() {
         </div>
       </StepCard>
 
-      {/* ============ PASO 4: Resumen ============ */}
-      <StepCard stepNumber={5} title="Resumen: ¿qué hemos aprendido?" variant="result">
+      {/* ============ PASO 5: Resumen ============ */}
+      <StepCard stepNumber={6} title="Resumen: ¿qué hemos aprendido?" variant="result">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
             <CardContent className="p-3 space-y-1">

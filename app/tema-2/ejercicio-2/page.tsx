@@ -83,11 +83,11 @@ export default function Ejercicio2() {
             Para estudiar el efecto de una determinada dieta alimenticia se ha tomado al azar una muestra de
             <strong> 60 personas</strong>. Los pesos obtenidos (en kg) son:
           </p>
-          <div className="overflow-x-auto"><div className="bg-white dark:bg-gray-900 p-3 rounded text-sm font-mono grid grid-cols-8 gap-1">
+          <div className="bg-white dark:bg-gray-900 p-3 rounded text-sm font-mono grid grid-cols-4 sm:grid-cols-8 gap-x-3 gap-y-1.5">
             {rawData.map((d, i) => (
-              <span key={i} className="text-center">{d}</span>
+              <span key={i} className="text-center tabular-nums">{d}</span>
             ))}
-          </div></div>
+          </div>
           <p>Determine:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm">
             <li>a) La distribución de frecuencias agrupada en intervalos de amplitud 2</li>
