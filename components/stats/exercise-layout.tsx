@@ -28,6 +28,7 @@ const temaColors: Record<number, string> = {
   1: "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200",
   2: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200",
   3: "bg-violet-100 dark:bg-violet-900/30 text-violet-800 dark:text-violet-200",
+  4: "bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200",
 };
 
 export function ExerciseLayout({

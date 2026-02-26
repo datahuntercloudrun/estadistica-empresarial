@@ -10,6 +10,7 @@ import {
   ChevronRight,
   GraduationCap,
   Home,
+  TrendingUp,
 } from "lucide-react";
 import {
   Sidebar,
@@ -82,6 +83,24 @@ const navigation = [
       { title: "Comp.1 Análisis completo salarios", url: "/tema-3/complementario-1" },
       { title: "Comp.2 Comparación calificaciones", url: "/tema-3/complementario-2" },
       { title: "Comp.3 Relación σ y CV", url: "/tema-3/complementario-3" },
+    ],
+  },
+  {
+    title: "Tema 4: Dos Variables",
+    icon: TrendingUp,
+    color: "text-teal-500",
+    badge: "9",
+    items: [
+      { title: "Resumen Teoría", url: "/tema-4" },
+      { title: "Ej.1 Frecuencias conjuntas", url: "/tema-4/ejercicio-1" },
+      { title: "Ej.2 Publicidad vs ventas", url: "/tema-4/ejercicio-2" },
+      { title: "Ej.3 Rectas de regresión", url: "/tema-4/ejercicio-3" },
+      { title: "Ej.4 Clientes y facturación", url: "/tema-4/ejercicio-4" },
+      { title: "Ej.5 Empresas madereras", url: "/tema-4/ejercicio-5" },
+      { title: "Ej.6 Vacas vs leche", url: "/tema-4/ejercicio-6" },
+      { title: "Comp.1 Accidentes vs velocidad", url: "/tema-4/complementario-1" },
+      { title: "Comp.2 Distribución bidimensional", url: "/tema-4/complementario-2" },
+      { title: "Comp.3 Parking coste vs tiempo", url: "/tema-4/complementario-3" },
     ],
   },
 ];

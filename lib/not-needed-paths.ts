@@ -8,4 +8,8 @@ export const NOT_NEEDED_PATHS = [
   "/tema-3/complementario-1",
   "/tema-3/complementario-2",
   "/tema-3/complementario-3",
+  "/tema-4",
+  "/tema-4/complementario-1",
+  "/tema-4/complementario-2",
+  "/tema-4/complementario-3",
 ];
