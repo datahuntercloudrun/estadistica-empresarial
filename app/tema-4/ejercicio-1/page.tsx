@@ -206,19 +206,71 @@ export default function Ejercicio1() {
 
       {/* ===== PASO 5: Independencia ===== */}
       <StepCard stepNumber={5} title="b) Estudio de independencia" variant="calculation">
-        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
-          <CardContent className="p-3 text-sm space-y-1">
-            <p className="font-semibold text-blue-800 dark:text-blue-200">¿Cómo se comprueba?</p>
+        {/* --- BLOQUE 1: La pregunta que queremos responder --- */}
+        <Card className="bg-teal-50 dark:bg-teal-950/20 border-teal-200 dark:border-teal-800">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-teal-800 dark:text-teal-200">La pregunta clave</p>
             <p className="text-muted-foreground">
-              X e Y son independientes si <InlineMath math="n_{ij} = \frac{n_{i\cdot} \cdot n_{\cdot j}}{n}" /> para <strong>todos</strong> los pares (i, j).
-              Si una sola celda no cumple, ya NO son independientes.
+              Si te digo que <strong>X = 4</strong>, ¿eso te ayuda a predecir qué valor tomará Y?
+            </p>
+            <p className="text-muted-foreground">
+              Si <strong>sí</strong> → las variables están <strong>relacionadas</strong> (dependientes).
+              Si <strong>no</strong> → son <strong>independientes</strong> (saber X no cambia nada sobre Y).
             </p>
           </CardContent>
         </Card>
 
-        <p className="text-sm text-muted-foreground mt-2">Comparamos frecuencias observadas vs esperadas (si fueran independientes):</p>
+        {/* --- BLOQUE 2: La analogía intuitiva --- */}
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">Analogía: dos dados</p>
+            <p className="text-muted-foreground">
+              Piensa en tirar dos dados. El resultado del dado 1 no influye en el dado 2: son independientes.
+              Pero si te digo que &quot;la suma de los dos dados es 7&quot;, entonces saber que el dado 1 sacó un 2
+              te dice que el dado 2 sacó un 5. Ahora están <strong>relacionados por una condición</strong>.
+            </p>
+          </CardContent>
+        </Card>
 
-        <div className="overflow-x-auto mt-2">
+        {/* --- BLOQUE 3: El método formal --- */}
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mt-2">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">El método: comparar lo real con lo esperado</p>
+            <p className="text-muted-foreground">
+              Si X e Y fueran independientes, podríamos calcular <strong>qué frecuencia esperaríamos</strong> en cada celda
+              simplemente multiplicando las marginales:
+            </p>
+            <FormulaDisplay math={`n_{ij}^{\\text{esperado}} = \\frac{n_{i\\cdot} \\times n_{\\cdot j}}{n}`} />
+            <p className="text-muted-foreground">
+              <strong>Ejemplo:</strong> para la celda (x=1, y=2): el total de la fila x=1 es {table.marginalX[0]} y el total
+              de la columna y=2 es {table.marginalY[0]}, sobre n={table.n} observaciones:
+            </p>
+            <FormulaDisplay math={`n_{\\text{esperado}} = \\frac{${table.marginalX[0]} \\times ${table.marginalY[0]}}{${table.n}} = ${round(expectedFreqs[0][0], 2)}`} />
+            <p className="text-muted-foreground">
+              La frecuencia observada real es <strong>{table.frequencies[0][0]}</strong>.
+              {Math.abs(table.frequencies[0][0] - expectedFreqs[0][0]) < 0.001
+                ? " Coincide."
+                : ` No coincide (${table.frequencies[0][0]} ≠ ${round(expectedFreqs[0][0], 2)}).`}
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* --- BLOQUE 4: La regla decisiva --- */}
+        <Card className="bg-violet-50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-800 mt-2">
+          <CardContent className="p-3 text-sm">
+            <p className="font-semibold text-violet-800 dark:text-violet-200">La regla</p>
+            <p className="text-muted-foreground">
+              Si <strong>TODAS</strong> las celdas cumplen (observada = esperada) → independientes.
+              Si <strong>una sola</strong> celda falla → <strong>NO son independientes</strong>.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* --- BLOQUE 5: Tabla comparativa --- */}
+        <p className="text-sm font-semibold mt-3">Comprobamos celda por celda:</p>
+        <p className="text-xs text-muted-foreground mb-1">En cada celda: <strong>observada</strong> vs esperada. Las celdas rojas no coinciden.</p>
+
+        <div className="overflow-x-auto mt-1">
           <table className="text-sm border-collapse w-full">
             <thead>
               <tr className="bg-gray-100 dark:bg-gray-700/30">
@@ -226,6 +278,7 @@ export default function Ejercicio1() {
                 {table.yValues.map((y) => (
                   <th key={y} className="border p-2 text-center">{y}</th>
                 ))}
+                <th className="border p-2 text-center bg-blue-50 dark:bg-blue-950/20"><InlineMath math="n_{i\cdot}" /></th>
               </tr>
             </thead>
             <tbody>
@@ -237,28 +290,61 @@ export default function Ejercicio1() {
                     const exp = round(expectedFreqs[i][j], 2);
                     const match = Math.abs(obs - exp) < 0.001;
                     return (
-                      <td key={j} className={`border p-2 text-center text-xs ${match ? "" : "bg-rose-50 dark:bg-rose-950/20"}`}>
-                        <span className="font-bold">{obs}</span>
-                        <span className="text-muted-foreground"> vs {exp}</span>
-                        {!match && <span className="text-rose-600 dark:text-rose-400 ml-1 font-bold">✗</span>}
+                      <td key={j} className={`border p-2 text-center text-xs ${match ? "bg-emerald-50 dark:bg-emerald-950/20" : "bg-rose-50 dark:bg-rose-950/20"}`}>
+                        <span className="font-bold text-base">{obs}</span>
+                        <span className="text-muted-foreground block text-[10px]">esperada: {exp}</span>
+                        {match
+                          ? <span className="text-emerald-600 dark:text-emerald-400 font-bold text-xs block">&#10003;</span>
+                          : <span className="text-rose-600 dark:text-rose-400 font-bold text-xs block">&#10007; ≠</span>}
                       </td>
                     );
                   })}
+                  <td className="border p-2 text-center font-bold bg-blue-50 dark:bg-blue-950/20">{table.marginalX[i]}</td>
                 </tr>
               ))}
+              <tr className="bg-blue-50 dark:bg-blue-950/20">
+                <td className="border p-2 text-center font-bold"><InlineMath math="n_{\cdot j}" /></td>
+                {table.marginalY.map((m, j) => (
+                  <td key={j} className="border p-2 text-center font-bold">{m}</td>
+                ))}
+                <td className="border p-2 text-center font-bold">{table.n}</td>
+              </tr>
             </tbody>
           </table>
         </div>
 
-        <Card className={`mt-2 ${isIndependent ? "bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800" : "bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-800"}`}>
-          <CardContent className="p-3 text-sm">
-            <p className={`font-semibold ${isIndependent ? "text-emerald-800 dark:text-emerald-200" : "text-rose-800 dark:text-rose-200"}`}>
-              {isIndependent ? "Las variables SON independientes" : "Las variables NO son independientes"}
+        {/* --- BLOQUE 6: Conclusión --- */}
+        <Card className={`mt-3 ${isIndependent ? "bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800" : "bg-rose-50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-800"}`}>
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className={`font-bold text-base ${isIndependent ? "text-emerald-800 dark:text-emerald-200" : "text-rose-800 dark:text-rose-200"}`}>
+              {isIndependent ? "Conclusión: Las variables SON independientes" : "Conclusión: Las variables NO son independientes"}
             </p>
-            <p className="text-muted-foreground mt-1">
-              {isIndependent
-                ? "Todas las frecuencias esperadas coinciden con las observadas."
-                : "Existen celdas donde la frecuencia observada no coincide con la esperada. Saber el valor de X nos da información sobre Y (y viceversa)."}
+            {!isIndependent && (
+              <>
+                <p className="text-muted-foreground">
+                  Hay celdas donde lo observado no coincide con lo esperado bajo independencia.
+                  Esto significa que <strong>saber el valor de X sí te da información sobre Y</strong> (y viceversa).
+                </p>
+                <p className="text-muted-foreground">
+                  Por ejemplo: si te dicen que X = 1, las frecuencias reales para Y son distintas de las que habría
+                  si X e Y no tuvieran nada que ver. Las variables están relacionadas (aunque débilmente, como
+                  confirma la covarianza pequeña).
+                </p>
+              </>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* --- BLOQUE 7: Ojo para el examen --- */}
+        <Card className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 mt-2">
+          <CardContent className="p-3 text-sm space-y-1">
+            <p className="font-semibold">Ojo para el examen</p>
+            <p className="text-muted-foreground">
+              <strong>Independientes → covarianza = 0</strong> (siempre cierto).
+            </p>
+            <p className="text-muted-foreground">
+              <strong>Covarianza = 0 → ¿independientes?</strong> NO necesariamente. Puede haber dependencia no lineal
+              (ej: Y = X², donde la covarianza puede ser 0 pero claramente Y depende de X).
             </p>
           </CardContent>
         </Card>
