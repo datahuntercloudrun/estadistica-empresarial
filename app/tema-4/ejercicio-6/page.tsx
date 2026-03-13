@@ -6,6 +6,7 @@ import { FormulaDisplay, InlineMath } from "@/components/stats/formula-display";
 import { ResultCard } from "@/components/stats/result-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { round } from "@/lib/stats/descriptive";
+import { ScatterChartCustom } from "@/components/charts/scatter-chart-custom";
 
 // Datos del gráfico: y = 32.313x - 616.18, R² = 0.6182
 // n = 49 granjas, X = vacas, Y = litros leche
@@ -29,6 +30,23 @@ const produccion70 = alpha + beta * 70;
 
 // r desde R²
 const r = Math.sqrt(R2); // positivo porque β > 0
+
+// Puntos aproximados del gráfico del PDF (49 granjas)
+const scatterData = [
+  { x: 30, y: 400 }, { x: 35, y: 600 }, { x: 38, y: 500 }, { x: 40, y: 700 },
+  { x: 42, y: 800 }, { x: 45, y: 900 }, { x: 45, y: 600 }, { x: 48, y: 1000 },
+  { x: 50, y: 1100 }, { x: 50, y: 800 }, { x: 55, y: 1200 }, { x: 55, y: 900 },
+  { x: 58, y: 1500 }, { x: 60, y: 1300 }, { x: 60, y: 1800 }, { x: 62, y: 1400 },
+  { x: 65, y: 1600 }, { x: 65, y: 1200 }, { x: 68, y: 1500 }, { x: 70, y: 1800 },
+  { x: 70, y: 2000 }, { x: 72, y: 1600 }, { x: 75, y: 2200 }, { x: 78, y: 1900 },
+  { x: 80, y: 2500 }, { x: 80, y: 1800 }, { x: 85, y: 2000 }, { x: 85, y: 2800 },
+  { x: 88, y: 2200 }, { x: 90, y: 2500 }, { x: 90, y: 1500 }, { x: 95, y: 2700 },
+  { x: 95, y: 2300 }, { x: 100, y: 3000 }, { x: 100, y: 2500 }, { x: 105, y: 2200 },
+  { x: 110, y: 3500 }, { x: 115, y: 2500 }, { x: 120, y: 3200 }, { x: 120, y: 4000 },
+  { x: 125, y: 3800 }, { x: 130, y: 4500 }, { x: 130, y: 3500 }, { x: 135, y: 4800 },
+  { x: 140, y: 5000 }, { x: 140, y: 4200 }, { x: 145, y: 4500 }, { x: 150, y: 5200 },
+  { x: 160, y: 5500 },
+];
 
 export default function Ejercicio6() {
   return (
@@ -100,6 +118,20 @@ export default function Ejercicio6() {
             </CardContent>
           </Card>
         </div>
+
+        <ScatterChartCustom
+          data={scatterData}
+          title="Nº de vacas vs Producción diaria de leche (49 granjas)"
+          xLabel="Nº de vacas"
+          yLabel="Litros de leche"
+          regressionLines={[
+            { slope: beta, intercept: alpha, label: `y = ${beta}x − ${Math.abs(alpha)}`, color: "#0d9488" },
+          ]}
+          color="#2563eb"
+        />
+        <p className="text-xs text-muted-foreground mt-1">
+          Reproducción aproximada del gráfico del enunciado. Los puntos muestran la dispersión de las 49 granjas con la recta de regresión superpuesta.
+        </p>
       </StepCard>
 
       {/* PASO 3: Estimación 70 vacas */}

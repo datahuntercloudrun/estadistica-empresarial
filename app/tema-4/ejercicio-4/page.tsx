@@ -14,6 +14,7 @@ import {
   regressionYX,
   predict,
 } from "@/lib/stats/bivariate";
+import { ScatterChartCustom } from "@/components/charts/scatter-chart-custom";
 
 // Datos del ejercicio
 const n = 30;
@@ -171,6 +172,21 @@ export default function Ejercicio4() {
             );
           })}
         </div>
+
+        <ScatterChartCustom
+          data={escenarios.map((esc) => ({ x: esc.clientes, y: predict(lineYX, esc.clientes) }))}
+          title="Recta de regresión y escenarios"
+          xLabel="Nº de clientes"
+          yLabel="Facturación (€)"
+          regressionLines={[
+            { slope: lineYX.beta, intercept: lineYX.alpha, label: "Facturación ~ Clientes", color: "#2563eb" },
+          ]}
+          gravityCenter={{ x: xMean, y: yMean }}
+          color="#e11d48"
+        />
+        <p className="text-xs text-muted-foreground mt-1">
+          Los puntos rojos representan los 3 escenarios. El punto grande rojo es el centro de gravedad <InlineMath math={`(${round(xMean, 1)},\\, ${round(yMean, 1)})`} />.
+        </p>
 
         <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mt-3">
           <CardContent className="p-3 text-sm">

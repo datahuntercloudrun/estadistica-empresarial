@@ -164,10 +164,21 @@ export default function Ejercicio2() {
           yLabel="Ventas (miles €)"
           gravityCenter={{ x: xMean, y: yMean }}
           regressionLines={[
-            { slope: lineYX.beta, intercept: lineYX.alpha, label: "Y/X (Ventas~Gastos)", color: "#2563eb" },
+            { slope: lineYX.beta, intercept: lineYX.alpha, label: "Recta Y/X (Ventas~Gastos)", color: "#2563eb" },
+            { slope: 1 / lineXY.beta, intercept: -lineXY.alpha / lineXY.beta, label: "Recta X/Y (Gastos~Ventas)", color: "#16a34a" },
           ]}
           color="#0d9488"
         />
+        <Card className="bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800 mt-2">
+          <CardContent className="p-3 text-sm">
+            <p className="font-semibold text-amber-800 dark:text-amber-200">Posición relativa de las rectas</p>
+            <p className="text-muted-foreground mt-1">
+              Ambas rectas se cruzan en el centro de gravedad <InlineMath math={`(\\bar{x}, \\bar{y}) = (${round(xMean, 2)},\\, ${round(yMean, 2)})`} />.
+              Como <InlineMath math={`r = ${round(r, 4)}`} /> está próximo a 1, las rectas están muy juntas, lo que indica un buen ajuste lineal.
+              Si <InlineMath math="r = \\pm 1" />, ambas rectas coincidirían. Si <InlineMath math="r = 0" />, serían perpendiculares.
+            </p>
+          </CardContent>
+        </Card>
       </StepCard>
 
       {/* PASO 6: Estimación */}

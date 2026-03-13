@@ -321,7 +321,8 @@ export default function Ejercicio1() {
           yLabel="Y"
           gravityCenter={{ x: xMean, y: yMean }}
           regressionLines={[
-            { slope: lineYX.beta, intercept: lineYX.alpha, label: "Y/X", color: "#2563eb" },
+            { slope: lineYX.beta, intercept: lineYX.alpha, label: "Recta Y/X", color: "#2563eb" },
+            { slope: 1 / lineXY.beta, intercept: -lineXY.alpha / lineXY.beta, label: "Recta X/Y", color: "#16a34a" },
           ]}
           color="#0d9488"
         />
