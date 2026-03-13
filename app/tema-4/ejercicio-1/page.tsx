@@ -354,9 +354,44 @@ export default function Ejercicio1() {
 
       {/* ===== PASO 6: Varianzas ===== */}
       <StepCard stepNumber={6} title="Calcular varianzas (necesarias para la regresión)" variant="calculation">
-        <FormulaDisplay math={`s_x^2 = \\overline{x^2} - \\bar{x}^2 = \\frac{${table.xValues.map((x, i) => `${x}^2 \\cdot ${table.marginalX[i]}`).join(" + ")}}{${table.n}} - ${round(xMean, 2)}^2 = ${round(momentOrigin(table, 2, 0), 4)} - ${round(xMean * xMean, 4)} = ${round(sx2, 4)}`} />
+        {/* --- ¿Por qué necesitamos las varianzas? --- */}
+        <Card className="bg-teal-50 dark:bg-teal-950/20 border-teal-200 dark:border-teal-800">
+          <CardContent className="p-3 text-sm space-y-1">
+            <p className="font-semibold text-teal-800 dark:text-teal-200">¿Por qué calculamos esto?</p>
+            <p className="text-muted-foreground">
+              Para obtener las rectas de regresión necesitamos las varianzas. La pendiente de cada recta
+              se calcula dividiendo la covarianza entre una varianza:
+            </p>
+            <p className="text-muted-foreground">
+              <InlineMath math="\beta = \frac{s_{xy}}{s_x^2}" /> (recta Y/X) y <InlineMath math="\beta' = \frac{s_{xy}}{s_y^2}" /> (recta X/Y)
+            </p>
+          </CardContent>
+        </Card>
 
-        <FormulaDisplay math={`s_y^2 = \\overline{y^2} - \\bar{y}^2 = \\frac{${table.yValues.map((y, j) => `${y}^2 \\cdot ${table.marginalY[j]}`).join(" + ")}}{${table.n}} - ${round(yMean, 2)}^2 = ${round(momentOrigin(table, 0, 2), 4)} - ${round(yMean * yMean, 4)} = ${round(sy2, 4)}`} />
+        {/* --- Varianza de X --- */}
+        <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800 mt-2">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-blue-800 dark:text-blue-200">Varianza de X (dispersión de los valores de X)</p>
+            <p className="text-muted-foreground">
+              Fórmula atajo: &quot;la media de los cuadrados menos el cuadrado de la media&quot;
+            </p>
+            <FormulaDisplay math={`s_x^2 = \\overline{x^2} - \\bar{x}^2`} />
+            <p className="text-muted-foreground">Paso 1: calcular <InlineMath math="\overline{x^2}" /> (media de x²) usando las frecuencias marginales de X:</p>
+            <FormulaDisplay math={`\\overline{x^2} = \\frac{\\sum x_i^2 \\cdot n_{i\\cdot}}{n} = \\frac{${table.xValues.map((x, i) => `${x}^2 \\cdot ${table.marginalX[i]}`).join(" + ")}}{${table.n}} = \\frac{${table.xValues.reduce((s, x, i) => s + x * x * table.marginalX[i], 0)}}{${table.n}} = ${round(momentOrigin(table, 2, 0), 4)}`} />
+            <p className="text-muted-foreground">Paso 2: restar el cuadrado de la media que ya teníamos (<InlineMath math={`\\bar{x} = ${round(xMean, 2)}`} />):</p>
+            <FormulaDisplay math={`s_x^2 = ${round(momentOrigin(table, 2, 0), 4)} - ${round(xMean, 2)}^2 = ${round(momentOrigin(table, 2, 0), 4)} - ${round(xMean * xMean, 4)} = \\boxed{${round(sx2, 4)}}`} />
+          </CardContent>
+        </Card>
+
+        {/* --- Varianza de Y --- */}
+        <Card className="bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 mt-2">
+          <CardContent className="p-3 text-sm space-y-2">
+            <p className="font-semibold text-emerald-800 dark:text-emerald-200">Varianza de Y (dispersión de los valores de Y)</p>
+            <p className="text-muted-foreground">Mismo proceso pero con Y y sus frecuencias marginales:</p>
+            <FormulaDisplay math={`\\overline{y^2} = \\frac{${table.yValues.map((y, j) => `${y}^2 \\cdot ${table.marginalY[j]}`).join(" + ")}}{${table.n}} = \\frac{${table.yValues.reduce((s, y, j) => s + y * y * table.marginalY[j], 0)}}{${table.n}} = ${round(momentOrigin(table, 0, 2), 4)}`} />
+            <FormulaDisplay math={`s_y^2 = ${round(momentOrigin(table, 0, 2), 4)} - ${round(yMean, 2)}^2 = ${round(momentOrigin(table, 0, 2), 4)} - ${round(yMean * yMean, 4)} = \\boxed{${round(sy2, 4)}}`} />
+          </CardContent>
+        </Card>
 
         <div className="grid grid-cols-2 gap-2 mt-2">
           <ResultCard label="Varianza X" value={`sx² = ${round(sx2, 4)}`} />
